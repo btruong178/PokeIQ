@@ -1,0 +1,72 @@
+.header {
+  background: #854242;
+  color: #fff;
+  border-bottom: white solid 1px;
+  padding: 10px 10px;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0;
+  /* display: none; */
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.header-title {
+  text-decoration: none;
+  font-size: 2.2rem;
+  font-family: 'Segoe UI', Verdana, sans-serif;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #25c985;
+}
+
+.FaBars {
+  margin: 0px 15px 0px 15px;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.FaBook {
+  margin: 0px 15px 5px 15px;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.FaCog {
+  margin: 0px 15px 5px 15px;
+  cursor: pointer;
+  font-size: 2rem;
+}

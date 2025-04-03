@@ -1,0 +1,49 @@
+.welcome {
+  font-size: 3rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
+  margin: 20px 20px;
+  letter-spacing: 1px;
+}
+
+.introduction {
+  font-size: 1.2rem;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgb(0, 0, 0);
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 20px;
+  letter-spacing: 0.5px;
+}
+
+.hr-line {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.pokeball {
+  width: 70px;
+  height: 70px;
+}
+
+.section {
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  padding-top: 5rem;
+}
+
+.background {
+  background-image: url('./images/pokeEvee.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-color: rgba(0, 0, 0, 0.3);
+  background-blend-mode: darken;
+  background-attachment: fixed;
+}

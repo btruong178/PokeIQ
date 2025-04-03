@@ -1,0 +1,342 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    font-size: 2rem;
+    font-family: 'Segoe UI', Verdana, sans-serif;
+    color: #ffffff;
+    margin-bottom: 10px;
+    margin: 2rem auto;
+    letter-spacing: 1rem;
+}
+
+.pokemon-text {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    margin: 10px;
+}
+
+.type-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0px 10px;
+}
+
+.type-header-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.reset-button {
+    background-color: #0078d4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0 5px;
+}
+
+.reset-all-button {
+    background-color: #0078d4;
+    white-space: nowrap;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0 5px;
+}
+
+.submit-button {
+    background-color: #0078d4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0 10px;
+}
+
+.type-selector {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: blueviolet;
+    flex: 1;
+}
+
+.damage-selector {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: blueviolet;
+    text-align: center;
+    flex: 1;
+}
+
+.damage-outgoing {
+    background-color: orange;
+    padding: 10px;
+}
+
+.damage-incoming {
+    background-color: brown;
+    padding: 10px;
+}
+
+.whole-page {
+    min-height: calc(100vh - 80px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.battleground {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
+    padding: 10px 0;
+    flex: 1;
+}
+
+
+
+.pokemon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background: red;
+    flex: 1;
+}
+
+.selectors {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: aquamarine;
+    flex: 2;
+}
+
+
+
+
+.button-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+    background-color: green;
+    max-width: 900px;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.radio-group {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: yellow;
+    padding: 10px;
+}
+
+
+
+
+.radio-group input[type="radio"] {
+    display: none;
+}
+
+
+.radio-group label {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    background-color: #0078d4;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 5px 10px;
+}
+
+.radio-group label:hover {
+    background-color: #005a9e;
+}
+
+.radio-group label span {
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+
+.radio-group label:has(input[type="radio"]:checked) {
+    background-color: #0a2d47;
+}
+
+.typeToggle {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #d46600;
+    padding: 10px;
+}
+
+.typeToggle .unselected {
+    background-color: #0078d4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0 10px;
+}
+
+.typeToggle .selected {
+    background-color: #021524;
+    color: #fff;
+    border: 1px solid #021524;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0 10px;
+}
+
+
+.type-selector .selected {
+    background-color: #0a2d47;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0 10px;
+}
+
+.type-selector .unselected {
+    background-color: #0078d4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 0 10px;
+}
+
+.reset-all-button:hover {
+    background-color: #005a9e;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.reset-all-button:active {
+    background-color: #004578;
+}
+
+.reset-button:hover {
+    background-color: #005a9e;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.reset-button:active {
+    background-color: #004578;
+}
+
+.submit-button:hover {
+    background-color: #005a9e;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.submit-button:active {
+    background-color: #004578;
+}
+
+.unselected:hover {
+    background-color: #005a9e;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.unselected:active {
+    background-color: #004578;
+}
+
+@media (max-width: 1000px) {
+    .battleground {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    .damage-selector {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 800px) {
+    .button-group {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 350px) {
+    .button-group {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+@media (max-width: 180px) {
+    .button-group {
+        grid-template-columns: 1fr;
+    }
+
+}
