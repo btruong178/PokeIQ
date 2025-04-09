@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the Backend Server');
+    res.send('Welcome to the Backend Server!');
 });
 
 app.use('/api', apiroutes);

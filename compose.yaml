@@ -1,4 +1,32 @@
 services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./frontend:/app/frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    command: npm run dev
+    volumes:
+      - ./backend:/app/backend
+    env_file:
+      - .env.backend
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
   db:
     image: postgres
     restart: always
@@ -9,17 +37,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    restart: always
-    env_file:
-      - .env.backend
-    ports:
-      - 5000:5000
-    depends_on:
-      - db
+
   adminer:
     image: adminer
     restart: always

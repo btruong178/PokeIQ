@@ -36,8 +36,8 @@ function TypeQuiz() {
             const initializeDamageSelections = (newTypes) => {
                 setTypes(newTypes);
                 setCurrentType(newTypes[0]);
-                console.log("UseEffect => Types Array: ", newTypes);
-                console.log("UseEffect => Current Type: ", newTypes[0]);
+                console.log("UseEffect => \"types\" useState: ", newTypes);
+                console.log("UseEffect => \"currentType\" useState: ", newTypes[0]);
                 if (newTypes.length > 0) {
                     const newDamageSelections = {};
                     newTypes.forEach((type) => {

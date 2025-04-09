@@ -13,4 +13,14 @@ router.get('/check', async (req, res) => {
     }
 });
 
+router.get('/health-check', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT NOW()');
+        res.status(200).json({ message: 'API is Working!!!', time: result.rows[0] });
+    } catch (err) {
+        console.error('Database query error:', err);
+        res.status(500).json({ error: 'Database error', details: err.message });
+    }
+});
+
 export default router;

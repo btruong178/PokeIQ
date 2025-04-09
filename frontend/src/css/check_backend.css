@@ -1,0 +1,18 @@
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('./images/pokeEvee.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-color: rgba(0, 0, 0, 0.75);
+    background-blend-mode: darken;
+    background-attachment: fixed;
+}
+
+.loading-text {
+    color: white;
+    font-size: 3rem;
+}

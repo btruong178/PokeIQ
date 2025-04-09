@@ -1,0 +1,35 @@
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import '../css/check_backend.css';
+import axios from 'axios';
+import ServiceDown from './service_down';
+
+const CheckBackend = ({ children }) => {
+    const location = useLocation();
+    const [backendUp, setBackendUp] = useState(null);
+
+    const checkAPIConnection = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/health-check');
+            setBackendUp(response.status === 200);
+        } catch (err) {
+            setBackendUp(false);
+        }
+    };
+
+    useEffect(() => {
+        setBackendUp(null);
+        checkAPIConnection();
+    }, [location]);
+
+    if (backendUp === null)
+        return (
+            <div className="loading-container">
+                <h1 className="loading-text">Loading...</h1>
+            </div>
+        );
+
+    return backendUp ? children : <ServiceDown />;
+};
+
+export default CheckBackend;

@@ -38,16 +38,20 @@ function Types({ onTypeSelect, damageSelections, currentDamage, currentType, cor
     }, [damageSelections, currentDamage, currentType]);
 
     const handleButtonClick = (type) => {
-        let newSelectedTypes;
-        if (damageSelections[currentType][currentDamage].includes(type)) {
-            newSelectedTypes = damageSelections[currentType][currentDamage].filter(t => t !== type);
-
-        } else {
-            newSelectedTypes = [...(damageSelections[currentType][currentDamage] || []), type];
+        try {
+            let newSelectedTypes;
+            if (damageSelections[currentType][currentDamage].includes(type)) {
+                newSelectedTypes = damageSelections[currentType][currentDamage].filter(t => t !== type);
+            } else {
+                newSelectedTypes = [...damageSelections[currentType][currentDamage], type];
+            }
+            damageSelections[currentType][currentDamage] = newSelectedTypes;
+            setSelectedTypes(newSelectedTypes);
+            onTypeSelect(damageSelections);
+        } catch (error) {
+            console.error("Error in handleButtonClick:", error);
+            alert("An unexpected error occurred. Please try again later.");
         }
-        damageSelections[currentType][currentDamage] = newSelectedTypes;
-        setSelectedTypes(newSelectedTypes);
-        onTypeSelect(damageSelections);
     };
 
 
@@ -93,7 +97,7 @@ function SubmitButton({ correctTypeAdvantage, damageSelections }) {
     const checkCorrectness = ({ correct, selected }) => {
         console.log("Checking Correctness");
         const wrongAnswersObject = {};
-
+        // Initialize the wrong answers object
         Object.keys(correct).forEach((key) => {
             wrongAnswersObject[key] = {
                 missing: {},

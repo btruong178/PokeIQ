@@ -1,0 +1,18 @@
+.service-down-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: hsla(0, 0%, 0%, 0.75);
+    background-image: url('./images/pokeEvee.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-blend-mode: darken;
+    background-attachment: fixed;
+}
+
+.service-down-text {
+    color: white;
+    font-size: 3rem;
+}

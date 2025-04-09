@@ -21,7 +21,7 @@ const pool = new Pool({
     user: dbUrl.username,
     host: dbUrl.hostname,
     database: dbUrl.pathname.slice(1),
-    password: decodeURIComponent(dbUrl.password),
+    password: dbUrl.password,
     port: dbUrl.port,
 });
 
@@ -29,7 +29,7 @@ const poolData = {
     user: dbUrl.username,
     host: dbUrl.hostname,
     database: dbUrl.pathname.slice(1),
-    password: decodeURIComponent(dbUrl.password),
+    password: dbUrl.password,
     port: dbUrl.port,
 };
 console.log('DB Connection Details(db.js):', poolData);
@@ -40,6 +40,14 @@ pool.query('SELECT NOW()', (err, res) => {
     console.log("--------------------------------\nFrom db.js\n--------------------------------");
     if (err) {
         console.error('Database connection error(db.js):', err.stack);
+        // Exit the process if the connection fails
+        console.log("--------------------------------");
+        console.error('Exiting process due to DB connection error(db.js)');
+        // Close the pool and exit the process
+        pool.end(() => {
+            console.log('Pool has ended(db.js)');
+            process.exit(1);
+        });
     } else {
         console.log('DB Connection Established(db.js):', res.rows[0]);
     }
