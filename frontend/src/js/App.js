@@ -6,6 +6,7 @@ import axios from 'axios';
 import Homepage from './homepage';
 import About from './about';
 import TypeQuiz from './type_quiz';
+import Damage_Relations_Quiz from './damage_relations_quiz/quiz.js';
 import { Header } from './header';
 import { Footer } from './footer';
 import CheckBackend from './check_backend';
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/About" element={<About />} />
             <Route path="/TypeQuiz" element={<TypeQuiz />} />
+            <Route path="/Damage_Relations_Quiz" element={<Damage_Relations_Quiz />} />
           </Routes>
         </main>
       </CheckBackend>

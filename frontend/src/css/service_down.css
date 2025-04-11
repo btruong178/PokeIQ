@@ -1,5 +1,6 @@
 .service-down-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -15,4 +16,5 @@
 .service-down-text {
     color: white;
     font-size: 3rem;
+    box-shadow: 3rem;
 }

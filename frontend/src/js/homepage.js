@@ -17,9 +17,9 @@ function Homepage() {
                             </div>
                             <HrLine />
                             <p className="introduction">
-                                PokeQuiz is a collection of many
+                                PokeIQ is a collection of many
                                 Pokemon related quizzes. Test your knowledge about Pokemon and
-                                become the Pokemon Master.
+                                increase your PokeIQ.
                                 Challenge your friends and see who knows the most about the world of Pokemon.
                                 Enjoy a variety of quizzes and have fun!
                             </p>

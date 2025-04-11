@@ -25,7 +25,8 @@ const CheckBackend = ({ children }) => {
     if (backendUp === null)
         return (
             <div className="loading-container">
-                <h1 className="loading-text">Loading...</h1>
+                <h1 className="loading-text">Loading</h1>
+                <div className="spinning-circle"></div>
             </div>
         );
 

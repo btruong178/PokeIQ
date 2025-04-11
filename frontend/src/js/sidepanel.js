@@ -48,6 +48,12 @@ function SidePanel({ isOpen, toggleSidePanel }) {
                         Type Quiz
                     </Link>
                 </li>
+                <li>
+                    <Link to="/Damage_Relations_Quiz" onClick={toggleSidePanel}>
+                        <FaBrain className="fa-icon"></FaBrain>
+                        Dmg Relations
+                    </Link>
+                </li>
             </ul>
         </div>
     );
