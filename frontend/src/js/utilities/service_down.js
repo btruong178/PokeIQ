@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/service_down.css';
+import '../../css/utilities/service_down.css';
 
 const ServiceDown = () => (
     <div className="service-down-container">

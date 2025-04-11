@@ -22,12 +22,16 @@ const logError = (error) => {
     console.error(LINE_SEPARATOR);
 };
 
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 // Function to fetch Pokémon data
 const fetchPokemonData = async (pokemonID) => {
     const response = await axios.get(`${POKEMON_BASE_URL}${pokemonID}`);
     const { forms, types, id } = response.data;
-    const pokemonName = forms[0].name;
-    const pokemonTypes = types.map(t => t.type.name).join('/');
+    const pokemonName = capitalizeFirstLetter(forms[0].name);
+    const pokemonTypes = types.map(t => capitalizeFirstLetter(t.type.name)).join('/');
     return { pokemonName, pokemonTypes };
 };
 
@@ -36,7 +40,7 @@ const fetchTypeData = async (typeID) => {
     let damageRelationsDictionary = {};
     const response = await axios.get(`${TYPE_BASE_URL}${typeID}`);
     const { damage_relations, name } = response.data;
-    const typeName = name;
+    const typeName = capitalizeFirstLetter(name);
     Object.entries(damage_relations).forEach(([key, value]) => {
         damageRelationsDictionary[key] = value.map(t => t.name);
     });
@@ -131,7 +135,7 @@ const checkIfDBisPopulated = async () => {
 
 
 // Execute the functions
-const num = 3; // Change this number to test the different functions
+const num = 2; // Change this number to test the different functions
 // switch statement
 switch (num) {
     case 1:

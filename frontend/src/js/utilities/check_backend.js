@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import '../css/check_backend.css';
+import '../../css/utilities/check_backend.css';
 import axios from 'axios';
 import ServiceDown from './service_down';
 

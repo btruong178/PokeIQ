@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { availableTypes } from "./logic";
 
 const DamageRelationsForm = ({
@@ -14,6 +14,14 @@ const DamageRelationsForm = ({
     handleTypeChange2,
     onSubmit,
 }) => {
+    useEffect(() => {
+        if (random) {
+            handleTypeChange({ target: { value: "" } });
+            handleTypeChange1({ target: { value: "" } });
+            handleTypeChange2({ target: { value: "" } });
+        }
+    }, [random]);
+
     return (
         <>
             <div className="toggles-options">
@@ -34,12 +42,12 @@ const DamageRelationsForm = ({
                         value={TypeMode}
                         onChange={(e) => setTypeMode(e.target.value)}
                     >
-                        <option value="single">Single Type</option>
-                        <option value="dual">Dual Type</option>
+                        <option value="Single">Single Type</option>
+                        <option value="Dual">Dual Type</option>
                     </select>
                 </div>
 
-                {!random && TypeMode === "single" && (
+                {!random && TypeMode === "Single" && (
                     <div className="single-type-select">
                         <label htmlFor="type-select">Choose a type: </label>
                         <select
@@ -50,14 +58,14 @@ const DamageRelationsForm = ({
                             <option value="">--Select a Type--</option>
                             {availableTypes.map((type, index) => (
                                 <option key={index} value={type}>
-                                    {type.charAt(0).toUpperCase() + type.slice(1)}
+                                    {type}
                                 </option>
                             ))}
                         </select>
                     </div>
                 )}
 
-                {!random && TypeMode === "dual" && (
+                {!random && TypeMode === "Dual" && (
                     <div className="dual-type-select">
                         <label htmlFor="dual-type-select-1">Choose Type 1: </label>
                         <select

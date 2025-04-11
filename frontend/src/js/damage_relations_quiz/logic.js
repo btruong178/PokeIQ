@@ -1,22 +1,24 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
-import '../../css/damage_relations_quiz.css';
 
 
 const Damage_Relations_API_URL = 'http://localhost:5000/pokemon/damage_relations'; // '/:typeName' at the end
 
-const availableTypes = [
+export const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export const availableTypes = [
     'normal', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost',
     'steel', 'fire', 'water', 'grass', 'electric', 'psychic', 'ice', 'dragon',
     'dark', 'fairy'
-];
+].map(type => capitalizeFirstLetter(type));
 
-const RandomTypeSingle = () => {
+export const RandomTypeSingle = () => {
     const randomIndex = Math.floor(Math.random() * availableTypes.length);
     return availableTypes[randomIndex];
 }
 
-const RandomTypeDual = () => {
+export const RandomTypeDual = () => {
     const randomIndex1 = Math.floor(Math.random() * availableTypes.length);
     let randomIndex2 = randomIndex1;
     while (randomIndex2 === randomIndex1) {
@@ -27,34 +29,33 @@ const RandomTypeDual = () => {
 
 
 const validateSingleType = (type) => {
-    if (typeof type !== 'string') {
-        throw new Error("Invalid: Type name must be a string.\nCurrent type: " + type);
-    }
-    if (!availableTypes.includes(type = type.toLowerCase())) {
-        throw new Error("Invalid: Type not found.");
+    if (type === "") {
+        throw new Error("No Type Selected");
     }
 }
 
 const validateDualType = (type1, type2) => {
-    validateSingleType(type1);
-    validateSingleType(type2);
+    if (type1 === "" || type2 === "") {
+        throw new Error("Missing type(s)");
+    }
     if (type1 === type2) {
-        throw new Error("Type names must be different.");
+        throw new Error("Cannot have the same type twice.");
     }
 };
 
 
-const fetchSingleType = async (type) => {
+export const fetchSingleType = async (type) => {
     try {
+        validateSingleType(type);
         const response = await axios.get(`${Damage_Relations_API_URL}/${type}`);
         return response.data;
     } catch (error) {
         console.error(error.message);
-        return null;
+        throw new Error(error.message);
     }
 }
 
-const fetchDualType = async (type1, type2) => {
+export const fetchDualType = async (type1, type2) => {
     try {
         validateDualType(type1, type2);
         const type1Data = await fetchSingleType(type1);
@@ -62,11 +63,11 @@ const fetchDualType = async (type1, type2) => {
         return { type1: type1Data, type2: type2Data };
     } catch (error) {
         console.error(error.message);
-        return null;
+        throw new Error(error.message);
     }
 }
 
-const fetchSingleTypeRandom = async () => {
+export const fetchSingleTypeRandom = async () => {
     try {
         const RandomType = RandomTypeSingle();
         const data = fetchSingleType(RandomType)
@@ -77,7 +78,7 @@ const fetchSingleTypeRandom = async () => {
     }
 };
 
-const fetchDualTypeRandom = async () => {
+export const fetchDualTypeRandom = async () => {
     try {
         const [RandomType1, RandomType2] = RandomTypeDual();
         const data = fetchDualType(RandomType1, RandomType2)
@@ -87,7 +88,5 @@ const fetchDualTypeRandom = async () => {
         return null;
     }
 };
-
-export { fetchDualType, fetchSingleType, fetchSingleTypeRandom, fetchDualTypeRandom, availableTypes };
 
 

@@ -9,7 +9,7 @@ import TypeQuiz from './type_quiz';
 import Damage_Relations_Quiz from './damage_relations_quiz/quiz.js';
 import { Header } from './header';
 import { Footer } from './footer';
-import CheckBackend from './check_backend';
+import CheckBackend from './utilities/check_backend';
 // CSS imports
 import '../css/App.css';
 

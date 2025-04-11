@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/custom_modal.css';
+import '../../css/utilities/custom_modal.css';
 
 const CustomModal = ({ message, onClose }) => {
     return (

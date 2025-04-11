@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import DamageRelationsForm from "./form";
-import { availableTypes } from "./logic";
 import {
     handleGetSingleType,
     handleGetSingleTypeRandom,
     handleGetDualType,
-    handleGetDualTypeRandom,
-    validateDualType
+    handleGetDualTypeRandom
 } from "./handlers";
-import '../../css/damage_relations_quiz.css';
-import CustomModal from '../custom_modal';
+import { Selection } from "./selection";
+import '../../css/damage_relations_quiz/quiz.css';
+import CustomModal from '../utilities/custom_modal';
 
 function Damage_Relations_Quiz() {
     const [selectedSingleType, setSelectedSingleType] = useState("");
     const [selectedDualType1, setSelectedDualType1] = useState("");
     const [selectedDualType2, setSelectedDualType2] = useState("");
     const [random, setRandom] = useState(true);
-    const [TypeMode, setTypeMode] = useState("single");
+    const [TypeMode, setTypeMode] = useState("Single");
     const [modalMessage, setModalMessage] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [quiz, setQuiz] = useState(false);
@@ -37,19 +36,18 @@ function Damage_Relations_Quiz() {
 
     const handleSubmit = async () => {
         try {
-            if (TypeMode === "single") {
+            if (TypeMode === "Single") {
                 random
                     ? await handleGetSingleTypeRandom()
-                    : await handleGetSingleType(selectedSingleType, showErrorModal);
-            } else if (TypeMode === "dual") {
+                    : await handleGetSingleType(selectedSingleType);
+            } else if (TypeMode === "Dual") {
                 random
                     ? await handleGetDualTypeRandom()
-                    : await handleGetDualType(selectedDualType1, selectedDualType2, showErrorModal);
+                    : await handleGetDualType(selectedDualType1, selectedDualType2);
             }
             setQuiz(true);
         } catch (error) {
             showErrorModal(error.message);
-            return;
         }
     };
 
@@ -75,13 +73,14 @@ function Damage_Relations_Quiz() {
                     onSubmit={handleSubmit}
                 />
             ) : (
-                <div className="quiz-result">
-                    <h2>Quiz Result</h2>
-                    <p>
-                        You have selected {TypeMode === "single" ? selectedSingleType : `${selectedDualType1} and ${selectedDualType2}`}
-                    </p>
-                    <button onClick={() => setQuiz(false)}>Restart Quiz</button>
-                </div>
+                <Selection
+                    selectedSingleType={selectedSingleType}
+                    selectedDualType1={selectedDualType1}
+                    selectedDualType2={selectedDualType2}
+                    TypeMode={TypeMode}
+                    quiz={quiz}
+                    setQuiz={setQuiz}
+                />
             )}
             {showModal && (
                 <CustomModal message={modalMessage} onClose={closeModal} />
