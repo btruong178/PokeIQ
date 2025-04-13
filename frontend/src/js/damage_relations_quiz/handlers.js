@@ -5,7 +5,6 @@ export const handleGetSingleType = async (selectedType) => {
         const data = await fetchSingleType(selectedType);
         console.log("Single Type Data: ", data);
     } catch (error) {
-        console.error(error.message);
         throw new Error(error.message);
     }
 };
@@ -17,7 +16,6 @@ export const handleGetDualType = async (selectedType1, selectedType2) => {
         console.log("Dual-Type 1 Data: ", data.type1);
         console.log("Dual-Type 2 Data: ", data.type2);
     } catch (error) {
-        console.error(error.message);
         throw new Error(error.message);
     }
 };

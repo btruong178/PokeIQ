@@ -76,7 +76,7 @@ const DamageRelationsForm = ({
                             <option value="">--Select a Type--</option>
                             {availableTypes.map((type, index) => (
                                 <option key={index} value={type}>
-                                    {type.charAt(0).toUpperCase() + type.slice(1)}
+                                    {type}
                                 </option>
                             ))}
                         </select>
@@ -90,7 +90,7 @@ const DamageRelationsForm = ({
                             <option value="">--Select a Type--</option>
                             {availableTypes.map((type, index) => (
                                 <option key={index} value={type}>
-                                    {type.charAt(0).toUpperCase() + type.slice(1)}
+                                    {type}
                                 </option>
                             ))}
                         </select>
