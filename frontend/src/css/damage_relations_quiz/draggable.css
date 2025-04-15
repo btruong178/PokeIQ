@@ -1,0 +1,15 @@
+.draggable-type {
+    opacity: 1;
+    cursor: grab;
+    display: flex;
+    background-color: black;
+}
+
+.draggable-type .dragging {
+    opacity: 0;
+    cursor: pointer;
+    display: flex;
+    background-color: aqua;
+
+
+}

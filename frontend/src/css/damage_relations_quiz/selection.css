@@ -25,26 +25,69 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-color: lightgreen;
+    background-color: rgb(46, 75, 46);
     padding: 10px;
 }
 
 .quiz-info h5 {
     margin: 0;
     padding: 0;
-
 }
 
 .quiz-info p {
     margin: 0;
     padding: 0;
     font-size: 0.8em;
+    white-space: nowrap;
+}
+
+.quiz-info p.label {
+    font-weight: bold;
+}
+
+.quiz-info span {
+    font-weight: normal;
+    display: inline;
+}
+
+.quiz-info hr {
+    width: 100%;
+    margin: 5px 0;
+}
+
+@keyframes gradientBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .quiz-info button {
-    margin: 5px;
-    padding: 5px 10px;
+    background: linear-gradient(270deg, #6f8ba3, #00f2fe, #6f8ba3);
+    background-size: 600% 600%;
+    color: white;
     border: none;
-    border-radius: 50%;
+    border-radius: 30px;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.8rem;
     cursor: pointer;
+    margin: 5px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease-in-out;
+    /* animation: gradientBackground 8s ease infinite; */
+}
+
+.quiz-info button:hover {
+    transform: scale(1.05);
+}
+
+.quiz-info button:active {
+    transform: scale(0.98);
 }

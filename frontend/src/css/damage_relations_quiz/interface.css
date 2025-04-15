@@ -1,0 +1,23 @@
+.interface-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(230, 173, 225);
+    padding: 10px;
+}
+
+.button-display {
+    display: grid;
+    justify-content: center;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+
+    background-color: rgb(101, 164, 223);
+    padding: 10px;
+}
