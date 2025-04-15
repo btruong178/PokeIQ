@@ -4,11 +4,13 @@ import {
     handleGetSingleType,
     handleGetSingleTypeRandom,
     handleGetDualType,
-    handleGetDualTypeRandom
+    handleGetDualTypeRandom,
+    handleGetRandomPokemon
 } from "./handlers";
 import { Selection } from "./selection";
 import '../../css/damage_relations_quiz/quiz.css';
 import CustomModal from '../utilities/custom_modal';
+import { fetchRandomPokemon } from "./logic";
 
 function Damage_Relations_Quiz() {
     const [selectedSingleType, setSelectedSingleType] = useState("");
@@ -34,6 +36,16 @@ function Damage_Relations_Quiz() {
         setModalMessage("");
     };
 
+    const testbutton = async () => {
+        try {
+            const data = await fetchRandomPokemon();
+            console.log(data);
+        } catch (error) {
+            console.error("Error fetching random Pokémon:", error);
+            showErrorModal(error.message);
+        }
+    }
+
     const handleSubmit = async () => {
         try {
             if (TypeMode === "Single") {
@@ -44,6 +56,12 @@ function Damage_Relations_Quiz() {
                 random
                     ? await handleGetDualTypeRandom()
                     : await handleGetDualType(selectedDualType1, selectedDualType2);
+            } else if (TypeMode === "Pokemon") {
+                if (random) {
+                    await handleGetRandomPokemon();
+                } else {
+                    throw new Error("Random Pokemon Type is only available when 'Random' is selected.");
+                }
             }
             setQuiz(true);
         } catch (error) {
@@ -58,6 +76,7 @@ function Damage_Relations_Quiz() {
                 Welcome to the Damage Relations page! Here you can explore the damage
                 relations between different Pokémon types.
             </p>
+            <button onClick={() => testbutton()}>Test Button</button>
             {!quiz ? (
                 <DamageRelationsForm
                     random={random}

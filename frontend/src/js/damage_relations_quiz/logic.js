@@ -1,6 +1,6 @@
 import axios from "axios";
 
-
+const Random_Pokemon_API_URL = 'http://localhost:5000/pokemon/random_pokemon';
 const Damage_Relations_API_URL = 'http://localhost:5000/pokemon/damage_relations'; // '/:typeName' at the end
 
 export const capitalizeFirstLetter = (string) => {
@@ -88,5 +88,24 @@ export const fetchDualTypeRandom = async () => {
         return null;
     }
 };
+
+export const fetchRandomPokemon = async () => {
+    try {
+        const result = await axios.get(`${Random_Pokemon_API_URL}`);
+        const { id, name, type } = result.data;
+        let damage_relations = {};
+        if (type.includes("/")) {
+            const types = type.split("/").map(t => t.trim());
+            damage_relations = await fetchDualType(types[0], types[1]);
+            return { id, name, type: types, damage_relations: damage_relations };
+        } else {
+            damage_relations = await fetchSingleType(type);
+            return { id, name, type: [type], damage_relations: damage_relations };
+        }
+    } catch (error) {
+        console.error(error.message);
+        throw new Error(error.message);
+    }
+}
 
 

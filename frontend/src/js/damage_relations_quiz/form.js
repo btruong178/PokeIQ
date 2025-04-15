@@ -20,8 +20,11 @@ const DamageRelationsForm = ({
             handleTypeChange1({ target: { value: "" } });
             handleTypeChange2({ target: { value: "" } });
         }
+        if (!random && TypeMode === "Pokemon") {
+            setTypeMode("Single");
+            handleTypeChange({ target: { value: "" } });
+        }
     }, [random]);
-
     return (
         <>
             <div className="toggles-options">
@@ -42,8 +45,9 @@ const DamageRelationsForm = ({
                         value={TypeMode}
                         onChange={(e) => setTypeMode(e.target.value)}
                     >
-                        <option value="Single">Single Type</option>
-                        <option value="Dual">Dual Type</option>
+                        <option value="Single">Single</option>
+                        <option value="Dual">Dual</option>
+                        {random && <option value="Pokemon">Pokemon</option>}
                     </select>
                 </div>
 
