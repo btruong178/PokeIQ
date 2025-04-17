@@ -8,7 +8,7 @@
  */
 
 import '../../css/damage_relations_quiz/selection.css'
-import Interface from './interface';
+import Buttons from './buttons';
 
 /**
   *
@@ -23,7 +23,7 @@ import Interface from './interface';
  * @param {Function} props.onSubmit - Callback function to handle form submission.
  * @returns {JSX.Element} The Selection component.
  */
-const Selection = ({
+const Header = ({
     selectedSingleType,
     selectedDualType1,
     selectedDualType2,
@@ -41,6 +41,7 @@ const Selection = ({
                     <hr />
                     <p className="label">Random: <span>{random ? "On" : "Off"}</span></p>
                     <p className="label">Type Mode: <span>{TypeMode}</span></p>
+                    <hr />
                     {TypeMode === "Single" && (
                         <>
                             <p className="label">Type: <span>{selectedSingleType}</span></p>
@@ -64,13 +65,11 @@ const Selection = ({
                         <button onClick={() => setQuiz(false)}>Re-select</button>
                     </div>
                 </div>
+                <Buttons pokemon={pokemon}></Buttons>
             </div>
-            {random && TypeMode === "Pokemon" && (
-                <Interface pokemon={pokemon}></Interface>
-            )}
 
         </div>
     )
 }
 
-export { Selection };
+export { Header };

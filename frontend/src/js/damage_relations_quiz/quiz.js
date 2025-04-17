@@ -16,7 +16,7 @@ import {
     handleGetDualTypeRandom,
     handleGetRandomPokemon
 } from "./handlers";
-import { Selection } from "./selection";
+import { Header } from "./header";
 import '../../css/damage_relations_quiz/quiz.css';
 import CustomModal from '../utilities/custom_modal';
 
@@ -139,7 +139,7 @@ function Damage_Relations_Quiz() {
                     onSubmit={handleSubmit}
                 />
             ) : (
-                <Selection
+                <Header
                     selectedSingleType={selectedSingleType}
                     selectedDualType1={selectedDualType1}
                     selectedDualType2={selectedDualType2}

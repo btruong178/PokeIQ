@@ -1,14 +1,16 @@
 import '../../css/damage_relations_quiz/interface.css';
 import { availableTypes } from './logic.js';
-import Draggable from './draggable.js';
+import Draggable from './react-dnd/draggable.js';
 
 
 
-const Interface = () => {
+const Buttons = () => {
     return (
-        <div className="interface-container">
+        <div className="button-container">
             <div className="button-display">
-                <Draggable type="Normal" />
+                {availableTypes.map((type, index) => (
+                    <Draggable key={index} type={type} />
+                ))}
             </div>
             <div className="type-effectiveness-chart">
 
@@ -17,4 +19,4 @@ const Interface = () => {
     );
 }
 
-export default Interface;
+export default Buttons;

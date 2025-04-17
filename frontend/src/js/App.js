@@ -11,6 +11,7 @@ import TypeQuiz from './type_quiz';
 import Damage_Relations_Quiz from './damage_relations_quiz/quiz.js';
 import { Header } from './header';
 import CheckBackend from './utilities/check_backend';
+import CustomDragLayer from './damage_relations_quiz/react-dnd/CustomDragLayer.js';
 // CSS imports
 import '../css/App.css';
 
@@ -27,6 +28,7 @@ function App() {
               <Route path="/TypeQuiz" element={<TypeQuiz />} />
               <Route path="/Damage_Relations_Quiz" element={<Damage_Relations_Quiz />} />
             </Routes>
+            <CustomDragLayer />
           </main>
         </DndProvider>
       </CheckBackend>

@@ -1,14 +1,8 @@
-.draggable-type {
+.drag-preview {
     padding: 8px 16px;
     background-color: aqua;
     border: 2px solid #000;
     border-radius: 4px;
     color: #000;
     font-weight: bold;
-    cursor: grab;
-}
-
-
-.draggable-type.dragging {
-    opacity: 0;
 }
