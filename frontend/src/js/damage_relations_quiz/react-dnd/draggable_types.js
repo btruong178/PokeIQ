@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import '../../../css/damage_relations_quiz/draggable.css';
+import '../../../css/damage_relations_quiz/react-dnd/draggable_types.css';
 
-const Draggable = ({ type }) => {
+const DraggableType = ({ type }) => {
     const [collectObject, drag, preview] = useDrag({
         type: 'TYPE',
         item: { type },
@@ -29,4 +29,4 @@ const Draggable = ({ type }) => {
     );
 }
 
-export default Draggable;
+export default DraggableType;

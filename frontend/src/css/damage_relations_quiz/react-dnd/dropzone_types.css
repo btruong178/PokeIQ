@@ -1,0 +1,51 @@
+.dropzone {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px dashed #000;
+    background-color: blue;
+
+}
+
+/* reset default margins on h5 and p */
+.dropzone>h5,
+.dropzone>p {
+    margin: 0;
+    text-align: center;
+}
+
+
+.dropzone.hover.can-drop {
+    background-color: lightblue;
+}
+
+.dropzone.can-drop {
+    background-color: lightgreen;
+}
+
+.dropzone-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.dropped-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 60px;
+
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    margin: 0 5px;
+    padding: 0.5rem;
+}

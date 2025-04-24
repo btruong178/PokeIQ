@@ -8,7 +8,7 @@
  */
 
 import '../../css/damage_relations_quiz/selection.css'
-import Buttons from './buttons';
+import TypeButtons from './type_buttons';
 
 /**
   *
@@ -21,6 +21,8 @@ import Buttons from './buttons';
  * @param {Object} props.pokemon - The Pokémon object containing its data.
  * @param {Function} props.setQuiz - Function to update the quiz state.
  * @param {Function} props.onSubmit - Callback function to handle form submission.
+ * @param {Object} props.AnswerMap - The map of answers for the quiz.
+ * @param {Function} props.setAnswerMap - Function to update the answer map.
  * @returns {JSX.Element} The Selection component.
  */
 const Header = ({
@@ -31,7 +33,9 @@ const Header = ({
     TypeMode,
     pokemon,
     setQuiz,
-    onSubmit
+    onSubmit,
+    AnswerMap,
+    setAnswerMap
 }) => {
     return (
         <div className="quiz-container">
@@ -65,7 +69,7 @@ const Header = ({
                         <button onClick={() => setQuiz(false)}>Re-select</button>
                     </div>
                 </div>
-                <Buttons pokemon={pokemon}></Buttons>
+                <TypeButtons AnswerMap={AnswerMap} setAnswerMap={setAnswerMap}></TypeButtons>
             </div>
 
         </div>

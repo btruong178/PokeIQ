@@ -16,7 +16,9 @@ import {
     handleGetDualTypeRandom,
     handleGetRandomPokemon
 } from "./handlers";
+import { availableTypes } from "./logic";
 import { Header } from "./header";
+import TypeZones from "./type_zones";
 import '../../css/damage_relations_quiz/quiz.css';
 import CustomModal from '../utilities/custom_modal';
 
@@ -40,6 +42,15 @@ function Damage_Relations_Quiz() {
     const [modalMessage, setModalMessage] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [quiz, setQuiz] = useState(false);
+    const [AnswerMap, setAnswerMap] = useState({
+        "unSelected": availableTypes,
+        "x0": [],
+        "x0.25": [],
+        "x0.5": [],
+        "x1": [],
+        "x2": [],
+        "x4": [],
+    });
 
     /**
      * Handles change for the single type input.
@@ -139,17 +150,23 @@ function Damage_Relations_Quiz() {
                     onSubmit={handleSubmit}
                 />
             ) : (
-                <Header
-                    selectedSingleType={selectedSingleType}
-                    selectedDualType1={selectedDualType1}
-                    selectedDualType2={selectedDualType2}
-                    random={random}
-                    TypeMode={TypeMode}
-                    pokemon={pokemon}
-                    setQuiz={setQuiz}
-                    onSubmit={handleSubmit}
-                />
+                <>
+                    <Header
+                        selectedSingleType={selectedSingleType}
+                        selectedDualType1={selectedDualType1}
+                        selectedDualType2={selectedDualType2}
+                        random={random}
+                        TypeMode={TypeMode}
+                        pokemon={pokemon}
+                        setQuiz={setQuiz}
+                        onSubmit={handleSubmit}
+                        AnswerMap={AnswerMap}
+                        setAnswerMap={setAnswerMap}
+                    />
+                    <TypeZones AnswerMap={AnswerMap} setAnswerMap={setAnswerMap}></TypeZones>
+                </>
             )}
+
             {showModal && (
                 <CustomModal message={modalMessage} onClose={closeModal} />
             )}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDragLayer } from 'react-dnd';
-import '../../../css/damage_relations_quiz/CustomDragLayer.css';
+import '../../../css/damage_relations_quiz/react-dnd/CustomDragLayer.css';
 
 const layerStyles = {
     position: 'fixed',
