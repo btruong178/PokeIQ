@@ -18,7 +18,7 @@ import {
 } from "./handlers";
 import { availableTypes } from "./logic";
 import { Header } from "./header";
-import TypeZones from "./type_zones";
+import { TypeZones } from "./dropzone_components";
 import '../../css/damage_relations_quiz/quiz.css';
 import CustomModal from '../utilities/custom_modal';
 
@@ -49,8 +49,25 @@ function Damage_Relations_Quiz() {
         "x0.5": [],
         "x1": [],
         "x2": [],
-        "x4": [],
+        "x4": []
+
     });
+
+    // const [AnswerMap, setAnswerMap] = useState({
+    //     "unSelected": availableTypes,
+    //     "Immune To": [],
+    //     "Resistant To": {
+    //         "x0.25": [],
+    //         "x0.5": []
+    //     },
+    //     "Normally Damaged By": [],
+    //     "Weak To": {
+    //         "x2": [],
+    //         "x4": []
+    //     },
+    // });
+
+    // Remeber to create CorrectAnswers for the AnswerMap 
 
     /**
      * Handles change for the single type input.

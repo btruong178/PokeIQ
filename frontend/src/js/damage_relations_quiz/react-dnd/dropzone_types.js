@@ -6,40 +6,66 @@ const DropZone = ({ type_effectiveness, type_multiplier, AnswerMap, setAnswerMap
 
     const [{ isOver, canDrop }, drop] = useDrop(() => ({
         accept: 'TYPE',
-        drop: (item) => {
-            if (AnswerMap[type_multiplier].includes(item.type)) {
-                console.log(`Already dropped ${item.type} in ${type_multiplier}`);
-                return;
-            }
-            setAnswerMap((prev) => {
-                let newAnswerMap = { ...prev };
-                newAnswerMap[type_multiplier].push(item.type);
-                console.log(newAnswerMap);
-                return newAnswerMap;
+        drop: ({ type }) => {
+            setAnswerMap(prev => {
+                const newMap = Object.fromEntries(
+                    Object.entries(prev).map(
+                        ([key, arr]) => [key, arr.filter(t => t !== type)]
+                    )
+                );
+                newMap[type_multiplier] = [...newMap[type_multiplier], type];
+                return newMap;
             });
-
         },
-        collect: (monitor) => ({
+        collect: monitor => ({
             isOver: monitor.isOver(),
             canDrop: monitor.canDrop()
         })
-    }), [AnswerMap]);
+    }), [setAnswerMap]);
 
     return (
-        <div
-            ref={drop}
-            className={`dropzone${isOver ? ' hover' : ''}${canDrop ? ' can-drop' : ''}`}
-        >
-            {type_multiplier !== "unSelected" && <h5>{type_effectiveness} ({type_multiplier})</h5>}
-            <div className="dropzone-content">
-                {AnswerMap[type_multiplier].length > 0
-                    ? AnswerMap[type_multiplier].map((type, i) => (
-                        <DraggableType key={i} className="dropped-type" type={type}>{type}</DraggableType>
-                    ))
-                    : <p>Drop types here</p>
-                }
-            </div>
-        </div>
+        <>
+            {type_multiplier === "unSelected" ? (
+                <div
+                    ref={drop}
+                    className={'unSelected-button-container'}
+                >
+                    <div className={`unSelected-button-grid`}>
+                        {(AnswerMap[type_multiplier]?.length > 0)
+                            ? AnswerMap[type_multiplier].map((type, i) => (
+                                <DraggableType
+                                    key={i}
+                                    type={type}
+                                    AnswerMap={AnswerMap}
+                                    setAnswerMap={setAnswerMap}>
+                                    {type}
+                                </DraggableType>
+                            ))
+                            : <p>Drop types here</p>
+                        }
+                    </div>
+                </div>
+            ) : (
+                <div
+                    ref={drop}
+                    className={'dropzone'}
+                >
+                    <h5>{type_effectiveness} ({type_multiplier})</h5>
+                    <div className={`dropzone-content ${isOver ? 'hover' : ''} ${canDrop ? 'can-drop' : ''}`}>
+                        {AnswerMap[type_multiplier].map((type, i) => (
+                            <DraggableType
+                                key={i}
+                                type={type}
+                                AnswerMap={AnswerMap}
+                                setAnswerMap={setAnswerMap}>
+                                {type}
+                            </DraggableType>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+        </>
     );
 }
 

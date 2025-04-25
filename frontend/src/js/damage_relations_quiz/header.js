@@ -7,8 +7,8 @@
  * @component
  */
 
-import '../../css/damage_relations_quiz/selection.css'
-import TypeButtons from './type_buttons';
+import '../../css/damage_relations_quiz/header.css'
+import { TypeButtons } from './dropzone_components';
 
 /**
   *
@@ -38,7 +38,7 @@ const Header = ({
     setAnswerMap
 }) => {
     return (
-        <div className="quiz-container">
+        <div className="quiz-header-container">
             <div className="quiz-header">
                 <div className="quiz-info">
                     <h5>Quiz Selection</h5>
