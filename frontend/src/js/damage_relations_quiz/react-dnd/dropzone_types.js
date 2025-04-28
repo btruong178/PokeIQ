@@ -30,19 +30,16 @@ const DropZone = ({ type_effectiveness, type_multiplier, AnswerMap, setAnswerMap
                     ref={drop}
                     className={'unSelected-button-container'}
                 >
-                    <div className={`unSelected-button-grid`}>
-                        {(AnswerMap[type_multiplier]?.length > 0)
-                            ? AnswerMap[type_multiplier].map((type, i) => (
-                                <DraggableType
-                                    key={i}
-                                    type={type}
-                                    AnswerMap={AnswerMap}
-                                    setAnswerMap={setAnswerMap}>
-                                    {type}
-                                </DraggableType>
-                            ))
-                            : <p>Drop types here</p>
-                        }
+                    <div className={`unSelected-buttons`}>
+                        {AnswerMap[type_multiplier].map((type, i) => (
+                            <DraggableType
+                                key={i}
+                                type={type}
+                                AnswerMap={AnswerMap}
+                                setAnswerMap={setAnswerMap}>
+                                {type}
+                            </DraggableType>
+                        ))}
                     </div>
                 </div>
             ) : (

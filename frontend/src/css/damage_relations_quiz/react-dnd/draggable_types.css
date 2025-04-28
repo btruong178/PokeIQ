@@ -1,4 +1,8 @@
 .draggable-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     padding: 8px 16px;
     background-color: aqua;
     border: 2px solid #000;
@@ -6,8 +10,7 @@
     color: #000;
     font-weight: bold;
     cursor: grab;
-    margin: 0px 5px;
-    text-align: center;
+    margin: 0px 1px;
 }
 
 
