@@ -8,7 +8,7 @@
  */
 
 import '../../css/damage_relations_quiz/header.css'
-import { TypeButtons } from './dropzone_components';
+import { UnSelectedButtons } from './dropzone_components';
 
 /**
   *
@@ -69,7 +69,7 @@ const Header = ({
                         <button onClick={() => setQuiz(false)}>Re-select</button>
                     </div>
                 </div>
-                <TypeButtons AnswerMap={AnswerMap} setAnswerMap={setAnswerMap}></TypeButtons>
+                <UnSelectedButtons AnswerMap={AnswerMap} setAnswerMap={setAnswerMap} />
             </div>
 
         </div>

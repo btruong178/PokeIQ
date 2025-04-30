@@ -10,12 +10,16 @@
 
 }
 
-/* reset default margins on h5 and p */
-.dropzone>h5,
-.dropzone>p {
-    margin: 0;
+.dropzone h5 {
+    margin: 0 5px;
     text-align: center;
 }
+
+.dropzone h6 {
+    margin: 0 5px;
+    text-align: center;
+}
+
 
 .dropzone-content {
     display: flex;

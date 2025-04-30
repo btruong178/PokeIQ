@@ -42,30 +42,36 @@ function Damage_Relations_Quiz() {
     const [modalMessage, setModalMessage] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [quiz, setQuiz] = useState(false);
-    const [AnswerMap, setAnswerMap] = useState({
-        "unSelected": availableTypes,
-        "x0": [],
-        "x0.25": [],
-        "x0.5": [],
-        "x1": [],
-        "x2": [],
-        "x4": []
-
-    });
-
     // const [AnswerMap, setAnswerMap] = useState({
     //     "unSelected": availableTypes,
-    //     "Immune To": [],
-    //     "Resistant To": {
-    //         "x0.25": [],
-    //         "x0.5": []
-    //     },
-    //     "Normally Damaged By": [],
-    //     "Weak To": {
-    //         "x2": [],
-    //         "x4": []
-    //     },
+    //     "x0": [],
+    //     "x0.25": [],
+    //     "x0.5": [],
+    //     "x1": [],
+    //     "x2": [],
+    //     "x4": []
+
     // });
+
+    const [AnswerMap, setAnswerMap] = useState({
+        "unSelected": {
+            "N/A": availableTypes
+        },
+        "Immune To": {
+            "x0": [],
+        },
+        "Resistant To": {
+            "x0.25": [],
+            "x0.5": []
+        },
+        "Normally Damaged By": {
+            "x1": [],
+        },
+        "Weak To": {
+            "x2": [],
+            "x4": []
+        },
+    });
 
     // Remeber to create CorrectAnswers for the AnswerMap 
 

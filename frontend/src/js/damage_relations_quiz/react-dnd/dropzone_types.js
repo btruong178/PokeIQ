@@ -7,15 +7,18 @@ const DropZone = ({ type_effectiveness, type_multiplier, AnswerMap, setAnswerMap
     const [{ isOver, canDrop }, drop] = useDrop(() => ({
         accept: 'TYPE',
         drop: ({ type }) => {
-            setAnswerMap(prev => {
-                const newMap = Object.fromEntries(
-                    Object.entries(prev).map(
-                        ([key, arr]) => [key, arr.filter(t => t !== type)]
-                    )
-                );
-                newMap[type_multiplier] = [...newMap[type_multiplier], type];
-                return newMap;
-            });
+            console.log("Dropped", type, "on", type_effectiveness, type_multiplier);
+            const newAnswerMap = { ...AnswerMap };
+            for (const [effectiveness, object] of Object.entries(newAnswerMap)) {
+                for (const [multiplier, array] of Object.entries(object)) {
+                    if (array.includes(type)) {
+                        newAnswerMap[effectiveness][multiplier] = array.filter(t => t !== type);
+                    }
+                }
+            }
+            newAnswerMap[type_effectiveness][type_multiplier].push(type);
+            console.log("AnswerMap after drop:", newAnswerMap);
+            setAnswerMap(newAnswerMap);
         },
         collect: monitor => ({
             isOver: monitor.isOver(),
@@ -23,45 +26,55 @@ const DropZone = ({ type_effectiveness, type_multiplier, AnswerMap, setAnswerMap
         })
     }), [setAnswerMap]);
 
+
+
+    const target = AnswerMap[type_effectiveness];
+    const targetEntries = Object.entries(target);
+
+
     return (
         <>
-            {type_multiplier === "unSelected" ? (
+            {type_effectiveness === "unSelected" ? (
                 <div
                     ref={drop}
                     className={'unSelected-button-container'}
                 >
                     <div className={`unSelected-buttons`}>
-                        {AnswerMap[type_multiplier].map((type, i) => (
-                            <DraggableType
-                                key={i}
-                                type={type}
-                                AnswerMap={AnswerMap}
-                                setAnswerMap={setAnswerMap}>
-                                {type}
-                            </DraggableType>
+                        {targetEntries.map(([multiplier, array]) => (
+                            array.map((type, i) => (
+                                <DraggableType
+                                    key={i}
+                                    type={type}
+                                    AnswerMap={AnswerMap}
+                                    setAnswerMap={setAnswerMap}>
+                                    {type}
+                                </DraggableType>
+                            ))
                         ))}
                     </div>
                 </div>
-            ) : (
+            ) : type_effectiveness !== "unSelected" && (
                 <div
                     ref={drop}
                     className={'dropzone'}
                 >
-                    <h5>{type_effectiveness} ({type_multiplier})</h5>
+                    <h5>{type_effectiveness}</h5>
+                    <h6>({type_multiplier})</h6>
                     <div className={`dropzone-content ${isOver ? 'hover' : ''} ${canDrop ? 'can-drop' : ''}`}>
-                        {AnswerMap[type_multiplier].map((type, i) => (
-                            <DraggableType
-                                key={i}
-                                type={type}
-                                AnswerMap={AnswerMap}
-                                setAnswerMap={setAnswerMap}>
-                                {type}
-                            </DraggableType>
+                        {targetEntries.map(([multiplier, array]) => (
+                            array.map((type, i) => (
+                                <DraggableType
+                                    key={i}
+                                    type={type}
+                                    AnswerMap={AnswerMap}
+                                    setAnswerMap={setAnswerMap}>
+                                    {type}
+                                </DraggableType>
+                            ))
                         ))}
                     </div>
                 </div>
             )}
-
         </>
     );
 }

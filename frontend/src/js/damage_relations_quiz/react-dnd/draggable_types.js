@@ -17,29 +17,30 @@ const DraggableType = ({ type, AnswerMap, setAnswerMap }) => {
         preview(getEmptyImage(), { captureDraggingState: true });
     }, [preview]);
 
-    const sendBacktoUnSelected = (event) => {
-        if (AnswerMap["unSelected"]?.includes(type)) {
+    const sendBacktoUnSelectedOnClick = () => {
+        console.log("Clicked on type:", type);
+        const newAnswerMap = { ...AnswerMap };
+        if (newAnswerMap["unSelected"]["N/A"].includes(type)) {
+            console.log("Type already in unSelected, not sending back.");
             return;
-        } else {
-            setAnswerMap(prev => {
-                const newMap = { ...prev };
-                for (const key in newMap) {
-                    if (newMap[key].includes(type)) {
-                        newMap[key] = newMap[key].filter(t => t !== type);
-                    }
-                }
-                newMap["unSelected"] = [...newMap["unSelected"], type];
-                return newMap;
-            });
         }
 
+        for (const [effectiveness, object] of Object.entries(newAnswerMap)) {
+            for (const [multiplier, array] of Object.entries(object)) {
+                if (array.includes(type)) {
+                    newAnswerMap[effectiveness][multiplier] = array.filter(t => t !== type);
+                }
+            }
+        }
+        newAnswerMap["unSelected"]["N/A"].push(type);
+        setAnswerMap(newAnswerMap);
     }
 
     return (
         <div
             ref={drag}
             className={`draggable-type ${collectObject.isDragging ? 'dragging' : ''}`}
-            onClick={() => sendBacktoUnSelected()}
+            onClick={() => sendBacktoUnSelectedOnClick()}
         >
             {type}
         </div>
