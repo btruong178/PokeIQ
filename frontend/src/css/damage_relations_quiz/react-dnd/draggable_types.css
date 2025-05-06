@@ -3,7 +3,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 8px 16px;
     background-color: aqua;
     border: 2px solid #000;
     border-radius: 4px;
@@ -11,6 +10,7 @@
     font-weight: bold;
     cursor: grab;
     margin: 0px 3px;
+    padding: 0.75rem;
 }
 
 

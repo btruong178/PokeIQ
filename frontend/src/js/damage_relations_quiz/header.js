@@ -9,6 +9,7 @@
 
 import '../../css/damage_relations_quiz/header.css'
 import { UnSelectedButtons } from './dropzone_components';
+import { Container, Row, Col } from 'react-bootstrap';
 
 /**
   *
@@ -39,7 +40,46 @@ const Header = ({
 }) => {
     return (
         <div className="quiz-header-container">
-            <div className="quiz-header">
+            <Container fluid>
+                <Row className="justify-content-center">
+                    <Col xs={6} md={3}>
+                        <div className="quiz-info">
+                            <h5>Quiz Selection</h5>
+                            <hr />
+                            <p className="label">Random: <span>{random ? "On" : "Off"}</span></p>
+                            <p className="label">Type Mode: <span>{TypeMode}</span></p>
+                            <hr />
+                            {TypeMode === "Single" && (
+                                <>
+                                    <p className="label">Type: <span>{selectedSingleType}</span></p>
+                                </>
+                            )}
+                            {TypeMode === "Dual" && (
+                                <>
+                                    <p className="label">Types: <span>{selectedDualType1} / {selectedDualType2}</span></p>
+                                </>
+                            )}
+                            {TypeMode === "Pokemon" && (
+                                <>
+                                    <p className="label">Pokemon: <span>{pokemon.name}</span></p>
+                                    <p className="label">Type(s): <span>{pokemon.type.join("-")}</span></p>
+                                </>
+                            )}
+                            <div className="quiz-info-buttons">
+                                {random && (
+                                    <button onClick={() => onSubmit()}>Randomize Again</button>
+                                )}
+                                <button onClick={() => setQuiz(false)}>Re-select</button>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <UnSelectedButtons AnswerMap={AnswerMap} setAnswerMap={setAnswerMap} />
+                    </Col>
+                </Row>
+
+            </Container>
+            {/* <div className="quiz-header">
                 <div className="quiz-info">
                     <h5>Quiz Selection</h5>
                     <hr />
@@ -70,7 +110,7 @@ const Header = ({
                     </div>
                 </div>
                 <UnSelectedButtons AnswerMap={AnswerMap} setAnswerMap={setAnswerMap} />
-            </div>
+            </div> */}
 
         </div>
     )

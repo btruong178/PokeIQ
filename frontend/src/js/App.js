@@ -14,6 +14,8 @@ import CheckBackend from './utilities/check_backend';
 import CustomDragLayer from './damage_relations_quiz/react-dnd/CustomDragLayer.js';
 // CSS imports
 import '../css/App.css';
+// Bootstrap imports
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

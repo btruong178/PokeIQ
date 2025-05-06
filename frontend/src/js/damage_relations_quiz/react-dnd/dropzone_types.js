@@ -1,6 +1,7 @@
 import { useDrop } from 'react-dnd';
 import DraggableType from './draggable_types';
 import '../../../css/damage_relations_quiz/react-dnd/dropzone_types.css';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const DropZone = ({ type_effectiveness, type_multiplier, AnswerMap, setAnswerMap }) => {
 
@@ -39,43 +40,75 @@ const DropZone = ({ type_effectiveness, type_multiplier, AnswerMap, setAnswerMap
                     ref={drop}
                     className={'unSelected-button-container'}
                 >
-                    <div className={`unSelected-buttons`}>
-                        {targetEntries.map(([multiplier, array]) => (
-                            array.map((type, i) => (
-                                <DraggableType
-                                    key={i}
-                                    type={type}
-                                    AnswerMap={AnswerMap}
-                                    setAnswerMap={setAnswerMap}>
-                                    {type}
-                                </DraggableType>
-                            ))
-                        ))}
-                    </div>
+                    <Container fluid ref={drop}>
+                        <Row className="g-2">
+                            {targetEntries.flatMap(([, arr]) => arr).map((type, i) => (
+                                <Col key={type + i} xs={6} sm={4} md={3} lg={2}>
+                                    <DraggableType
+                                        type={type}
+                                        AnswerMap={AnswerMap}
+                                        setAnswerMap={setAnswerMap}
+                                    >
+                                        {type}
+                                    </DraggableType>
+                                </Col>
+                            ))}
+                        </Row>
+                    </Container>
                 </div>
             ) : type_effectiveness !== "unSelected" && (
                 <div
                     ref={drop}
                     className={'dropzone'}
                 >
-                    <div className="dropzone-header">
-                        <h5>{type_effectiveness}</h5>
-                        <h6>({type_multiplier})</h6>
-                    </div>
-                    <div className={`dropzone-content ${isOver ? 'hover' : ''} ${canDrop ? 'can-drop' : ''}`}>
-                        {targetEntries.map(([multiplier, array]) => (
-                            array.map((type, i) => (
-                                <DraggableType
-                                    key={i}
-                                    type={type}
-                                    AnswerMap={AnswerMap}
-                                    setAnswerMap={setAnswerMap}>
-                                    {type}
-                                </DraggableType>
-                            ))
-                        ))}
-                    </div>
+                    <Container>
+                        <Row className="g-2">
+                            <Col>
+                                <div className="dropzone-header">
+                                    <h5>{type_effectiveness}</h5>
+                                    <h6>({type_multiplier})</h6>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div className={`dropzone-content ${isOver ? 'hover' : ''} ${canDrop ? 'can-drop' : ''}`}>
+                                    {targetEntries.map(([, array]) => (
+                                        array.map((type, i) => (
+                                            <DraggableType
+                                                key={i}
+                                                type={type}
+                                                AnswerMap={AnswerMap}
+                                                setAnswerMap={setAnswerMap}>
+                                                {type}
+                                            </DraggableType>
+                                        ))
+                                    ))}
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
+                // <div
+                //     ref={drop}
+                //     className={'dropzone'}
+                // >
+                //     <div className="dropzone-header">
+                //         <h5>{type_effectiveness}</h5>
+                //         <h6>({type_multiplier})</h6>
+                //     </div>
+                //     <div className={`dropzone-content ${isOver ? 'hover' : ''} ${canDrop ? 'can-drop' : ''}`}>
+                //         {targetEntries.map(([multiplier, array]) => (
+                //             array.map((type, i) => (
+                //                 <DraggableType
+                //                     key={i}
+                //                     type={type}
+                //                     AnswerMap={AnswerMap}
+                //                     setAnswerMap={setAnswerMap}>
+                //                     {type}
+                //                 </DraggableType>
+                //             ))
+                //         ))}
+                //     </div>
+                // </div>
             )}
         </>
     );
