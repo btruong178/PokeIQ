@@ -58,8 +58,10 @@ const DropZone = ({ type_effectiveness, type_multiplier, AnswerMap, setAnswerMap
                     ref={drop}
                     className={'dropzone'}
                 >
-                    <h5>{type_effectiveness}</h5>
-                    <h6>({type_multiplier})</h6>
+                    <div className="dropzone-header">
+                        <h5>{type_effectiveness}</h5>
+                        <h6>({type_multiplier})</h6>
+                    </div>
                     <div className={`dropzone-content ${isOver ? 'hover' : ''} ${canDrop ? 'can-drop' : ''}`}>
                         {targetEntries.map(([multiplier, array]) => (
                             array.map((type, i) => (

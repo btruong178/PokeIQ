@@ -61,10 +61,10 @@ function Damage_Relations_Quiz() {
             "x0": [],
         },
         "Resistant To": {
-            "x0.25": [],
-            "x0.5": []
+            "x0.5": [],
+            "x0.25": []
         },
-        "Normally Damaged By": {
+        "Normally Damaged": {
             "x1": [],
         },
         "Weak To": {
