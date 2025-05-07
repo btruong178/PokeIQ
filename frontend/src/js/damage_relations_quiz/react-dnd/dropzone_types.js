@@ -36,11 +36,11 @@ const DropZone = ({ type_effectiveness, type_multiplier, AnswerMap, setAnswerMap
     return (
         <>
             {type_effectiveness === "unSelected" ? (
-                <div
+                <Container fluid
                     ref={drop}
                     className={'unSelected-button-container'}
                 >
-                    <Container fluid ref={drop}>
+                    <Container fluid className="unSelected-buttons">
                         <Row className="g-2">
                             {targetEntries.flatMap(([, arr]) => arr).map((type, i) => (
                                 <Col key={type + i} xs={6} sm={4} md={3} lg={2}>
@@ -55,38 +55,43 @@ const DropZone = ({ type_effectiveness, type_multiplier, AnswerMap, setAnswerMap
                             ))}
                         </Row>
                     </Container>
-                </div>
+                </Container>
             ) : type_effectiveness !== "unSelected" && (
-                <div
+                <Container fluid
                     ref={drop}
                     className={'dropzone'}
                 >
-                    <Container>
+                    <Container fluid>
                         <Row className="g-2">
-                            <Col>
-                                <div className="dropzone-header">
+                            <Col xs={12} md={2}>
+                                <Container fluid className="dropzone-header">
                                     <h5>{type_effectiveness}</h5>
                                     <h6>({type_multiplier})</h6>
-                                </div>
+                                </Container>
                             </Col>
-                            <Col>
-                                <div className={`dropzone-content ${isOver ? 'hover' : ''} ${canDrop ? 'can-drop' : ''}`}>
-                                    {targetEntries.map(([, array]) => (
-                                        array.map((type, i) => (
-                                            <DraggableType
-                                                key={i}
-                                                type={type}
-                                                AnswerMap={AnswerMap}
-                                                setAnswerMap={setAnswerMap}>
-                                                {type}
-                                            </DraggableType>
-                                        ))
-                                    ))}
-                                </div>
+                            <Col xs={12} md={10}>
+                                <Container fluid className={`dropzone-content ${isOver ? 'hover' : ''} ${canDrop ? 'can-drop' : ''}`}>
+                                    <Row className="g-2">
+                                        {targetEntries.map(([, array]) => (
+                                            array.map((type, i) => (
+                                                <Col xs={6} sm={4} md={3} lg={2}>
+                                                    <DraggableType
+                                                        key={i}
+                                                        type={type}
+                                                        AnswerMap={AnswerMap}
+                                                        setAnswerMap={setAnswerMap}>
+                                                        {type}
+                                                    </DraggableType>
+                                                </Col>
+                                            ))
+                                        ))}
+                                    </Row>
+
+                                </Container>
                             </Col>
                         </Row>
                     </Container>
-                </div>
+                </Container>
                 // <div
                 //     ref={drop}
                 //     className={'dropzone'}

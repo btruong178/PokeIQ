@@ -9,7 +9,7 @@
 
 import '../../css/damage_relations_quiz/header.css'
 import { UnSelectedButtons } from './dropzone_components';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 /**
   *
@@ -42,8 +42,8 @@ const Header = ({
         <div className="quiz-header-container">
             <Container fluid>
                 <Row className="justify-content-center">
-                    <Col xs={6} md={3}>
-                        <div className="quiz-info">
+                    <Col xs={12} md={4}>
+                        <Container fluid className="quiz-info">
                             <h5>Quiz Selection</h5>
                             <hr />
                             <p className="label">Random: <span>{random ? "On" : "Off"}</span></p>
@@ -67,51 +67,27 @@ const Header = ({
                             )}
                             <div className="quiz-info-buttons">
                                 {random && (
-                                    <button onClick={() => onSubmit()}>Randomize Again</button>
+                                    <Button
+                                        variant="primary"
+                                        onClick={() => { onSubmit() }}
+                                    >
+                                        Randomize Again
+                                    </Button>
                                 )}
-                                <button onClick={() => setQuiz(false)}>Re-select</button>
+                                <Button
+                                    variant="primary"
+                                    onClick={() => { setQuiz(false) }}
+                                >
+                                    Re-select
+                                </Button>
                             </div>
-                        </div>
+                        </Container>
                     </Col>
-                    <Col xs={12} md={6}>
+                    <Col xs={12} md={8}>
                         <UnSelectedButtons AnswerMap={AnswerMap} setAnswerMap={setAnswerMap} />
                     </Col>
                 </Row>
-
             </Container>
-            {/* <div className="quiz-header">
-                <div className="quiz-info">
-                    <h5>Quiz Selection</h5>
-                    <hr />
-                    <p className="label">Random: <span>{random ? "On" : "Off"}</span></p>
-                    <p className="label">Type Mode: <span>{TypeMode}</span></p>
-                    <hr />
-                    {TypeMode === "Single" && (
-                        <>
-                            <p className="label">Type: <span>{selectedSingleType}</span></p>
-                        </>
-                    )}
-                    {TypeMode === "Dual" && (
-                        <>
-                            <p className="label">Types: <span>{selectedDualType1} / {selectedDualType2}</span></p>
-                        </>
-                    )}
-                    {TypeMode === "Pokemon" && (
-                        <>
-                            <p className="label">Pokemon: <span>{pokemon.name}</span></p>
-                            <p className="label">Type(s): <span>{pokemon.type.join("-")}</span></p>
-                        </>
-                    )}
-                    <div className="quiz-info-buttons">
-                        {random && (
-                            <button onClick={() => onSubmit()}>Randomize Again</button>
-                        )}
-                        <button onClick={() => setQuiz(false)}>Re-select</button>
-                    </div>
-                </div>
-                <UnSelectedButtons AnswerMap={AnswerMap} setAnswerMap={setAnswerMap} />
-            </div> */}
-
         </div>
     )
 }
