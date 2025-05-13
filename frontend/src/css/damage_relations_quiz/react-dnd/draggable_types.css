@@ -17,3 +17,14 @@
 .draggable-type.dragging {
     opacity: 0;
 }
+
+.multiplier-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    border-radius: 40px;
+    border: 2px solid #ffffff;
+    color: #fff;
+}

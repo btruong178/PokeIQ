@@ -1,14 +1,15 @@
 import '../css/About.css'
+import { Container, Row, Col } from 'react-bootstrap';
 
 function About() {
     return (
-        <div className='about-page'>
-            <div className="row">
-                <div className="col-md-12">
+        <Container fluid className='about-page background'>
+            <Row>
+                <Col className="about-text">
                     <h1>About</h1>
-                </div>
-            </div>
-        </div>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

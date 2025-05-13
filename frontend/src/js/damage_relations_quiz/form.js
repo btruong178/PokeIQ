@@ -9,6 +9,7 @@
 import React, { useEffect } from "react";
 import { availableTypes } from "./logic";
 import "../../css/damage_relations_quiz/form.css";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 
 /**
  * DamageRelationsForm renders the quiz form.
@@ -53,92 +54,112 @@ const DamageRelationsForm = ({
     }, [random]);
 
     return (
-        <div className="form-container">
-            <h1>Damage Relations</h1>
-            <p>
-                Welcome to the Damage Relations page! Here you can quiz yourself
-                on damage relations of each type! Select your mode(s) and type(s) to
-                get started.
-            </p>
-            <div className="toggles-options">
-                <div className="random-toggle">
-                    <label htmlFor="random">Random Mode:</label>
-                    <input
+        <Container fluid className="form-container background">
+            <Row className="form-header">
+                <Col>
+                    <h1>Damage Relations</h1>
+                    <hr />
+                    <p>
+                        Welcome to the Damage Relations page!
+                    </p>
+                    <p>
+                        Here you can quiz yourself
+                        on damage relations of each type!
+                    </p>
+                    <p>
+                        Select your mode(s) and type(s) to
+                        get started.
+                    </p>
+                </Col>
+                <hr />
+            </Row>
+
+            <Row className="toggles-options justify-content-center">
+                <Col xs="auto" className="random-toggle">
+                    <Form.Label>Random Mode:</Form.Label>
+                    <Form.Check
                         type="checkbox"
                         id="random"
                         checked={random}
                         onChange={() => setRandom(!random)}
                     />
-                </div>
+                </Col>
 
-                <div className="type-mode-toggle">
-                    <label htmlFor="type-mode">Select Type Mode:</label>
-                    <select
-                        id="type-mode"
-                        value={TypeMode}
-                        onChange={(e) => setTypeMode(e.target.value)}
-                    >
-                        <option value="Single">Single</option>
-                        <option value="Dual">Dual</option>
-                        {random && <option value="Pokemon">Pokemon</option>}
-                    </select>
-                </div>
+                <Col xs="auto" className="type-mode-toggle">
+                    <Form.Group controlId="type-mode-toggle" className="mb-3">
+                        <Form.Label>Select Type Mode:</Form.Label>
+                        <Form.Select
+                            value={TypeMode}
+                            onChange={(e) => setTypeMode(e.target.value)}
+                        >
+                            <option value="Single">Single</option>
+                            <option value="Dual">Dual</option>
+                            {random && <option value="Pokemon">Pokemon</option>}
+                        </Form.Select>
+                    </Form.Group>
+                </Col>
 
                 {!random && TypeMode === "Single" && (
-                    <div className="single-type-select">
-                        <label htmlFor="type-select">Choose a type: </label>
-                        <select
-                            id="type-select"
-                            value={selectedSingleType}
-                            onChange={handleTypeChange}
-                        >
-                            <option value="">--Select a Type--</option>
-                            {availableTypes.map((type, index) => (
-                                <option key={index} value={type}>
-                                    {type}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+                    <Container className="single-type-select">
+                        <Form.Group controlId="single-type-select" className="mb-3">
+                            <Form.Label>Choose a Type</Form.Label>
+                            <Form.Select
+                                value={selectedSingleType}
+                                onChange={handleTypeChange}
+                            >
+                                <option value="">--Select a Type--</option>
+                                {availableTypes.map((type, index) => (
+                                    <option key={index} value={type}>
+                                        {type}
+                                    </option>
+                                ))}
+                            </Form.Select>
+                        </Form.Group>
+                    </Container>
                 )}
 
                 {!random && TypeMode === "Dual" && (
-                    <div className="dual-type-select">
-                        <label htmlFor="dual-type-select-1">Choose Type 1: </label>
-                        <select
-                            id="dual-type-select-1"
-                            value={selectedDualType1}
-                            onChange={handleTypeChange1}
-                        >
-                            <option value="">--Select a Type--</option>
-                            {availableTypes.map((type, index) => (
-                                <option key={index} value={type}>
-                                    {type}
-                                </option>
-                            ))}
-                        </select>
+                    <Container className="dual-type-select">
+                        <Form.Group controlId="dual-type-select-1" className="mb-3">
+                            <Form.Label>Choose Type 1</Form.Label>
+                            <Form.Select
+                                value={selectedDualType1}
+                                onChange={handleTypeChange1}
+                            >
+                                <option value="">--Select a Type--</option>
+                                {availableTypes.map((type, idx) => (
+                                    <option key={idx} value={type}>
+                                        {type}
+                                    </option>
+                                ))}
+                            </Form.Select>
+                        </Form.Group>
 
-                        <label htmlFor="dual-type-select-2">Choose Type 2: </label>
-                        <select
-                            id="dual-type-select-2"
-                            value={selectedDualType2}
-                            onChange={handleTypeChange2}
-                        >
-                            <option value="">--Select a Type--</option>
-                            {availableTypes.map((type, index) => (
-                                <option key={index} value={type}>
-                                    {type}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+                        <Form.Group controlId="dual-type-select-2" className="mb-3">
+                            <Form.Label>Choose Type 2</Form.Label>
+                            <Form.Select
+                                value={selectedDualType2}
+                                onChange={handleTypeChange2}
+                            >
+                                <option value="">--Select a Type--</option>
+                                {availableTypes.map((type, idx) => (
+                                    <option key={idx} value={type}>
+                                        {type}
+                                    </option>
+                                ))}
+                            </Form.Select>
+                        </Form.Group>
+                    </Container>
                 )}
-            </div>
-
-            <div className="submit-button-container">
-                <button onClick={onSubmit}>Submit</button>
-            </div>
-        </div>
+            </Row>
+            <Button
+                variant="primary"
+                className="submit-button-container"
+                onClick={onSubmit}
+            >
+                Submit
+            </Button>
+        </Container>
     );
 };
 

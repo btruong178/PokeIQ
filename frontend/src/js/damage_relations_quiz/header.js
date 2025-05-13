@@ -22,8 +22,6 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
  * @param {Object} props.pokemon - The Pokémon object containing its data.
  * @param {Function} props.setQuiz - Function to update the quiz state.
  * @param {Function} props.onSubmit - Callback function to handle form submission.
- * @param {Object} props.AnswerMap - The map of answers for the quiz.
- * @param {Function} props.setAnswerMap - Function to update the answer map.
  * @returns {JSX.Element} The Selection component.
  */
 const Header = ({
@@ -35,8 +33,8 @@ const Header = ({
     pokemon,
     setQuiz,
     onSubmit,
-    AnswerMap,
-    setAnswerMap
+    AnswerObject,
+    dispatchAnswerObject
 }) => {
     return (
         <div className="quiz-header-container">
@@ -76,7 +74,7 @@ const Header = ({
                                 )}
                                 <Button
                                     variant="primary"
-                                    onClick={() => { setQuiz(false) }}
+                                    onClick={() => { setQuiz(false); }}
                                 >
                                     Re-select
                                 </Button>
@@ -84,7 +82,7 @@ const Header = ({
                         </Container>
                     </Col>
                     <Col xs={12} md={8}>
-                        <UnSelectedButtons AnswerMap={AnswerMap} setAnswerMap={setAnswerMap} />
+                        <UnSelectedButtons AnswerObject={AnswerObject} dispatchAnswerObject={dispatchAnswerObject} />
                     </Col>
                 </Row>
             </Container>

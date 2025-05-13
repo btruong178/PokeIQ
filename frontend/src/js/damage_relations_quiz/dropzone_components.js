@@ -1,44 +1,44 @@
 import DropZone from "./react-dnd/dropzone_types";
 
-const UnSelectedButtons = ({ AnswerMap, setAnswerMap }) => {
+const UnSelectedButtons = ({ AnswerObject, dispatchAnswerObject }) => {
 
     return (
         <DropZone
             type_effectiveness={"unSelected"}
             type_multiplier={"N/A"}
-            AnswerMap={AnswerMap}
-            setAnswerMap={setAnswerMap} />
+            AnswerObject={AnswerObject}
+            dispatchAnswerObject={dispatchAnswerObject}
+        />
     );
 }
 
-const TypeZones = ({ AnswerMap, setAnswerMap }) => {
-    const categories = ["Normally Damaged", "Weak To", "Immune To", "Resistant To"];
+const TypeEffectivenessZones = ({ AnswerObject, dispatchAnswerObject }) => {
+    const entries = Object.entries(AnswerObject).filter(([effectiveness, multObj]) => {
+        if (effectiveness === "unSelected") {
+            return false;
+        } else {
+            return true;
+        }
+    })
+
 
     return (
         <>
-            <DropZone
-                type_effectiveness={"Normally Damaged"}
-                type_multiplier={"x1"}
-                AnswerMap={AnswerMap}
-                setAnswerMap={setAnswerMap} />
-            <DropZone
-                type_effectiveness={"Weak To"}
-                type_multiplier={"x2"}
-                AnswerMap={AnswerMap}
-                setAnswerMap={setAnswerMap} />
-            <DropZone
-                type_effectiveness={"Resistant To"}
-                type_multiplier={"x0.5"}
-                AnswerMap={AnswerMap}
-                setAnswerMap={setAnswerMap} />
-            <DropZone
-                type_effectiveness={"Immune To"}
-                type_multiplier={"x0"}
-                AnswerMap={AnswerMap}
-                setAnswerMap={setAnswerMap} />
-
+            {entries.map(([effectiveness, multObj]) => {
+                const firstMultiplier = Object.keys(multObj)[0];
+                return (
+                    <DropZone
+                        key={effectiveness}
+                        type_effectiveness={effectiveness}
+                        type_multiplier={firstMultiplier}
+                        AnswerObject={AnswerObject}
+                        dispatchAnswerObject={dispatchAnswerObject}
+                    />
+                );
+            })}
         </>
+
     )
 }
 
-export { UnSelectedButtons, TypeZones };
+export { UnSelectedButtons, TypeEffectivenessZones };

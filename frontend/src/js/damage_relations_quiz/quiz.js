@@ -7,7 +7,7 @@
  * @component
  */
 
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import DamageRelationsForm from "./form";
 import {
     handleGetSingleType,
@@ -18,7 +18,7 @@ import {
 } from "./handlers";
 import { availableTypes } from "./logic";
 import { Header } from "./header";
-import { TypeZones } from "./dropzone_components";
+import { TypeEffectivenessZones } from "./dropzone_components";
 import '../../css/damage_relations_quiz/quiz.css';
 import CustomModal from '../utilities/custom_modal';
 
@@ -27,33 +27,8 @@ import CustomModal from '../utilities/custom_modal';
  */
 
 function Damage_Relations_Quiz() {
-    // State hooks for quiz configuration and data management
-    const [selectedSingleType, setSelectedSingleType] = useState("");
-    const [selectedDualType1, setSelectedDualType1] = useState("");
-    const [selectedDualType2, setSelectedDualType2] = useState("");
-    const [pokemon, setPokemon] = useState({
-        id: null,
-        name: "",
-        type: [],
-        damage_relations: {}
-    });
-    const [random, setRandom] = useState(true);
-    const [TypeMode, setTypeMode] = useState("Single");
-    const [modalMessage, setModalMessage] = useState("");
-    const [showModal, setShowModal] = useState(false);
-    const [quiz, setQuiz] = useState(false);
-    // const [AnswerMap, setAnswerMap] = useState({
-    //     "unSelected": availableTypes,
-    //     "x0": [],
-    //     "x0.25": [],
-    //     "x0.5": [],
-    //     "x1": [],
-    //     "x2": [],
-    //     "x4": []
-
-    // });
-
-    const [AnswerMap, setAnswerMap] = useState({
+    // Default states for quiz configuration and data management
+    const defaultAnswerObject = {
         "unSelected": {
             "N/A": availableTypes
         },
@@ -70,10 +45,55 @@ function Damage_Relations_Quiz() {
         "Weak To": {
             "x2": [],
             "x4": []
-        },
+        }
+    };
+    // State hooks for quiz configuration and data management
+    const [selectedSingleType, setSelectedSingleType] = useState("");
+    const [selectedDualType1, setSelectedDualType1] = useState("");
+    const [selectedDualType2, setSelectedDualType2] = useState("");
+    const [pokemon, setPokemon] = useState({
+        id: null,
+        name: "",
+        type: [],
+        damage_relations: {}
     });
+    const [random, setRandom] = useState(true);
+    const [TypeMode, setTypeMode] = useState("Single");
+    const [modalMessage, setModalMessage] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [quiz, setQuiz] = useState(false);
 
-    // Remeber to create CorrectAnswers for the AnswerMap 
+    const AnswerObjectReducer = (state, action) => {
+        switch (action.command) {
+            // Requires only the type to be removed from the AnswerObject
+            case 'REMOVE_TYPE':
+                const { type: typeToRemove } = action.payload;
+                const newState = { ...state };
+                for (const [effectiveness, object] of Object.entries(newState)) {
+                    for (const [multiplier, array] of Object.entries(object)) {
+                        if (array.includes(typeToRemove)) {
+                            newState[effectiveness][multiplier] = array.filter(t => t !== typeToRemove);
+                            break;
+                        }
+                    }
+                }
+                return newState;
+            // Requires type, effectiveness, and multiplier in payload
+            case 'ADD_TYPE':
+                const newAnswerObject = { ...state };
+                const { type: typeToAdd, effectiveness, multiplier } = action.payload;
+                newAnswerObject[effectiveness][multiplier].push(typeToAdd);
+                return newAnswerObject;
+            case 'RESET':
+                return defaultAnswerObject;
+            default:
+                return state;
+        }
+    }
+
+    const [AnswerObject, dispatchAnswerObject] = useReducer(AnswerObjectReducer, defaultAnswerObject);
+
+
 
     /**
      * Handles change for the single type input.
@@ -183,10 +203,10 @@ function Damage_Relations_Quiz() {
                         pokemon={pokemon}
                         setQuiz={setQuiz}
                         onSubmit={handleSubmit}
-                        AnswerMap={AnswerMap}
-                        setAnswerMap={setAnswerMap}
+                        AnswerObject={AnswerObject}
+                        dispatchAnswerObject={dispatchAnswerObject}
                     />
-                    <TypeZones AnswerMap={AnswerMap} setAnswerMap={setAnswerMap}></TypeZones>
+                    <TypeEffectivenessZones AnswerObject={AnswerObject} dispatchAnswerObject={dispatchAnswerObject} />
                 </>
             )}
 

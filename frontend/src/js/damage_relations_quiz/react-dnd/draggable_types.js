@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import '../../../css/damage_relations_quiz/react-dnd/draggable_types.css';
+import { Button } from 'react-bootstrap';
 
-const DraggableType = ({ type, AnswerMap, setAnswerMap }) => {
+const DraggableType = ({ type, multiplier, dispatchAnswerObject }) => {
     const [collectObject, drag, preview] = useDrag({
         type: 'TYPE',
         item: { type },
@@ -19,21 +20,18 @@ const DraggableType = ({ type, AnswerMap, setAnswerMap }) => {
 
     const sendBacktoUnSelectedOnClick = () => {
         console.log("Clicked on type:", type);
-        const newAnswerMap = { ...AnswerMap };
-        if (newAnswerMap["unSelected"]["N/A"].includes(type)) {
-            console.log("Type already in unSelected, not sending back.");
+        if (multiplier === "N/A") {
+            console.log("Type is already in unSelected");
             return;
         }
-
-        for (const [effectiveness, object] of Object.entries(newAnswerMap)) {
-            for (const [multiplier, array] of Object.entries(object)) {
-                if (array.includes(type)) {
-                    newAnswerMap[effectiveness][multiplier] = array.filter(t => t !== type);
-                }
-            }
-        }
-        newAnswerMap["unSelected"]["N/A"].push(type);
-        setAnswerMap(newAnswerMap);
+        dispatchAnswerObject({
+            command: 'REMOVE_TYPE',
+            payload: { type }
+        });
+        dispatchAnswerObject({
+            command: 'ADD_TYPE',
+            payload: { type, effectiveness: "unSelected", multiplier: "N/A" }
+        });
     }
 
     return (
@@ -43,6 +41,14 @@ const DraggableType = ({ type, AnswerMap, setAnswerMap }) => {
             onClick={() => sendBacktoUnSelectedOnClick()}
         >
             {type}
+            {multiplier !== "N/A" && (
+                <Button
+                    className="multiplier-button"
+                    size="sm"
+                >
+                    {multiplier}
+                </Button>
+            )}
         </div>
     );
 }

@@ -65,12 +65,21 @@
     padding: 10px;
 }
 
+.unSelected-button-container.can-drop {
+    background-color: lightgreen;
+}
+
+.unSelected-button-container.hover.can-drop {
+    background-color: lightblue;
+}
+
 .unSelected-buttons {
     height: 100%;
     width: 100%;
     margin: 1px;
     background-color: lightskyblue;
 }
+
 
 
 .dropped-type {
