@@ -37,7 +37,7 @@ const DraggableType = ({ type, multiplier, dispatchAnswerObject }) => {
     return (
         <div
             ref={drag}
-            className={`draggable-type ${collectObject.isDragging ? 'dragging' : ''}`}
+            className={`draggable-type ${multiplier === "N/A" ? 'unselected' : ''} ${collectObject.isDragging ? 'dragging' : ''}`}
             onClick={() => sendBacktoUnSelectedOnClick()}
         >
             {type}
@@ -45,6 +45,14 @@ const DraggableType = ({ type, multiplier, dispatchAnswerObject }) => {
                 <Button
                     className="multiplier-button"
                     size="sm"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        console.log("Clicked on multiplier:", multiplier);
+                        dispatchAnswerObject({
+                            command: 'SWITCH_MULTIPLIER',
+                            payload: { type, multiplier }
+                        });
+                    }}
                 >
                     {multiplier}
                 </Button>

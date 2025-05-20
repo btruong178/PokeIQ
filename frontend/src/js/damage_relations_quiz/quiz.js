@@ -7,7 +7,7 @@
  * @component
  */
 
-import React, { useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 import DamageRelationsForm from "./form";
 import {
     handleGetSingleType,
@@ -16,11 +16,16 @@ import {
     handleGetDualTypeRandom,
     handleGetRandomPokemon
 } from "./handlers";
-import { availableTypes } from "./logic";
+import {
+    defaultPokemon,
+    defaultAnswerObject,
+    AnswerObjectReducer
+} from "./reducer_functions"
 import { Header } from "./header";
 import { TypeEffectivenessZones } from "./dropzone_components";
-import '../../css/damage_relations_quiz/quiz.css';
 import CustomModal from '../utilities/custom_modal';
+import '../../css/damage_relations_quiz/quiz.css';
+
 
 /**
  * @returns {JSX.Element} The main component for the Damage Relations Quiz.
@@ -28,89 +33,40 @@ import CustomModal from '../utilities/custom_modal';
 
 function Damage_Relations_Quiz() {
     // Default states for quiz configuration and data management
-    const defaultAnswerObject = {
-        "unSelected": {
-            "N/A": availableTypes
-        },
-        "Immune To": {
-            "x0": [],
-        },
-        "Resistant To": {
-            "x0.5": [],
-            "x0.25": []
-        },
-        "Normally Damaged": {
-            "x1": [],
-        },
-        "Weak To": {
-            "x2": [],
-            "x4": []
-        }
-    };
+
+
+
+
     // State hooks for quiz configuration and data management
     const [selectedSingleType, setSelectedSingleType] = useState("");
     const [selectedDualType1, setSelectedDualType1] = useState("");
     const [selectedDualType2, setSelectedDualType2] = useState("");
-    const [pokemon, setPokemon] = useState({
-        id: null,
-        name: "",
-        type: [],
-        damage_relations: {}
-    });
+    const [pokemon, setPokemon] = useState(defaultPokemon);
     const [random, setRandom] = useState(true);
     const [TypeMode, setTypeMode] = useState("Single");
     const [modalMessage, setModalMessage] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [quiz, setQuiz] = useState(false);
-
-    const AnswerObjectReducer = (state, action) => {
-        switch (action.command) {
-            // Requires only the type to be removed from the AnswerObject
-            case 'REMOVE_TYPE':
-                const { type: typeToRemove } = action.payload;
-                const newState = { ...state };
-                for (const [effectiveness, object] of Object.entries(newState)) {
-                    for (const [multiplier, array] of Object.entries(object)) {
-                        if (array.includes(typeToRemove)) {
-                            newState[effectiveness][multiplier] = array.filter(t => t !== typeToRemove);
-                            break;
-                        }
-                    }
-                }
-                return newState;
-            // Requires type, effectiveness, and multiplier in payload
-            case 'ADD_TYPE':
-                const newAnswerObject = { ...state };
-                const { type: typeToAdd, effectiveness, multiplier } = action.payload;
-                newAnswerObject[effectiveness][multiplier].push(typeToAdd);
-                return newAnswerObject;
-            case 'RESET':
-                return defaultAnswerObject;
-            default:
-                return state;
-        }
-    }
-
     const [AnswerObject, dispatchAnswerObject] = useReducer(AnswerObjectReducer, defaultAnswerObject);
 
 
 
     /**
-     * Handles change for the single type input.
+     * Handles change for the 'single type' input.
      *
      * @param {Event} e - The event object from the input field.
      */
     const handleTypeChange = e => setSelectedSingleType(e.target.value);
 
     /**
-     * Handles change for the first dual type input.
+     * Handles change for the 'first dual type' input.
      *
      * @param {Event} e - The event object from the input field.
      */
     const handleTypeChange1 = e => setSelectedDualType1(e.target.value);
 
     /**
-     * Handles change for the second dual type input.
+     * Handles change for the 'second dual type' input.
      *
      * @param {Event} e - The event object from the input field.
      */
@@ -121,7 +77,7 @@ function Damage_Relations_Quiz() {
      *
      * @param {string} msg - The error message to be displayed.
      */
-    const showErrorModal = msg => {
+    const showErrorModal = (msg) => {
         setModalMessage(msg);
         setShowModal(true);
     };

@@ -10,6 +10,12 @@
     font-weight: bold;
     cursor: grab;
     margin: 0px 3px;
+    padding: 0.75rem 3rem 0.75rem 0.75rem;
+    border-radius: 30px;
+    position: relative;
+}
+
+.draggable-type.unselected {
     padding: 0.75rem;
 }
 
@@ -18,13 +24,18 @@
     opacity: 0;
 }
 
-.multiplier-button {
+.draggable-type .multiplier-button {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgb(0, 0, 0);
-    border-radius: 40px;
-    border: 2px solid #ffffff;
-    color: #fff;
+    color: black;
+    background-color: white;
+    border-radius: 30px;
+    font-weight: bold;
+    border: 2px solid #000;
+    position: absolute;
+    top: 50%;
+    right: 0.15rem;
+    transform: translateY(-50%);
 }

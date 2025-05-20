@@ -74,7 +74,7 @@ const Header = ({
                                 )}
                                 <Button
                                     variant="primary"
-                                    onClick={() => { setQuiz(false); }}
+                                    onClick={() => { setQuiz(false); dispatchAnswerObject({ command: 'RESET' }) }}
                                 >
                                     Re-select
                                 </Button>
