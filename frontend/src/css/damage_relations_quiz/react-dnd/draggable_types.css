@@ -3,16 +3,23 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
-    border: 2px solid #000;
-    border-radius: 4px;
-    color: #000;
+    border: 2px solid var(--type-border, #000);
+    border-radius: 30px;
+    color: #ffffff;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.25);
     font-weight: bold;
-    cursor: grab;
     margin: 0px 3px;
     padding: 0.75rem 3rem 0.75rem 0.75rem;
-    border-radius: 30px;
+    cursor: grab;
     position: relative;
+    background-color: var(--type-bg, aqua);
+}
+
+.draggable-type:hover {
+    background-color: var(--type-bg, #fff);
+    color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    cursor: grab;
 }
 
 .draggable-type.unselected {
@@ -38,4 +45,101 @@
     top: 50%;
     right: 0.15rem;
     transform: translateY(-50%);
+}
+
+.draggable-type .multiplier-button:hover {
+    background-color: #000000;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+/* type-specific color tokens */
+.type-normal {
+    --type-bg: #9FA19F;
+    --type-border: #7F817F;
+}
+
+.type-fire {
+    --type-bg: #E62829;
+    --type-border: #B41E1F;
+}
+
+.type-water {
+    --type-bg: #2980EF;
+    --type-border: #2266BB;
+}
+
+.type-electric {
+    --type-bg: #FAC000;
+    --type-border: #C59800;
+}
+
+.type-grass {
+    --type-bg: #3FA129;
+    --type-border: #337D20;
+}
+
+.type-ice {
+    --type-bg: #3DCEF3;
+    --type-border: #2D9DBA;
+}
+
+.type-fighting {
+    --type-bg: #FF8000;
+    --type-border: #CC6600;
+}
+
+.type-poison {
+    --type-bg: #9141CB;
+    --type-border: #6D33A0;
+}
+
+.type-ground {
+    --type-bg: #915121;
+    --type-border: #6E3E18;
+}
+
+.type-flying {
+    --type-bg: #81B9EF;
+    --type-border: #6190BB;
+}
+
+.type-psychic {
+    --type-bg: #EF4179;
+    --type-border: #BB305E;
+}
+
+.type-bug {
+    --type-bg: #91A119;
+    --type-border: #6C7E11;
+}
+
+.type-rock {
+    --type-bg: #AFA981;
+    --type-border: #8A8864;
+}
+
+.type-ghost {
+    --type-bg: #704170;
+    --type-border: #502A50;
+}
+
+.type-dragon {
+    --type-bg: #5060E1;
+    --type-border: #3C4BA0;
+}
+
+.type-dark {
+    --type-bg: #624D4E;
+    --type-border: #452F36;
+}
+
+.type-steel {
+    --type-bg: #60A1B8;
+    --type-border: #4A8090;
+}
+
+.type-fairy {
+    --type-bg: #EF70EF;
+    --type-border: #BE52BE;
 }

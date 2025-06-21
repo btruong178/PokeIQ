@@ -67,7 +67,7 @@ const Header = ({
                                 {random && (
                                     <Button
                                         variant="primary"
-                                        onClick={() => { onSubmit() }}
+                                        onClick={() => { onSubmit(); dispatchAnswerObject({ command: "RESET" }) }}
                                     >
                                         Randomize Again
                                     </Button>

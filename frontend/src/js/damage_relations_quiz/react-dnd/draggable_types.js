@@ -4,6 +4,27 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 import '../../../css/damage_relations_quiz/react-dnd/draggable_types.css';
 import { Button } from 'react-bootstrap';
 
+export const styleLookup = {
+    Normal: 'type-normal',
+    Fire: 'type-fire',
+    Water: 'type-water',
+    Electric: 'type-electric',
+    Grass: 'type-grass',
+    Ice: 'type-ice',
+    Fighting: 'type-fighting',
+    Poison: 'type-poison',
+    Ground: 'type-ground',
+    Flying: 'type-flying',
+    Psychic: 'type-psychic',
+    Bug: 'type-bug',
+    Rock: 'type-rock',
+    Ghost: 'type-ghost',
+    Dragon: 'type-dragon',
+    Dark: 'type-dark',
+    Steel: 'type-steel',
+    Fairy: 'type-fairy'
+};
+
 const DraggableType = ({ type, multiplier, dispatchAnswerObject }) => {
     const [collectObject, drag, preview] = useDrag({
         type: 'TYPE',
@@ -37,8 +58,13 @@ const DraggableType = ({ type, multiplier, dispatchAnswerObject }) => {
     return (
         <div
             ref={drag}
-            className={`draggable-type ${multiplier === "N/A" ? 'unselected' : ''} ${collectObject.isDragging ? 'dragging' : ''}`}
-            onClick={() => sendBacktoUnSelectedOnClick()}
+            className={[
+                'draggable-type',
+                styleLookup[type],
+                multiplier === 'N/A' ? 'unselected' : '',
+                collectObject.isDragging ? 'dragging' : ''
+            ].join(' ')}
+            onClick={sendBacktoUnSelectedOnClick}
         >
             {type}
             {multiplier !== "N/A" && (

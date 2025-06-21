@@ -1,8 +1,12 @@
+@import url('./draggable_types.css');
+
 .drag-preview {
-    padding: 8px 16px;
-    background-color: aqua;
-    border: 2px solid #000;
-    border-radius: 4px;
-    color: #000;
+    padding: 12px 24px;
+    background-color: var(--type-bg, #fff);
+    border: 2px solid var(--type-border, #000);
+    border-radius: 30px;
+    color: #ffffff;
     font-weight: bold;
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }

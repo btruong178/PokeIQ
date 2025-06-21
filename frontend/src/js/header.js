@@ -34,20 +34,6 @@ export function Header() {
 
                 </Container>
             </Navbar>
-
-            {/* <header className="header">
-                <div className="header-left">
-                    <FaBars className="FaBars" onClick={toggleSidePanel} title="Toggle Side Panel" />
-                    <Link to="/" className="header-title">
-                        PokeIQ
-                    </Link>
-                </div>
-                <div className="header-right">
-                    <FaBook className="FaBook" title="Homepage Tutorial" />
-                    <FaCog className="FaCog" title="Settings" />
-                </div>
-            </header>
-            <SidePanel isOpen={isOpen} toggleSidePanel={toggleSidePanel} /> */}
         </>
     );
 }

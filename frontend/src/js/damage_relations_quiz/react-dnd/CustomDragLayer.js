@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDragLayer } from 'react-dnd';
 import '../../../css/damage_relations_quiz/react-dnd/CustomDragLayer.css';
+import { styleLookup } from './draggable_types';
 
 const layerStyles = {
     position: 'fixed',
@@ -21,7 +22,7 @@ function getItemStyles(offset) {
 }
 
 const CustomDragLayer = () => {
-    const { isDragging, item, currentOffset } = useDragLayer((monitor) => ({
+    const { item, isDragging, currentOffset } = useDragLayer((monitor) => ({
         item: monitor.getItem(),
         isDragging: monitor.isDragging(),
         currentOffset: monitor.getClientOffset(),
@@ -32,7 +33,7 @@ const CustomDragLayer = () => {
     return (
         <div style={layerStyles}>
             <div style={getItemStyles(currentOffset)}>
-                <div className="drag-preview">
+                <div className={["drag-preview", styleLookup[item.type]].join(' ')}>
                     {item.type}
                 </div>
             </div>

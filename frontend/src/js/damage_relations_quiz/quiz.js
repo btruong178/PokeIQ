@@ -23,6 +23,7 @@ import {
 } from "./reducer_functions"
 import { Header } from "./header";
 import { TypeEffectivenessZones } from "./dropzone_components";
+import { Container } from "react-bootstrap";
 import CustomModal from '../utilities/custom_modal';
 import '../../css/damage_relations_quiz/quiz.css';
 
@@ -44,9 +45,11 @@ function Damage_Relations_Quiz() {
     const [pokemon, setPokemon] = useState(defaultPokemon);
     const [random, setRandom] = useState(true);
     const [TypeMode, setTypeMode] = useState("Single");
+    // State for managing modal messages and visibility
     const [modalMessage, setModalMessage] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [quiz, setQuiz] = useState(false);
+    // Reducer for managing the answer object state
     const [AnswerObject, dispatchAnswerObject] = useReducer(AnswerObjectReducer, defaultAnswerObject);
 
 
@@ -162,7 +165,10 @@ function Damage_Relations_Quiz() {
                         AnswerObject={AnswerObject}
                         dispatchAnswerObject={dispatchAnswerObject}
                     />
-                    <TypeEffectivenessZones AnswerObject={AnswerObject} dispatchAnswerObject={dispatchAnswerObject} />
+                    <div className="type-effectiveness-zones-container">
+                        <TypeEffectivenessZones AnswerObject={AnswerObject} dispatchAnswerObject={dispatchAnswerObject} />
+                    </div>
+
                 </>
             )}
 
