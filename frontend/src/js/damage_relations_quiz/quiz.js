@@ -105,30 +105,35 @@ function Damage_Relations_Quiz() {
      * @throws {Error} Throws an error if a non-random choice is made in "Pokemon" mode.
      */
     const handleSubmit = async () => {
-        try {
-            if (TypeMode === "Single") {
-                if (random) {
+        const actions = {
+            Single: random
+                ? async () => {
                     const data = await handleGetSingleTypeRandom();
                     setSelectedSingleType(data.name);
-                } else {
-                    await handleGetSingleType(selectedSingleType);
                 }
-            } else if (TypeMode === "Dual") {
-                if (random) {
+                : async () => {
+                    await handleGetSingleType(selectedSingleType);
+                },
+
+            Dual: random
+                ? async () => {
                     const data = await handleGetDualTypeRandom();
                     setSelectedDualType1(data.type1.name);
                     setSelectedDualType2(data.type2.name);
-                } else {
+                }
+                : async () => {
                     await handleGetDualType(selectedDualType1, selectedDualType2);
-                }
-            } else if (TypeMode === "Pokemon") {
-                if (random) {
-                    const data = await handleGetRandomPokemon();
-                    setPokemon(data);
-                } else {
-                    throw new Error("Random Pokemon Type is only available when 'Random' is selected.");
-                }
+                },
+
+            Pokemon: async () => {
+                if (!random) throw new Error("Random Pokémon only when ‘Random’ is selected.");
+                const data = await handleGetRandomPokemon();
+                setPokemon(data);
             }
+        };
+
+        try {
+            await actions[TypeMode]();
             setQuiz(true);
         } catch (error) {
             showErrorModal(error.message);
@@ -166,7 +171,12 @@ function Damage_Relations_Quiz() {
                         dispatchAnswerObject={dispatchAnswerObject}
                     />
                     <div className="type-effectiveness-zones-container">
-                        <TypeEffectivenessZones AnswerObject={AnswerObject} dispatchAnswerObject={dispatchAnswerObject} />
+                        <TypeEffectivenessZones
+                            AnswerObject={AnswerObject}
+                            dispatchAnswerObject={dispatchAnswerObject}
+                            pokemon={pokemon}
+                            TypeMode={TypeMode}
+                        />
                     </div>
 
                 </>

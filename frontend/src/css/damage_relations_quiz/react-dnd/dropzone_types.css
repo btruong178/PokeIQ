@@ -42,19 +42,6 @@
 
 
 
-.dropzone-content.can-drop {
-    /* background-color: lightgreen; */
-    background-color: lightgreen;
-}
-
-.dropzone-content.hover.can-drop {
-    /* background-color: lightblue; */
-    background-color: lightblue;
-}
-
-
-
-
 .unSelected-button-container {
     display: flex;
     flex-direction: row;
@@ -68,16 +55,16 @@
     padding: 10px;
 }
 
-.unSelected-button-container.can-drop {
-    background-color: lightgreen;
-}
-
-.unSelected-button-container.hover.can-drop {
-    background-color: lightblue;
-}
-
 .unSelected-buttons {
     height: 100%;
     width: 100%;
     margin: 1px;
+}
+
+.dropzone-content.can-drop {
+    background-color: rgb(189, 186, 186);
+}
+
+.dropzone-content.hover.can-drop {
+    background-color: rgb(209, 241, 205);
 }

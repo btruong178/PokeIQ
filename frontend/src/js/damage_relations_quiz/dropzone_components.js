@@ -1,26 +1,28 @@
 import DropZone from "./react-dnd/dropzone_types";
 
-const UnSelectedButtons = ({ AnswerObject, dispatchAnswerObject }) => {
+export const UnSelectedButtons = ({
+    AnswerObject,
+    dispatchAnswerObject,
+    pokemon,
+    TypeMode
+}) => (
+    <DropZone
+        type_effectiveness="unSelected"
+        type_multiplier="N/A"
+        AnswerObject={AnswerObject}
+        dispatchAnswerObject={dispatchAnswerObject}
+        pokemon={pokemon}
+        TypeMode={TypeMode}
+    />
+);
 
-    return (
-        <DropZone
-            type_effectiveness={"unSelected"}
-            type_multiplier={"N/A"}
-            AnswerObject={AnswerObject}
-            dispatchAnswerObject={dispatchAnswerObject}
-        />
-    );
-}
-
-const TypeEffectivenessZones = ({ AnswerObject, dispatchAnswerObject }) => {
-    const entries = Object.entries(AnswerObject).filter(([effectiveness, multObj]) => {
-        if (effectiveness === "unSelected") {
-            return false;
-        } else {
-            return true;
-        }
-    })
-
+export const TypeEffectivenessZones = ({
+    AnswerObject,
+    dispatchAnswerObject,
+    pokemon,
+    TypeMode
+}) => {
+    const entries = Object.entries(AnswerObject).filter(([e]) => e !== "unSelected");
 
     return (
         <>
@@ -33,12 +35,11 @@ const TypeEffectivenessZones = ({ AnswerObject, dispatchAnswerObject }) => {
                         type_multiplier={firstMultiplier}
                         AnswerObject={AnswerObject}
                         dispatchAnswerObject={dispatchAnswerObject}
+                        pokemon={pokemon}
+                        TypeMode={TypeMode}
                     />
                 );
             })}
         </>
-
-    )
-}
-
-export { UnSelectedButtons, TypeEffectivenessZones };
+    );
+};

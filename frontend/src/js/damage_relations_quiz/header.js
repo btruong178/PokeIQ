@@ -54,7 +54,7 @@ const Header = ({
                             )}
                             {TypeMode === "Dual" && (
                                 <>
-                                    <p className="label">Types: <span>{selectedDualType1} / {selectedDualType2}</span></p>
+                                    <p className="label">Types: <span>{selectedDualType1}-{selectedDualType2}</span></p>
                                 </>
                             )}
                             {TypeMode === "Pokemon" && (

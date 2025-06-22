@@ -52,7 +52,14 @@ const DamageRelationsForm = ({
             handleTypeChange({ target: { value: "" } });
         }
     }, [random]);
-
+    useEffect(() => {
+        if (TypeMode === "Single") {
+            handleTypeChange1({ target: { value: "" } });
+            handleTypeChange2({ target: { value: "" } });
+        } else if (TypeMode === "Dual") {
+            handleTypeChange({ target: { value: "" } });
+        }
+    }, [TypeMode]);
     return (
         <Container fluid className="form-container background">
             <Row className="form-header">
