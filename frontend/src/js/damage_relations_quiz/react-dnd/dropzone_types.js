@@ -46,34 +46,36 @@ const DropZone = ({
         type_effectiveness === "unSelected"
             ? "unSelected-buttons"
             : `dropzone-content ${isOver ? "hover" : ""} ${canDrop ? "can-drop" : ""}`;
+    const getDroppables = () => {
+        const target = AnswerObject[type_effectiveness];
+        return Object.entries(target).map(([mult, arr]) =>
+            arr.map((type, idx) => (
+                <React.Fragment key={`${type}-${mult}-${idx}`}>
+                    <Col xs={6} sm={4} md={3} lg={2}>
+                        <DraggableType
+                            type={type}
+                            multiplier={mult}
+                            dispatchAnswerObject={dispatchAnswerObject}
+                            TypeMode={TypeMode}
+                            pokemon={pokemon}
+                        >
+                            {type}
+                        </DraggableType>
+                    </Col>
 
-    const target = AnswerObject[type_effectiveness];
-    const droppables = Object.entries(target).map(([mult, arr]) =>
-        arr.map((type, idx) => (
-            <React.Fragment key={`${type}-${mult}-${idx}`}>
-                <Col xs={6} sm={4} md={3} lg={2}>
-                    <DraggableType
-                        type={type}
-                        multiplier={mult}
-                        dispatchAnswerObject={dispatchAnswerObject}
-                    >
-                        {type}
-                    </DraggableType>
-                </Col>
-
-                { /* Insert a full-width rule after the last x0.5 if x0.25 exists */}
-                {mult === 'x0.5'
-                    && target['x0.25']?.length > 0
-                    && idx === arr.length - 1 && (
-                        <Col xs={12}>
-                            <hr className="dropzone-mult-divider" />
-                        </Col>
-                    )}
-            </React.Fragment>
-        ))
-    );
+                    {((mult === 'x0.5' && target['x0.25']?.length > 0 && idx === arr.length - 1) ||
+                        (mult === 'x2' && target['x4']?.length > 0 && idx === arr.length - 1))
 
 
+                        && (
+                            <Col xs={12}>
+                                <hr className="dropzone-mult-divider" />
+                            </Col>
+                        )}
+                </React.Fragment>
+            ))
+        );
+    }
     const getHeaderCol = () => {
         const displayMult = (TypeMode === "Dual" && paired[type_multiplier] ||
             TypeMode === "Pokemon" && pokemon.type.length > 1 && paired[type_multiplier])
@@ -91,7 +93,9 @@ const DropZone = ({
                 </Col>
             );
     };
+    const droppables = getDroppables();
     const headerCol = getHeaderCol();
+
 
 
 

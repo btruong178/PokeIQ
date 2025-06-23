@@ -29,6 +29,10 @@
   height: 70px;
 }
 
+.pokeball.transform-Y {
+  transform: rotateY(180deg);
+}
+
 .section {
   min-height: calc(100vh - 80px);
   width: 100%;

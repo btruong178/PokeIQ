@@ -85,20 +85,20 @@ export const AnswerObjectReducer = (state, action) => {
         case 'RESET':
             return defaultAnswerObject;
         case 'SWITCH_MULTIPLIER':
-            const { type: typeToSwitch, multiplier: prevMultiplier } = action.payload;
+            const { type: typeToSwitch, multiplier: currentMultiplier } = action.payload;
             const swapObject = {
                 "x0.5": "x0.25",
                 "x0.25": "x0.5",
                 "x2": "x4",
                 "x4": "x2"
             };
-            if (Object.keys(swapObject).includes(prevMultiplier)) {
+            if (Object.keys(swapObject).includes(currentMultiplier)) {
                 const newState = { ...state };
-                const newMultiplier = swapObject[prevMultiplier];
+                const newMultiplier = swapObject[currentMultiplier];
                 removeTypeFromObject(newState, typeToSwitch);
-                if (prevMultiplier === "x0.5" || prevMultiplier === "x0.25") {
+                if (currentMultiplier === "x0.5" || currentMultiplier === "x0.25") {
                     newState["Resistant To"][newMultiplier].push(typeToSwitch);
-                } else if (prevMultiplier === "x2" || prevMultiplier === "x4") {
+                } else if (currentMultiplier === "x2" || currentMultiplier === "x4") {
                     newState["Weak To"][newMultiplier].push(typeToSwitch);
                 }
                 return newState;

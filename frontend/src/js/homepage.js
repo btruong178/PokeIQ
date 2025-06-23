@@ -1,6 +1,5 @@
 import '../css/Homepage.css'
-import pokeball from '../css/images/pokeball-thumbnail.png'
-import HrLine from './hr-line'
+import pokeball from '../css/images/luxuryball.png'
 
 function Homepage() {
     return (
@@ -13,9 +12,9 @@ function Homepage() {
                             <div className="d-flex align-items-center justify-content-center">
                                 <img src={pokeball} alt="Pokeball" className="pokeball"></img>
                                 <h1 className="welcome">Welcome</h1>
-                                <img src={pokeball} alt="Pokeball" className="pokeball"></img>
+                                <img src={pokeball} alt="Pokeball" className="pokeball transform-Y"></img>
                             </div>
-                            <HrLine />
+                            <hr className="hr-line"></hr>
                             <p className="introduction">
                                 PokeIQ is a collection of many
                                 Pokemon related quizzes. Test your knowledge about Pokemon and
@@ -30,9 +29,9 @@ function Homepage() {
                             <div className="d-flex align-items-center justify-content-center">
                                 <img src={pokeball} alt="Pokeball" className="pokeball"></img>
                                 <h1 className="welcome">Get Started</h1>
-                                <img src={pokeball} alt="Pokeball" className="pokeball"></img>
+                                <img src={pokeball} alt="Pokeball" className="pokeball transform-Y"></img>
                             </div>
-                            <HrLine />
+                            <hr className="hr-line"></hr>
                             <p className="introduction">
                                 Begin by selecting a quiz from the navigation bar located at the top left of the page.
                                 The icon with three horizontal lines will open the navigation bar.

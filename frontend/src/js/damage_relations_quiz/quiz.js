@@ -18,12 +18,11 @@ import {
 } from "./handlers";
 import {
     defaultPokemon,
-    defaultAnswerObject,
-    AnswerObjectReducer
-} from "./reducer_functions"
+    defaultAnswerObject
+} from "./default_values";
+import { AnswerObjectReducer } from "./reducer_functions"
 import { Header } from "./header";
 import { TypeEffectivenessZones } from "./dropzone_components";
-import { Container } from "react-bootstrap";
 import CustomModal from '../utilities/custom_modal';
 import '../../css/damage_relations_quiz/quiz.css';
 

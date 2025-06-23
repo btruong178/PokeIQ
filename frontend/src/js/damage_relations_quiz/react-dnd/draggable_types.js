@@ -25,7 +25,7 @@ export const styleLookup = {
     Fairy: 'type-fairy'
 };
 
-const DraggableType = ({ type, multiplier, dispatchAnswerObject }) => {
+const DraggableType = ({ type, multiplier, dispatchAnswerObject, TypeMode, pokemon }) => {
     const [collectObject, drag, preview] = useDrag({
         type: 'TYPE',
         item: { type },
@@ -54,6 +54,15 @@ const DraggableType = ({ type, multiplier, dispatchAnswerObject }) => {
             payload: { type, effectiveness: "unSelected", multiplier: "N/A" }
         });
     }
+    const getbuttonStyle = () => {
+        if ((multiplier === "x1" || multiplier === "x0") ||
+            (TypeMode === "Single" || (TypeMode === "Pokemon" && pokemon.type.length === 1))) {
+            return "multiplier-button-deactivated";
+        } else if (multiplier === "x0.5" || multiplier === "x0.25" || multiplier === "x2" || multiplier === "x4") {
+            return "multiplier-button";
+        }
+    }
+    const buttonStyle = getbuttonStyle();
 
     return (
         <div
@@ -69,15 +78,17 @@ const DraggableType = ({ type, multiplier, dispatchAnswerObject }) => {
             {type}
             {multiplier !== "N/A" && (
                 <Button
-                    className="multiplier-button"
+                    className={buttonStyle}
                     size="sm"
                     onClick={(e) => {
                         e.stopPropagation();
                         console.log("Clicked on multiplier:", multiplier);
-                        dispatchAnswerObject({
-                            command: 'SWITCH_MULTIPLIER',
-                            payload: { type, multiplier }
-                        });
+                        if ((TypeMode === "Dual") || (TypeMode === "Pokemon" && pokemon.type.length > 1)) {
+                            dispatchAnswerObject({
+                                command: 'SWITCH_MULTIPLIER',
+                                payload: { type, multiplier }
+                            });
+                        }
                     }}
                 >
                     {multiplier}
