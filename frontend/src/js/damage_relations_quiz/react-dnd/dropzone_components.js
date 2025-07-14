@@ -1,4 +1,4 @@
-import DropZone from "./react-dnd/dropzone_types";
+import DropZone from "./dropzone_types";
 
 export const UnSelectedButtons = ({
     AnswerObject,

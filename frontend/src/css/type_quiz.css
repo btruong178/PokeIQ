@@ -7,7 +7,7 @@
 .title {
     font-size: 2rem;
     font-family: 'Segoe UI', Verdana, sans-serif;
-    color: #ffffff;
+    color: #FFFFFF;
     margin-bottom: 10px;
     margin: 2rem auto;
     letter-spacing: 1rem;
@@ -19,8 +19,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: white;
-    color: black;
+    background-color: #FFFFFF;
+    color: #000000;
     padding: 10px;
     margin: 10px;
 }
@@ -41,7 +41,7 @@
 }
 
 .reset-button {
-    background-color: #0078d4;
+    background-color: #0078D4;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -53,7 +53,7 @@
 }
 
 .reset-all-button {
-    background-color: #0078d4;
+    background-color: #0078D4;
     white-space: nowrap;
     color: #fff;
     border: none;
@@ -66,7 +66,7 @@
 }
 
 .submit-button {
-    background-color: #0078d4;
+    background-color: #0078D4;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -193,7 +193,7 @@
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    background-color: #0078d4;
+    background-color: #0078D4;
     color: #fff;
     font-size: 1rem;
     cursor: pointer;
@@ -201,7 +201,7 @@
 }
 
 .radio-group label:hover {
-    background-color: #005a9e;
+    background-color: #005A9E;
 }
 
 .radio-group label span {
@@ -211,7 +211,7 @@
 
 
 .radio-group label:has(input[type="radio"]:checked) {
-    background-color: #0a2d47;
+    background-color: #0A2D47;
 }
 
 .typeToggle {
@@ -220,12 +220,12 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: #d46600;
+    background-color: #D46600;
     padding: 10px;
 }
 
 .typeToggle .unselected {
-    background-color: #0078d4;
+    background-color: #0078D4;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -250,7 +250,7 @@
 
 
 .type-selector .selected {
-    background-color: #0a2d47;
+    background-color: #0A2D47;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -262,7 +262,7 @@
 }
 
 .type-selector .unselected {
-    background-color: #0078d4;
+    background-color: #0078D4;
     color: #fff;
     border: none;
     border-radius: 4px;

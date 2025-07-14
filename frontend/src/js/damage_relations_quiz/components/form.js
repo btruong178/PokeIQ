@@ -7,8 +7,8 @@
  */
 
 import React, { useEffect } from "react";
-import { availableTypes } from "./logic";
-import "../../css/damage_relations_quiz/form.css";
+import { availableTypes } from "../logic_handling/logic";
+import "../../../css/damage_relations_quiz/components/form.css";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 
 /**

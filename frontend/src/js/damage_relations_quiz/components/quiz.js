@@ -15,16 +15,16 @@ import {
     handleGetDualType,
     handleGetDualTypeRandom,
     handleGetRandomPokemon
-} from "./handlers";
+} from "../logic_handling/handlers";
 import {
     defaultPokemon,
     defaultAnswerObject
-} from "./default_values";
-import { AnswerObjectReducer } from "./reducer_functions"
+} from "../logic_handling/default_values";
+import { AnswerObjectReducer } from "../logic_handling/reducer_functions"
 import { Header } from "./header";
-import { TypeEffectivenessZones } from "./dropzone_components";
-import CustomModal from '../utilities/custom_modal';
-import '../../css/damage_relations_quiz/quiz.css';
+import { TypeEffectivenessZones } from "../react-dnd/dropzone_components";
+import ErrorModal from '../../utilities/error_modal';
+import '../../../css/damage_relations_quiz/components/quiz.css';
 
 
 /**
@@ -32,11 +32,6 @@ import '../../css/damage_relations_quiz/quiz.css';
  */
 
 function Damage_Relations_Quiz() {
-    // Default states for quiz configuration and data management
-
-
-
-
     // State hooks for quiz configuration and data management
     const [selectedSingleType, setSelectedSingleType] = useState("");
     const [selectedDualType1, setSelectedDualType1] = useState("");
@@ -50,6 +45,9 @@ function Damage_Relations_Quiz() {
     const [quiz, setQuiz] = useState(false);
     // Reducer for managing the answer object state
     const [AnswerObject, dispatchAnswerObject] = useReducer(AnswerObjectReducer, defaultAnswerObject);
+    // Reducer for managing incorrect answers
+    const [incorrectAnswers, dispatchIncorrectAnswers] = useReducer(AnswerObjectReducer, defaultAnswerObject);
+
 
 
 
@@ -182,7 +180,7 @@ function Damage_Relations_Quiz() {
             )}
 
             {showModal && (
-                <CustomModal message={modalMessage} onClose={closeModal} />
+                <ErrorModal message={modalMessage} onClose={closeModal} />
             )}
         </div>
     );

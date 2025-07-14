@@ -2,8 +2,8 @@
 
 .drag-preview {
     padding: 12px 24px;
-    background-color: var(--type-bg, #fff);
-    border: 2px solid var(--type-border, #000);
+    background-color: var(--type-bg, #FFFFFF);
+    border: 2px solid var(--type-border, #000000);
     border-radius: 30px;
     color: #ffffff;
     font-weight: bold;

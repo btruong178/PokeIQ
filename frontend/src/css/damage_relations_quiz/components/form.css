@@ -10,7 +10,7 @@
 }
 
 .background {
-    background-image: url('../../css/images/pokeEvee.png');
+    background-image: url('../../../css/images/pokeEvee.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;

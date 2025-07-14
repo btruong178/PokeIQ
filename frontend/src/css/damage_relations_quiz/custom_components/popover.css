@@ -1,0 +1,13 @@
+.hover-popover-header {
+    font-weight: bold;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+.hover-popover-text {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #FFFFFF;
+    padding: 8px 12px;
+    text-align: center;
+    font-size: 0.9rem;
+}

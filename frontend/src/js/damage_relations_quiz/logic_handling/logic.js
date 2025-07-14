@@ -64,7 +64,7 @@ export const RandomTypeDual = () => {
  */
 const validateSingleType = (type) => {
     if (type === "") {
-        throw new Error("No Type Selected");
+        throw new Error("Missing type");
     }
 }
 
@@ -80,7 +80,7 @@ const validateDualType = (type1, type2) => {
         throw new Error("Missing type(s)");
     }
     if (type1 === type2) {
-        throw new Error("Cannot have the same type twice.");
+        throw new Error("Cannot have the same type twice");
     }
 };
 

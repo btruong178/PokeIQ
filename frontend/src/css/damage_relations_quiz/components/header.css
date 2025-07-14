@@ -7,7 +7,7 @@
     width: 100%;
     height: 100%;
     background-color: rgb(45, 46, 46);
-    border-bottom: white solid 1px;
+    border-bottom: #FFFFFF solid 1px;
 }
 
 .quiz-header-container .container-fluid {
@@ -34,6 +34,7 @@
     width: 100%;
     /* background-color: rgb(46, 75, 46); */
     padding: 10px;
+    position: relative;
 }
 
 .quiz-info h5 {
@@ -77,9 +78,9 @@
 }
 
 .quiz-info button {
-    background: linear-gradient(270deg, #6f8ba3, #00f2fe, #6f8ba3);
+    background: linear-gradient(270deg, #813e3e, #c2c066, #000000);
     background-size: 600% 600%;
-    color: white;
+    color: #FFFFFF;
     border: none;
     border-radius: 30px;
     padding: 0.5rem 1.1rem;
@@ -87,6 +88,7 @@
     cursor: pointer;
     margin: 5px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    text-shadow: 0px 0px 5px #000000;
     transition: transform 0.2s ease-in-out;
     animation: gradientBackground 8s ease infinite;
 }
