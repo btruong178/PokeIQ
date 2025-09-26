@@ -105,7 +105,7 @@ const showDBstructures = async () => {
         logError(err);
     }
 };
-const deleteDataAndResetAI = async () => {
+const deleteDataAndResetAlterSequence = async () => {
     try {
         console.log('Deleting data from the database...');
         await pool.query('DELETE FROM pokemon');
@@ -122,7 +122,7 @@ const checkIfDBisPopulated = async () => {
         const result = await pool.query('SELECT COUNT(*) FROM pokemon');
         if (result.rows[0].count > 0) {
             console.log('DB is already populated');
-            await deleteDataAndResetAI();
+            await deleteDataAndResetAlterSequence();
             return true;
         } else {
             console.log('DB is empty');
@@ -135,10 +135,12 @@ const checkIfDBisPopulated = async () => {
 
 
 // Execute the functions
-const num = 2; // Change this number to test the different functions
+// 2 is the main function
+// Other functions are for testing purposes
+const num = 4; // Change this number to test the different functions
 // switch statement
 switch (num) {
-    case 1:
+    case 3:
         fetchPokemonData(1);
         fetchTypeData(1);
         break;
@@ -155,7 +157,7 @@ switch (num) {
         showDBstructures();
         break;
     case 5:
-        deleteDataAndResetAI();
+        deleteDataAndResetAlterSequence();
         break;
     default:
         console.log('Invalid number');
