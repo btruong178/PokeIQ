@@ -7,7 +7,8 @@
     "start:frontend": "cd frontend && npm start",
     "start:backend": "cd backend && npm start",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
-    "install:all": "npx concurrently \"npm --prefix frontend install\" \"npm --prefix backend install\""
+    "ci:all": "npx concurrently \"npm --prefix frontend ci\" \"npm --prefix backend ci\"",
+    "backend:prisma:generate:migratedev": "cd backend && npx prisma generate && npx dotenv -e ../.env.backend -- prisma migrate dev"
   },
   "keywords": [],
   "author": "",

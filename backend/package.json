@@ -6,21 +6,25 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "dev": "nodemon --legacy-watch server.js"
+    "dev": "nodemon --legacy-watch server.js",
+    "pokeToDB": "cd routes && node pokeToDB.js"
+
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.16.2",
     "axios": "^1.7.9",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "env": "^0.0.2",
     "express": "^4.21.1",
     "pg": "^8.13.1"
   },
   "type": "module",
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "dotenv-cli": "^10.0.0",
+    "nodemon": "^3.1.9",
+    "prisma": "^6.16.2"
   }
 }

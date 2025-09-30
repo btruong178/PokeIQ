@@ -19,8 +19,6 @@ services:
       dockerfile: Dockerfile
     restart: always
     command: npm run dev
-    volumes:
-      - ./backend:/app/backend
     env_file:
       - .env.backend
     ports:

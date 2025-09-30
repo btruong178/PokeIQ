@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import apiroutes from './routes/api.js';
-import pokemonroutes from './routes/pokemon.js';
+import apiroutes from './routes/api-routes.js';
+import pokemonroutes from './routes/pokemonRoutes.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import dotenv from 'dotenv';
