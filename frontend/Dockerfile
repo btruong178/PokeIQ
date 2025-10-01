@@ -1,10 +1,9 @@
+# Build stage
 FROM node:20
-
 WORKDIR /app/frontend
 COPY . .
+RUN npm ci
 
-RUN npm install
-
+# Runtime configuration
 EXPOSE 3000
-
 CMD ["npm", "start"]
