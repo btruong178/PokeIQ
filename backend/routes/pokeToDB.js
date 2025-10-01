@@ -1,10 +1,10 @@
 import axios from 'axios';
 import pool from '../db.js';
-import { logError, capitalizeFirstLetter } from './api-utilities.js';
+import { logError, capitalizeFirstLetter } from './db-utilities.js';
+
 
 // API URLs
 const POKEMON_BASE_URL = 'https://pokeapi.co/api/v2/pokemon/';
-
 
 // Fetch Pokémon data (name + types)
 const fetchPokemonData = async (pokemonID) => {

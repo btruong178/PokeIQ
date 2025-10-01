@@ -6,9 +6,15 @@
   "scripts": {
     "start:frontend": "cd frontend && npm start",
     "start:backend": "cd backend && npm start",
+    "be:dotenv": "cd backend && npx dotenv -e ../.env.dev --",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
     "ci:all": "npx concurrently \"npm --prefix frontend ci\" \"npm --prefix backend ci\"",
-    "backend:prisma:generate:migratedev": "cd backend && npx prisma generate && npx dotenv -e ../.env.backend -- prisma migrate dev"
+    "be:prisma:localdb": "cd backend && npx prisma dev",
+    "be:prisma:seed": "npm run be:dotenv -- node prisma/seed.js",
+    "be:prisma:reset": "npm run be:dotenv -- prisma migrate reset",
+    "be:prisma:studio": "npm run be:dotenv -- prisma studio",
+    "be:prisma:generate": "npm run be:dotenv -- prisma generate",
+    "be:prisma:migratedev": "npm run be:dotenv -- prisma migrate dev"
   },
   "keywords": [],
   "author": "",

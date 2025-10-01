@@ -8,8 +8,10 @@ import dotenv from 'dotenv';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.join(__dirname, '../.env.backend') });
-
+// Only load .env.backend for local dev when required
+if (!process.env.DATABASE_URL || !process.env.PORT) {
+    dotenv.config({ path: path.join(__dirname, '../.env.dev') });
+}
 
 // Parse DATABASE_URL (e.g., postgres://user:pass@host:port/database)
 const dbUrl = new URL(process.env.DATABASE_URL);

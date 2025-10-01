@@ -75,6 +75,7 @@ web_modules/
 
 # dotenv environment variable files
 .env
+.env.**
 .env.db
 .env.frontend
 .env.backend
@@ -140,4 +141,4 @@ dist
 .pnp.*
 
 # Prisma Client
-backend/generated/prisma-client/
+backend/generated/

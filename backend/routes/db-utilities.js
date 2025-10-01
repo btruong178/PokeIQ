@@ -1,5 +1,4 @@
 import pool from '../db.js';
-import { logError } from './api-utilities.js';
 
 const LINE_SEPARATOR = '----------------------------------------';
 
