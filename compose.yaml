@@ -20,7 +20,7 @@ services:
     restart: always
     command: npm run dev
     env_file:
-      - .env.compose.backend
+      - .env.backend
     ports:
       - 5001:5001
     depends_on:
@@ -30,7 +30,7 @@ services:
     restart: always
     shm_size: 128mb
     env_file:
-      - .env.compose.db
+      - .env.db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:

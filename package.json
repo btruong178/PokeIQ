@@ -4,11 +4,11 @@
   "description": "A Website that helps test the User's knowledge about Pokemon through Quizzes.",
   "main": "index.js",
   "scripts": {
+    "ci:all": "npx concurrently \"npm --prefix frontend ci\" \"npm --prefix backend ci\"",
     "start:frontend": "cd frontend && npm start",
     "start:backend": "cd backend && npm start",
-    "be:dotenv": "cd backend && npx dotenv -e ../.env.dev --",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
-    "ci:all": "npx concurrently \"npm --prefix frontend ci\" \"npm --prefix backend ci\"",
+    "be:dotenv": "cd backend && npx dotenv -e ../.env.dev --",
     "be:prisma:localdb": "cd backend && npx prisma dev",
     "be:prisma:seed": "npm run be:dotenv -- node prisma/seed.js",
     "be:prisma:reset": "npm run be:dotenv -- prisma migrate reset",
