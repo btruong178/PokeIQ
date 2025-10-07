@@ -1,10 +1,11 @@
 {
   "name": "pokeiq",
   "version": "1.0.0",
+  "type": "module",
   "description": "A Website that helps test the User's knowledge about Pokemon through Quizzes.",
   "main": "index.js",
   "scripts": {
-    "ci:all": "npx concurrently \"npm --prefix frontend ci\" \"npm --prefix backend ci\"",
+    "ci:all": "npx concurrently \"npm --prefix frontend ci\" \"npm --prefix backend ci\" \"npm --prefix config ci\"",
     "start:frontend": "cd frontend && npm start",
     "start:backend": "cd backend && npm start",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
@@ -14,7 +15,8 @@
     "be:prisma:reset": "npm run be:dotenv -- prisma migrate reset",
     "be:prisma:studio": "npm run be:dotenv -- prisma studio",
     "be:prisma:generate": "npm run be:dotenv -- prisma generate",
-    "be:prisma:migratedev": "npm run be:dotenv -- prisma migrate dev"
+    "be:prisma:migratedev": "npm run be:dotenv -- prisma migrate dev",
+    "fetch:env": "node config/fetchEnvFromParameterStore.js"
   },
   "keywords": [],
   "author": "",
