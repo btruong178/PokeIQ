@@ -8,8 +8,8 @@
 
 import axios from "axios";
 
-const Random_Pokemon_API_URL = 'http://localhost:5000/pokemon/random_pokemon';
-const Damage_Relations_API_URL = 'http://localhost:5000/pokemon/damage_relations'; // '/:typeName' at the end
+const Random_Pokemon_API_URL = `${process.env.REACT_APP_API_URL}/pokemon/random_pokemon`;
+const Damage_Relations_API_URL = `${process.env.REACT_APP_API_URL}/pokemon/damage_relations`; // '/:typeName' at the end
 
 /**
  * Capitalizes the first letter of the given string.

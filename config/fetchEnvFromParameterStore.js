@@ -43,10 +43,18 @@ PORT=${port}`;
 POSTGRES_DB=${postgresDb}
 POSTGRES_PASSWORD=${postgresPassword}`;
 
-    // Write files to root directory
+    // Create .env.frontend content
+    const frontendContent = `REACT_APP_API_URL=http://localhost:${port}`;
+
+
+    // Root directory
     const rootDir = path.join(__dirname, '..');
+    // Env file paths
     const backendEnvPath = path.join(rootDir, '.env.backend');
     const dbEnvPath = path.join(rootDir, '.env.db');
+    const frontendEnvPath = path.join(rootDir, '.env.frontend');
+    // Write to .env files
+    fs.writeFileSync(frontendEnvPath, frontendContent);
     fs.writeFileSync(backendEnvPath, backendEnvContent);
     fs.writeFileSync(dbEnvPath, dbEnvContent);
 

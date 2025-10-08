@@ -16,7 +16,7 @@ router.get('/check', async (req, res) => {
 
 router.get('/health-check', async (req, res) => {
     try {
-        const result = await prisma.$queryRaw('SELECT NOW()');
+        const result = await prisma.$queryRaw`SELECT NOW()`;
         res.status(200).json({ message: 'API is Working!!!', time: result });
     } catch (err) {
         console.error('Database query error:', err);

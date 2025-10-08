@@ -62,8 +62,8 @@ const fetchPokemonData = async (pokemonID) => {
 };
 
 // Get arguments from command line
-const start = parseInt(process.argv[2]) || 1;  // Default to 1 if not provided
-const end = parseInt(process.argv[3]) || 1025; // Default to 1025 if not provided
+const startPokeID = parseInt(process.argv[2]) || 1;  // Default to 1 if not provided
+const endPokeID = parseInt(process.argv[3]) || 1025; // Default to 1025 if not provided
 
-console.log(`Seeding Pokemon from ID ${start} to ${end}`);
-cleanAndSeedPokemonDB(start, end);
+console.log(`Seeding Pokemon from ID ${startPokeID} to ${endPokeID}`);
+cleanAndSeedPokemonDB(startPokeID, endPokeID);
