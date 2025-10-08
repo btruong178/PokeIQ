@@ -27,28 +27,55 @@ const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export const cleanAndSeedPokemonDB = async (start, end) => {
+const checkIfPokemonPopulated = async () => {
+    const count = await prisma.pokemon.count();
+    return count > 0;
+}
+
+const checkIfTypesPopulated = async () => {
+    const count = await prisma.types.count();
+    return count > 0;
+}
+
+const cleanPokemonDB = async () => {
     try {
         await prisma.pokemon.deleteMany({});
-        console.log('Existing Pokémon data deleted successfully!');
-        // await prisma.$executeRaw`ALTER SEQUENCE "Pokemon_id_seq" RESTART WITH 1;`;
-        // console.log('ID sequence reset successfully!');
-        var data = [];
-        console.log("Adding Pokémon data to the 'pokemon' table...");
-        for (let i = start; i <= end; i++) {
-            const { pokemonName, pokemonTypes } = await fetchPokemonData(i);
-            data.push({ id: i, name: pokemonName, type: pokemonTypes });
-            console.log(`Fetched and prepared data for Pokémon ID ${i}: ${pokemonName} (${pokemonTypes})`);
-        }
+        console.log('Existing Pokémon data deleted');
+    } catch (error) {
+        logError(error);
+    }
+}
+
+const Reset_And_AddDataToPokemonDB = async (data) => {
+    try {
+        await cleanPokemonDB();
         await prisma.pokemon.createMany({ data });
-        console.log('Pokemon data added to the database successfully!');
+        console.log(`Pokemon data from ${data.length} entries added to the database`);
+    } catch (error) {
+        logError(error);
+    }
+}
+
+export const getPokemonData = async (start, end) => {
+    try {
+        console.log("Gathering Pokémon data from PokeAPI...");
+        const data = await Promise.all(
+            Array.from({ length: end - start + 1 }, (_, i) => { return start + i })
+                .map(async (id) => {
+                    const { pokemonName, pokemonTypes } = await fetchPokemonDetails(id);
+                    console.log(`Fetched and prepared data for Pokémon ID ${id}: ${pokemonName} (${pokemonTypes})`);
+                    return { id, name: pokemonName, type: pokemonTypes };
+                })
+        );
+        return data;
     } catch (error) {
         logError(error);
     }
 };
 
+
 // Fetch Pokémon data (name + types)
-const fetchPokemonData = async (pokemonID) => {
+const fetchPokemonDetails = async (pokemonID) => {
     try {
         const response = await axios.get(`${POKEMON_BASE_URL}${pokemonID}`);
         const { forms, types } = response.data;
@@ -66,4 +93,4 @@ const startPokeID = parseInt(process.argv[2]) || 1;  // Default to 1 if not prov
 const endPokeID = parseInt(process.argv[3]) || 1025; // Default to 1025 if not provided
 
 console.log(`Seeding Pokemon from ID ${startPokeID} to ${endPokeID}`);
-cleanAndSeedPokemonDB(startPokeID, endPokeID);
+Reset_And_AddDataToPokemonDB(await getPokemonData(startPokeID, endPokeID));
