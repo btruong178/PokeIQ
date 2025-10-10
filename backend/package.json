@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.907.0",
+    "@aws-sdk/lib-dynamodb": "^3.907.0",
+    "@aws-sdk/util-dynamodb": "^3.907.0",
     "@prisma/client": "^6.16.2",
     "axios": "^1.7.9",
     "client-ssm": "github:aws-sdk/client-ssm",

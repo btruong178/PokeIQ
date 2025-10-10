@@ -25,14 +25,14 @@ services:
     depends_on:
       - db
   
-  db:
-    image: postgres
-    restart: always
-    shm_size: 128mb
-    env_file:
-      - .env.db
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+#   db:
+#     image: postgres
+#     restart: always
+#     shm_size: 128mb
+#     env_file:
+#       - .env.db
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
 
-volumes:
-  postgres_data:
+# volumes:
+#   postgres_data:

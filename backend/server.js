@@ -9,10 +9,10 @@ import dotenv from 'dotenv';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Only load .env.backend for local dev when required
-if (!process.env.DATABASE_URL || !process.env.PORT) {
-    dotenv.config({ path: path.join(__dirname, '../.env.dev') });
-}
+// // Only load .env.backend for local dev when required
+// if (!process.env.DATABASE_URL || !process.env.PORT) {
+//     dotenv.config({ path: path.join(__dirname, '../.env.dev') });
+// }
 
 const app = express();
 app.use(cors());
