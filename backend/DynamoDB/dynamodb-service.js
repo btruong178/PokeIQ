@@ -1,6 +1,6 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutItemCommand, GetCommand, BatchWriteCommand } from '@aws-sdk/lib-dynamodb';
-import { marshall } from '@aws-sdk/util-dynamodb';
+import { DynamoDBDocumentClient, PutCommand, GetCommand, BatchWriteCommand } from '@aws-sdk/lib-dynamodb';
+import { logSuccess, logError } from '../utils/logger.js';
 
 export class DynamoDBService {
     constructor() {
@@ -12,14 +12,14 @@ export class DynamoDBService {
         try {
             const params = {
                 TableName: tableName,
-                Item: marshall(item)
+                Item: item
             };
-            const command = new PutItemCommand(params);
-            const response = await this.ddbClient.send(command);
-            console.log('DynamoDB PutItem succeeded:', response);
+            const command = new PutCommand(params);
+            const response = await this.ddbDocClient.send(command);
+            console.log('✅ DynamoDB PutItem succeeded:', response);
             return response;
         } catch (err) {
-            console.error('DynamoDB PutItem error:\n', err);
+            logError('DynamoDBService.putItem', err, { tableName, item });
             throw err;
         }
     }

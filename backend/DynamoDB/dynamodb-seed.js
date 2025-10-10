@@ -1,8 +1,12 @@
 import axios from 'axios';
-import { DynamoDBService } from "./dynamodb-service";
+import { DynamoDBService } from "./dynamodb-service.js";
+import { logError, logSuccess } from '../utils/logger.js';
+import { capitalizeFirstLetter } from '../utils/stringUtils.js';
+
+// Initialize Clients
 const dynamoDBService = new DynamoDBService();
 
-// Get Arguments from command line
+// Get Arguments from command line for seeding range
 const startPokeID = parseInt(process.argv[2]) || 1; // Default to 1 if not provided
 const endPokeID = parseInt(process.argv[3]) || 1025; // Default to 1025 if not provided
 
@@ -10,7 +14,12 @@ const endPokeID = parseInt(process.argv[3]) || 1025; // Default to 1025 if not p
 const pokemonTableName = process.env.DYNAMODB_TABLE_NAME_POKEMON;
 const typesTableName = process.env.DYNAMODB_TABLE_NAME_TYPES;
 
-// Fetch Pokémon data (name + types)
+// API URLs from PokeAPI
+const POKEMON_BASE_URL = 'https://pokeapi.co/api/v2/pokemon/';
+const TYPE_BASE_URL = 'https://pokeapi.co/api/v2/type/';
+
+
+// Fetch Pokémon data based on ID
 const fetchPokemonDetails_PokeAPI = async (pokemonID) => {
     try {
         const response = await axios.get(`${POKEMON_BASE_URL}${pokemonID}`);
@@ -36,6 +45,7 @@ const getPokemonData = async (startPokeID, endPokeID) => {
                     return { id, name: pokemonName, type: pokemonTypes };
                 })
         );
+        logSuccess('getPokemonData', `Fetched data for Pokémon IDs ${startPokeID} to ${endPokeID}`, { count: data.length });
         return data;
     } catch (error) {
         logError(error);
@@ -43,13 +53,21 @@ const getPokemonData = async (startPokeID, endPokeID) => {
 };
 
 
-
+// Seed Pokémon data into DynamoDB
 const seedPokemonData = async (startPokeID, endPokeID) => {
     try {
+        const pokemonData = await getPokemonData(startPokeID, endPokeID);
+        for (const pokemon of pokemonData) {
+            await dynamoDBService.putItem(pokemonTableName, pokemon);
+        }
+        console.log(`Successfully seeded Pokémon data from ID ${startPokeID} to ${endPokeID}`);
 
     } catch (error) {
         logError(error);
     }
 };
+
+seedPokemonData(startPokeID, endPokeID);
+
 
 
