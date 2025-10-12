@@ -27,22 +27,14 @@ const createEnvFiles = async () => {
     console.log('Starting to fetch parameters from AWS Parameter Store...\n');
 
     // Fetch all parameters
-    const [postgresUser, postgresDb, postgresPassword, databaseUrl, port] = await Promise.all([
-      getParameter('/pokeiq/database/POSTGRES_USER'),
-      getParameter('/pokeiq/database/POSTGRES_DB'),
-      getParameter('/pokeiq/database/POSTGRES_PASSWORD'),
-      getParameter('/pokeiq/database/DATABASE_URL'),
+    const [port, tableNames] = await Promise.all([
       getParameter('/pokeiq/backend/PORT'),
+      getParameter('/pokeiq/dynamodb/tableNames')
     ]);
 
     // Create .env.backend content
-    const backendEnvContent = `DATABASE_URL="${databaseUrl}"
+    const backendEnvContent = `${tableNames}
 PORT=${port}`;
-
-    // Create .env.db content
-    const dbEnvContent = `POSTGRES_USER=${postgresUser}
-POSTGRES_DB=${postgresDb}
-POSTGRES_PASSWORD=${postgresPassword}`;
 
     // Create .env.frontend content
     const frontendContent = `REACT_APP_API_URL=http://localhost:${port}`;
@@ -57,7 +49,6 @@ POSTGRES_PASSWORD=${postgresPassword}`;
     // Write to .env files
     fs.writeFileSync(frontendEnvPath, frontendContent);
     fs.writeFileSync(backendEnvPath, backendEnvContent);
-    fs.writeFileSync(dbEnvPath, dbEnvContent);
 
     console.log('\n✓ Environment files created successfully!');
     console.log(`  - ${backendEnvPath}`);

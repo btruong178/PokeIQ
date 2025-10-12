@@ -28,29 +28,6 @@ services:
       - /app/backend/node_modules
     ports:
       - 5001:5001
-    depends_on:
-      - db
-#   db:
-#     image: postgres
-#     restart: always
-#     shm_size: 128mb
-#     env_file:
-#       - .env.db
-#     volumes:
-#       - postgres_data:/var/lib/postgresql/data
-#     ports:
-#       - 5432:5432
 
-#   adminer:
-#     image: adminer
-#     restart: always
-#     ports:
-#       - 8080:8080
-
-
-    
-
-# volumes:
-#   postgres_data:
 
 

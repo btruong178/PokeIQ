@@ -11,6 +11,7 @@
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
     "fetch:env": "node config/fetchEnvFromParameterStore.js",
     "docker:dev": "docker compose -f compose.dev.yaml up --build",
+    "docker:down": "docker compose -f compose.dev.yaml down -v",
     "docker:prod": "docker compose -f compose.prod.yaml up --build"
   },
   "keywords": [],

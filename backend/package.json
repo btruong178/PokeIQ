@@ -15,20 +15,14 @@
     "@aws-sdk/client-dynamodb": "^3.907.0",
     "@aws-sdk/lib-dynamodb": "^3.907.0",
     "@aws-sdk/util-dynamodb": "^3.907.0",
-    "@prisma/client": "^6.16.2",
     "axios": "^1.7.9",
-    "client-ssm": "github:aws-sdk/client-ssm",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.21.1",
-    "prisma": "^6.16.3"
+    "express": "^4.21.1"
   },
   "type": "module",
   "devDependencies": {
     "dotenv-cli": "^10.0.0",
     "nodemon": "^3.1.9"
-  },
-  "prisma": {
-    "seed": "node prisma/seed.js"
   }
 }
