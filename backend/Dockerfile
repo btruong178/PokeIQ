@@ -3,7 +3,6 @@ FROM node:20 AS base
 WORKDIR /app/backend
 COPY . .
 RUN npm ci
-RUN npx prisma generate
 
 # Development stage
 FROM base AS development
