@@ -1,11 +1,23 @@
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBClient, ListTablesCommand } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, PutCommand, GetCommand, BatchWriteCommand } from '@aws-sdk/lib-dynamodb';
 import { logSuccess, logError } from '../utils/logger.js';
 
 export class DynamoDBService {
     constructor() {
-        this.ddbClient = new DynamoDBClient({ region: process.env.AWS_REGION });
+        this.ddbClient = new DynamoDBClient({ region: process.env.AWS_REGION || 'us-east-1' });
         this.ddbDocClient = DynamoDBDocumentClient.from(this.ddbClient);
+    }
+
+    async healthCheck() {
+        try {
+            const command = new ListTablesCommand({});
+            const result = await this.ddbClient.send(command);
+            logSuccess('DynamoDBService.healthCheck', 'Successfully connected to DynamoDB', result);
+            return result;
+        } catch (err) {
+            logError('DynamoDBService.healthCheck', err);
+            throw err;
+        }
     }
 
     async putItem(tableName, item) {

@@ -6,8 +6,6 @@ services:
     restart: always
     environment:
       - WATCHPACK_POLLING=true
-    env_file:
-      - .env.frontend
     volumes:
       - ./frontend:/app/frontend
     ports:
@@ -27,7 +25,7 @@ services:
       - ./backend:/app/backend
       - /app/backend/node_modules
     ports:
-      - 5001:5001
+      - 80:80
 
 
 

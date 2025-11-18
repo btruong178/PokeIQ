@@ -6,9 +6,9 @@
  */
 export const logError = (functionName, error, context = {}) => {
     const filePath = new Error().stack?.split('\n')[2]?.match(/\((.+?):\d+:\d+\)/)?.[1] || 'unknown';
-    
+
     console.error('\n' + '='.repeat(80));
-    console.error('❌ ERROR OCCURRED');
+    console.error('❌ ERROR OCCURRED (Logger)');
     console.error('─'.repeat(80));
     console.error('Function:', functionName);
     console.error('File:', filePath);
@@ -28,7 +28,7 @@ export const logError = (functionName, error, context = {}) => {
  */
 export const logSuccess = (functionName, message, data = {}) => {
     console.log('\n' + '='.repeat(80));
-    console.log('✅ SUCCESS');
+    console.log('✅ SUCCESS (Logger)');
     console.log('─'.repeat(80));
     console.log('Function:', functionName);
     console.log('Message:', message);

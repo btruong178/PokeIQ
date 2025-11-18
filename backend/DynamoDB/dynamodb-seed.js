@@ -3,7 +3,6 @@ import { DynamoDBService } from "./dynamodb-service.js";
 import { logError, logSuccess } from '../utils/logger.js';
 import { capitalizeFirstLetter } from '../utils/stringUtils.js';
 
-// Initialize Clients
 const dynamoDBService = new DynamoDBService();
 
 // Get Arguments from command line for seeding range
@@ -34,7 +33,7 @@ const fetchPokemonDetails_PokeAPI = async (pokemonID) => {
 };
 
 // Aggregate Pokémon data from start to end ID fetched from PokeAPI
-const getPokemonData = async (startPokeID, endPokeID) => {
+const aggregatePokemonData = async (startPokeID, endPokeID) => {
     try {
         console.log("Gathering Pokémon data from PokeAPI...");
         const data = await Promise.all(
@@ -56,7 +55,7 @@ const getPokemonData = async (startPokeID, endPokeID) => {
 // Seed Pokémon data into DynamoDB
 const seedPokemonData = async (startPokeID, endPokeID) => {
     try {
-        const pokemonData = await getPokemonData(startPokeID, endPokeID);
+        const pokemonData = await aggregatePokemonData(startPokeID, endPokeID);
         for (const pokemon of pokemonData) {
             await dynamoDBService.putItem(pokemonTableName, pokemon);
         }

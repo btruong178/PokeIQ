@@ -10,7 +10,7 @@ const CheckBackend = ({ children }) => {
 
     const checkAPIConnection = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/health-check`);
+            const response = await axios.get(`${process.env.REACT_APP_HEALTHCHECK_API_URL}`);
             setBackendUp(response.status === 200);
         } catch (err) {
             setBackendUp(false);
