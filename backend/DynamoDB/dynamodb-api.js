@@ -24,9 +24,10 @@ router.get('/health-check', async (req, res) => {
 
 router.get('/random-pokemon', async (req, res) => {
     try {
-        const response = await dynamoDBService.queryItems(process.env.DYNAMODB_TABLE_NAME_POKEMON);
-        logSuccess('Random Pokemon Endpoint', 'Fetched random Pokémon data', response);
-        return res.status(200).json({ status: 'success', data: response.Items });
+        const randomID = Math.floor(Math.random() * 1025) + 1;
+        const item = await dynamoDBService.getItem(process.env.DYNAMODB_TABLE_NAME_POKEMON, { id: randomID });
+        logSuccess('Random Pokemon Endpoint', 'Fetched random Pokémon data', item);
+        return res.status(200).json({ status: 'success', data: item });
     } catch (error) {
         logError('Random Pokemon Endpoint', error);
         return res.status(500).json({

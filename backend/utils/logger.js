@@ -56,6 +56,8 @@ export const logError = (functionName, error, context = {}) => {
 export const logSuccess = (functionName, message, data = {}) => {
     const timestamp = new Date().toISOString();
 
+
+
     const logMessage = [
         '\n' + '='.repeat(80),
         '✅ SUCCESS (Logger)',

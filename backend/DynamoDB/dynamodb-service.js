@@ -57,7 +57,8 @@ export class DynamoDBService {
     }
 
     // @param {string} tableName
-    // @param {object} key - Key of the item to get
+    // @param {object} key - Object representing the primary key of the item to get
+    // Example: key = { id: 1 }
     async getItem(tableName, key) {
         try {
             const params = {
