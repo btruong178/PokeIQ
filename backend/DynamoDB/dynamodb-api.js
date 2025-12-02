@@ -13,7 +13,6 @@ router.get('/health-check', async (req, res) => {
         logSuccess('Health Check Endpoint', 'DynamoDB connection is healthy', result);
         return res.status(200).json({ status: 'success', message: 'Health check passed', data: result });
     } catch (error) {
-        // Fixed: Pass error object correctly
         logError('Health Check Endpoint', error);
         return res.status(500).json({
             status: 'error',
@@ -22,5 +21,20 @@ router.get('/health-check', async (req, res) => {
         });
     }
 });
+
+router.get('/random-pokemon', async (req, res) => {
+    try {
+        const response = await dynamoDBService.queryItems(process.env.DYNAMODB_TABLE_NAME_POKEMON);
+        logSuccess('Random Pokemon Endpoint', 'Fetched random Pokémon data', response);
+        return res.status(200).json({ status: 'success', data: response.Items });
+    } catch (error) {
+        logError('Random Pokemon Endpoint', error);
+        return res.status(500).json({
+            status: 'error',
+            message: 'Failed to fetch random Pokémon data',
+            error: error.message
+        });
+    }
+})
 
 export default router;

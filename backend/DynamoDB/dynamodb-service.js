@@ -1,5 +1,5 @@
 import { DynamoDBClient, ListTablesCommand } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand, GetCommand, BatchWriteCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, PutCommand, GetCommand, BatchWriteCommand, DeleteCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { logSuccess, logError } from '../utils/logger.js';
 
 export class DynamoDBService {
@@ -20,6 +20,8 @@ export class DynamoDBService {
         }
     }
 
+    // @param {string} tableName
+    // @param {object} item - Item to put into the table
     async putItem(tableName, item) {
         try {
             const params = {
@@ -36,6 +38,26 @@ export class DynamoDBService {
         }
     }
 
+    // @param {string} tableName
+    // @param {object} key - Key of the item to delete
+    async deleteItem(tableName, key) {
+        try {
+            const params = {
+                TableName: tableName,
+                Key: key
+            };
+            const command = new DeleteCommand(params);
+            const response = await this.ddbDocClient.send(command);
+            logSuccess('DynamoDBService.deleteItem', 'Item deleted successfully', { tableName, key });
+            return response;
+        } catch (err) {
+            logError('DynamoDBService.deleteItem', err, { tableName, key });
+            throw err;
+        }
+    }
+
+    // @param {string} tableName
+    // @param {object} key - Key of the item to get
     async getItem(tableName, key) {
         try {
             const params = {
@@ -52,23 +74,101 @@ export class DynamoDBService {
         }
     }
 
+    // @param {string} tableName
+    // @param {Array} items - Array of objects to put
+    // Example: items = [ { id: 1, name: 'Bulbasaur' }, { id: 2, name: 'Ivysaur' }, ... ]
     async batchPutItems(tableName, items) {
         try {
-            const putRequests = items.map(item => ({
-                PutRequest: {
-                    Item: item
+            const BATCH_SIZE = 25;
+            const results = [];
+
+            for (let i = 0; i < items.length; i += BATCH_SIZE) {
+                const chunk = items.slice(i, i + BATCH_SIZE);
+
+                const putRequests = chunk.map(item => ({ PutRequest: { Item: item } }));
+                const command = new BatchWriteCommand({ RequestItems: { [tableName]: putRequests } });
+                const response = await this.ddbDocClient.send(command);
+                results.push(response);
+
+                // Retry for any unprocessed items
+                let unprocessed = response.UnprocessedItems?.[tableName] || [];
+                let attempt = 0;
+                while (unprocessed.length && attempt < 5) {
+                    const retryResp = await this.ddbDocClient.send(new BatchWriteCommand({
+                        RequestItems: { [tableName]: unprocessed }
+                    }));
+                    results.push(retryResp);
+                    unprocessed = retryResp.UnprocessedItems?.[tableName] || [];
+                    attempt++;
+                    if (unprocessed.length) await new Promise(r => setTimeout(r, 2 ** attempt * 100));
                 }
-            }));
-            const command = new BatchWriteCommand({
-                RequestItems: {
-                    [tableName]: putRequests
+                if (unprocessed.length) {
+                    logError('DynamoDBService.batchPutItems', new Error('UnprocessedItems remain'), {
+                        tableName,
+                        remaining: unprocessed.length
+                    });
+                    throw new Error('Failed to put all items after retries');
                 }
-            });
-            const response = await this.ddbDocClient.send(command);
-            console.log('DynamoDB BatchPutItem succeeded:', response);
-            return response;
+
+                logSuccess('DynamoDBService.batchPutItems', 'Batch put chunk succeeded', {
+                    tableName,
+                    chunkIndex: Math.floor(i / BATCH_SIZE) + 1,
+                    chunkSize: chunk.length
+                });
+            }
+
+            return results;
         } catch (err) {
-            console.error('DynamoDB BatchPutItem error:\n', err);
+            logError('DynamoDBService.batchPutItems', err, { tableName, itemsCount: items.length });
+            throw err;
+        }
+    }
+
+    // @param {string} tableName
+    // @param {Array} keys - Array of key objects to delete
+    // Example: keys = [ { id: 1 }, { id: 2 }, ... ]
+    async batchDeleteItems(tableName, keys) {
+        try {
+            const BATCH_SIZE = 25;
+            const results = [];
+
+            for (let i = 0; i < keys.length; i += BATCH_SIZE) {
+                const chunk = keys.slice(i, i + BATCH_SIZE);
+
+                const deleteRequests = chunk.map(key => ({ DeleteRequest: { Key: key } }));
+                const command = new BatchWriteCommand({ RequestItems: { [tableName]: deleteRequests } });
+                const response = await this.ddbDocClient.send(command);
+                results.push(response);
+
+                // Optional simple retry for any unprocessed items
+                let unprocessed = response.UnprocessedItems?.[tableName] || [];
+                let attempt = 0;
+                while (unprocessed.length && attempt < 5) {
+                    const command = new BatchWriteCommand({ RequestItems: { [tableName]: unprocessed } });
+                    const retryResp = await this.ddbDocClient.send(command);
+                    results.push(retryResp);
+                    unprocessed = retryResp.UnprocessedItems?.[tableName] || [];
+                    attempt++;
+                    if (unprocessed.length) await new Promise(r => setTimeout(r, 2 ** attempt * 100));
+                }
+                if (unprocessed.length) {
+                    logError('DynamoDBService.batchDeleteItems', new Error('UnprocessedItems remain'), {
+                        tableName,
+                        remaining: unprocessed.length
+                    });
+                    throw new Error('Failed to delete all items after retries');
+                }
+
+                logSuccess('DynamoDBService.batchDeleteItems', 'Batch delete chunk succeeded', {
+                    tableName,
+                    chunkIndex: Math.floor(i / BATCH_SIZE) + 1,
+                    chunkSize: chunk.length
+                });
+            }
+
+            return results;
+        } catch (err) {
+            logError('DynamoDBService.batchDeleteItems', err, { tableName, keysCount: keys.length });
             throw err;
         }
     }
