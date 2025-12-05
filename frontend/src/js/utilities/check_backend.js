@@ -10,7 +10,7 @@ const CheckBackend = ({ children }) => {
 
     const checkAPIConnection = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_HEALTHCHECK_API_URL}`);
+            const response = await axios.get(`/dynamoDB-api/health-check`);
             setBackendUp(response.status === 200);
         } catch (err) {
             setBackendUp(false);

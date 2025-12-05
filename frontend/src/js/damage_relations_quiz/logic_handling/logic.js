@@ -8,8 +8,8 @@
 
 import axios from "axios";
 
-const Random_Pokemon_API_URL = `${process.env.REACT_APP_RANDOM_POKEMON_API_URL}`;
-const Damage_Relations_API_URL = `${process.env.REACT_APP_DAMAGE_RELATIONS_API_URL}`; // '/:typeName' at the end
+const Random_Pokemon_API_URL = `/dynamoDB-api/random-pokemon`;
+const Damage_Relations_API_URL = `/dynamoDB-api/damage-relations`; // '/:typeName' at the end
 
 /**
  * Capitalizes the first letter of the given string.

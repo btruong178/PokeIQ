@@ -27,32 +27,26 @@ const createEnvFiles = async () => {
     console.log('Starting to fetch parameters from AWS Parameter Store...\n');
 
     // Fetch all parameters
-    const [port, tableNames] = await Promise.all([
+    const [port, tableNames, btaAk, btaSak] = await Promise.all([
       getParameter('/pokeiq/backend/PORT'),
-      getParameter('/pokeiq/dynamodb/tableNames')
+      getParameter('/pokeiq/dynamodb/tableNames'),
+      getParameter('BTA-AK'),
+      getParameter('BTA-SAK')
     ]);
-
     // Create .env.backend content
     const backendEnvContent = `${tableNames}
-PORT=${port}`;
-
-    // Create .env.frontend content
-    const frontendContent = `REACT_APP_API_URL=http://localhost:${port}`;
-
-
+PORT=${port}
+${btaAk}
+${btaSak}`;
     // Root directory
     const rootDir = path.join(__dirname, '..');
     // Env file paths
     const backendEnvPath = path.join(rootDir, '.env.backend');
-    const dbEnvPath = path.join(rootDir, '.env.db');
-    const frontendEnvPath = path.join(rootDir, '.env.frontend');
     // Write to .env files
-    fs.writeFileSync(frontendEnvPath, frontendContent);
     fs.writeFileSync(backendEnvPath, backendEnvContent);
 
     console.log('\n✓ Environment files created successfully!');
     console.log(`  - ${backendEnvPath}`);
-    console.log(`  - ${dbEnvPath}`);
   } catch (error) {
     console.error('\n✗ Failed to create environment files:', error.message);
     process.exit(1);
