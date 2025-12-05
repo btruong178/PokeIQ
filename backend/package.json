@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "dev": "nodemon --legacy-watch server.js",
-    "dynamodb:seed": "cd DynamoDB && node dynamodb-seed.js"
+    "dynamodb:seed:pokemon": "cd DynamoDB/seed && node dynamodb-seed-pokemon.js",
+    "dynamodb:seed:dmg": "cd DynamoDB/seed && node dynamodb-seed-dmg.js"
   },
   "keywords": [],
   "author": "",

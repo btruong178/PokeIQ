@@ -1,8 +1,8 @@
 import prompts from 'prompts';
 import axios from 'axios';
-import { DynamoDBService } from "./dynamodb-service.js";
-import { logError, logSuccess } from '../utils/logger.js';
-import { capitalizeFirstLetter } from '../utils/stringUtils.js';
+import { DynamoDBService } from "../dynamodb-service.js";
+import { logError, logSuccess } from '../../utils/logger.js';
+import { capitalizeFirstLetter } from '../../utils/stringUtils.js';
 
 // Initalize Clients
 const dynamoDBService = new DynamoDBService();
@@ -141,9 +141,8 @@ const fetchPokemonDetails_PokeAPI = async (pokemonID) => {
         const pokemonName = capitalizeFirstLetter(forms[0].name);
         const pokemonTypes = types.map(t => capitalizeFirstLetter(t.type.name)).join('/');
         return { pokemonName, pokemonTypes };
-    } catch (err) {
-        logError('fetchPokemonDetails_PokeAPI', err);
-        throw err;
+    } catch (error) {
+        logError('fetchPokemonDetails_PokeAPI', error);
     }
 };
 
