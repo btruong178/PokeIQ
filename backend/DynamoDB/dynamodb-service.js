@@ -67,7 +67,7 @@ export class DynamoDBService {
             };
             const command = new GetCommand(params);
             const response = await this.ddbDocClient.send(command);
-            console.log('DynamoDB GetItem succeeded:', response);
+            console.log('DynamoDB GetItem succeeded:', response.Item);
             return response.Item || null;
         } catch (err) {
             console.error('DynamoDB GetItem error:\n', err);

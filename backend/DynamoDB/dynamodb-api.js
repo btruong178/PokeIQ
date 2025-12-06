@@ -38,4 +38,19 @@ router.get('/random-pokemon', async (req, res) => {
     }
 })
 
+router.get('/damage-relations/:type', async (req, res) => {
+    try {
+        const type = req.params.type.toLowerCase();
+        const item = await dynamoDBService.getItem(process.env.DYNAMODB_TABLE_NAME_TYPES, { name: type });
+        return res.status(200).json({ status: 'success', data: item });
+    } catch (error) {
+        logError('Damage Relations Endpoint', error);
+        return res.status(500).json({
+            status: 'error',
+            message: 'Failed to fetch damage relations data',
+            error: error.message
+        });
+    }
+})
+
 export default router;
