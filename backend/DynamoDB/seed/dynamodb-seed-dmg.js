@@ -19,7 +19,8 @@ const interactiveSeed = async () => {
             message: 'Select action',
             choices: [
                 { title: 'Seed Type Damage Relations Data to DynamoDB', value: 1 },
-                { title: 'Get Type Data', value: 2 }
+                { title: 'Get Type Data', value: 2 },
+                { title: 'Batch Delete All Types', value: 3 }
             ],
             initial: 0,
         });
@@ -32,28 +33,44 @@ const interactiveSeed = async () => {
                 await seedDmgData();
                 break;
             case 2:
-                const { typeID } = await prompts({
-                    type: 'number',
-                    name: 'typeID',
-                    message: 'Enter Type ID to fetch:',
-                    validate: v => (v > 0 && v <= 18) ? true : 'Must be > 0 and <= 18',
+                const { typeName } = await prompts({
+                    type: 'text',
+                    name: 'typeName',
+                    message: 'Enter Type Name to fetch:',
+                    validate: v => (v.length > 0) ? true : 'Type Name cannot be empty',
                 });
-                if (!typeID) throw new Error('Operation cancelled.');
-                console.log(`Fetching data for Type ID ${typeID} from DynamoDB...`);
-                await getTypeData(typeID);
+                if (!typeName) throw new Error('Operation cancelled.');
+                console.log(`Fetching data for Type Name ${typeName} from DynamoDB...`);
+                await getTypeData(typeName);
+                break;
+            case 3:
+                console.log('Deleting all type items from DynamoDB...');
+                await batchDeleteTypes();
                 break;
         }
     } catch (error) {
         logError('Type Damage Relations Seeder', error);
     }
 };
-const getTypeData = async (typeID) => {
+const getTypeData = async (typeName) => {
     try {
-        const response = await dynamoDBService.getItem(typesTableName, { id: typeID });
+        const response = await dynamoDBService.getItem(typesTableName, { name: typeName });
     } catch (error) {
-        logError('getTypeData', error, { typeID });
+        logError('getTypeData', error, { typeName });
     }
 }
+
+const batchDeleteTypes = async () => {
+    try {
+        const allItems = await dynamoDBService.scanTable(typesTableName);
+        const keys = allItems.map(item => ({ name: item.name }));
+        await dynamoDBService.batchDeleteItems(typesTableName, keys);
+        logSuccess('batchDeleteTypes', 'All type items deleted successfully');
+    } catch (error) {
+        logError('batchDeleteTypes', error);
+    }
+}
+
 const fetchDamageRelations_PokeAPI = async (typeID) => {
     try {
         const response = await axios.get(`${TYPE_BASE_URL}${typeID}`);
@@ -72,6 +89,7 @@ const aggregateDmgData = async () => {
                     return { id, name, damage_relations };
                 })
         );
+        console.log(data);
         return data;
     } catch (error) {
         logError('aggregateDmgData', error);

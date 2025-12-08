@@ -26,6 +26,7 @@ const DropZone = ({
                 payload: { type, effectiveness: type_effectiveness, multiplier: type_multiplier }
             });
             console.log("Dispatched ADD_TYPE with", type, type_effectiveness, type_multiplier);
+            console.log("Updated AnswerObject: ", AnswerObject);
         },
         collect: monitor => ({
             isOver: monitor.isOver(),

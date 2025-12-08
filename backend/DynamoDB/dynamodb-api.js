@@ -27,7 +27,7 @@ router.get('/random-pokemon', async (req, res) => {
         const randomID = Math.floor(Math.random() * 1025) + 1;
         const item = await dynamoDBService.getItem(process.env.DYNAMODB_TABLE_NAME_POKEMON, { id: randomID });
         logSuccess('Random Pokemon Endpoint', 'Fetched random Pokémon data', item);
-        return res.status(200).json({ status: 'success', data: item });
+        return res.status(200).json({ status: 'success', item });
     } catch (error) {
         logError('Random Pokemon Endpoint', error);
         return res.status(500).json({
@@ -42,7 +42,7 @@ router.get('/damage-relations/:type', async (req, res) => {
     try {
         const type = req.params.type.toLowerCase();
         const item = await dynamoDBService.getItem(process.env.DYNAMODB_TABLE_NAME_TYPES, { name: type });
-        return res.status(200).json({ status: 'success', data: item });
+        return res.status(200).json({ status: 'success', item });
     } catch (error) {
         logError('Damage Relations Endpoint', error);
         return res.status(500).json({

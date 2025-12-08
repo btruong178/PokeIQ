@@ -165,7 +165,7 @@ export const fetchDualTypeRandom = async () => {
 export const fetchRandomPokemon = async () => {
     try {
         const result = await axios.get(`${Random_Pokemon_API_URL}`);
-        const { id, name, type } = result.data;
+        const { id, name, type } = result.data.item;
         let damage_relations = {};
         if (type.includes("/")) {
             const types = type.split("/").map(t => t.trim());

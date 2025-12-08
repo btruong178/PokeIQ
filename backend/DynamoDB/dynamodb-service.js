@@ -1,5 +1,5 @@
 import { DynamoDBClient, ListTablesCommand } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand, GetCommand, BatchWriteCommand, DeleteCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, PutCommand, GetCommand, BatchWriteCommand, DeleteCommand, QueryCommand, ScanCommand } from '@aws-sdk/lib-dynamodb';
 import { logSuccess, logError } from '../utils/logger.js';
 
 export class DynamoDBService {
@@ -170,6 +170,20 @@ export class DynamoDBService {
             return results;
         } catch (err) {
             logError('DynamoDBService.batchDeleteItems', err, { tableName, keysCount: keys.length });
+            throw err;
+        }
+    }
+
+    // @param {string} tableName
+    // Scans the entire table and returns all items
+    async scanTable(tableName) {
+        try {
+            const params = { TableName: tableName };
+            const command = new ScanCommand(params);
+            const response = await this.ddbDocClient.send(command);
+            return response.Items || [];
+        } catch (err) {
+            logError('DynamoDBService.scanTable', err, { tableName });
             throw err;
         }
     }

@@ -49,8 +49,8 @@ export const handleGetDualType = async (selectedType1, selectedType2) => {
  */
 export const handleGetSingleTypeRandom = async () => {
     const data = await fetchSingleTypeRandom();
-    console.log("Single Type Data: ", data);
-    return data;
+    console.log("Single Type Data: ", data.item);
+    return data.item;
 };
 
 /**
@@ -60,8 +60,8 @@ export const handleGetSingleTypeRandom = async () => {
  */
 export const handleGetDualTypeRandom = async () => {
     const data = await fetchDualTypeRandom();
-    console.log("Type 1 Data: ", data.type1);
-    console.log("Type 2 Data: ", data.type2);
+    console.log("Type 1 Data: ", data.type1.item);
+    console.log("Type 2 Data: ", data.type2.item);
     return data;
 };
 

@@ -24,6 +24,7 @@ import { AnswerObjectReducer } from "../logic_handling/reducer_functions"
 import { Header } from "./header";
 import { TypeEffectivenessZones } from "../react-dnd/dropzone_components";
 import ErrorModal from '../../utilities/error_modal';
+import { capitalizeFirstLetter } from "../../utilities/string";
 import '../../../css/damage_relations_quiz/components/quiz.css';
 
 
@@ -106,7 +107,7 @@ function Damage_Relations_Quiz() {
             Single: random
                 ? async () => {
                     const data = await handleGetSingleTypeRandom();
-                    setSelectedSingleType(data.name);
+                    setSelectedSingleType(capitalizeFirstLetter(data.name));
                 }
                 : async () => {
                     await handleGetSingleType(selectedSingleType);
@@ -115,8 +116,8 @@ function Damage_Relations_Quiz() {
             Dual: random
                 ? async () => {
                     const data = await handleGetDualTypeRandom();
-                    setSelectedDualType1(data.type1.name);
-                    setSelectedDualType2(data.type2.name);
+                    setSelectedDualType1(capitalizeFirstLetter(data.type1.item.name));
+                    setSelectedDualType2(capitalizeFirstLetter(data.type2.item.name));
                 }
                 : async () => {
                     await handleGetDualType(selectedDualType1, selectedDualType2);
