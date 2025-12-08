@@ -12,7 +12,7 @@ A Website that tests Pokemon players' knowledge about Pokemon to help the memori
 # Technologies
 | ***Frameworks*** | ***Database*** |  ***Languages*** | ***Tools*** |
 | ---  | --- | --- | --- | 
-| - React | - PostgreSQL | - Javascript | - Docker |
+| - React | - DynamoDB | - Javascript | - Docker |
 | - Express |  | - SQL |
 | | | - HTML5 |
 | | | - CSS3 |
