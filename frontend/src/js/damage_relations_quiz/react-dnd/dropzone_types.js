@@ -16,16 +16,10 @@ const DropZone = ({
     const [{ isOver, canDrop }, drop] = useDrop(() => ({
         accept: 'TYPE',
         drop: ({ type }) => {
-            console.log("Dropped", type, "on", type_effectiveness, type_multiplier);
             dispatchAnswerObject({
-                command: 'REMOVE_TYPE',
-                payload: { type }
-            });
-            dispatchAnswerObject({
-                command: 'ADD_TYPE',
-                payload: { type, effectiveness: type_effectiveness, multiplier: type_multiplier }
-            });
-            console.log("Dispatched ADD_TYPE with", type, type_effectiveness, type_multiplier);
+                command: 'MOVE_TYPE',
+                payload: { typeToMove: type, effectiveness: type_effectiveness, multiplier: type_multiplier }
+            })
             console.log("Updated AnswerObject: ", AnswerObject);
         },
         collect: monitor => ({

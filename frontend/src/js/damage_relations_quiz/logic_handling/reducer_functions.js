@@ -49,7 +49,7 @@ export const AnswerObjectReducer = (state, action) => {
         }
     };
 
-    const masterOrder = defaultAnswerObject["unSelected"]["N/A"];
+    const masterOrder = availableTypes;
 
     function removeTypeFromObject(object, type) {
         for (const [effectiveness, multObj] of Object.entries(object)) {
@@ -70,18 +70,39 @@ export const AnswerObjectReducer = (state, action) => {
             removeTypeFromObject(newState, typeToRemove);
             return newState;
         case 'ADD_TYPE':
-            const { type: typeToAdd, effectiveness, multiplier } = action.payload;
-            const base = state[effectiveness][multiplier];
-            const unSorted = base.includes(typeToAdd)
-                ? base
-                : [...base, typeToAdd];
-            const sorted = [...unSorted].sort((a, b) => {
-                const indexA = masterOrder.indexOf(a);
-                const indexB = masterOrder.indexOf(b);
-                return indexA - indexB;
-            })
-            const newEffectiveness = { ...state[effectiveness], [multiplier]: sorted };
-            return { ...state, [effectiveness]: newEffectiveness };
+            {
+                const { type: typeToAdd, effectiveness, multiplier } = action.payload;
+                const base = state[effectiveness][multiplier];
+                const unSorted = base.includes(typeToAdd)
+                    ? base
+                    : [...base, typeToAdd];
+                const sorted = [...unSorted].sort((a, b) => {
+                    const indexA = masterOrder.indexOf(a);
+                    const indexB = masterOrder.indexOf(b);
+                    return indexA - indexB;
+                })
+                const newEffectiveness = { ...state[effectiveness], [multiplier]: sorted };
+                const newState = { ...state, [effectiveness]: newEffectiveness };
+                return newState;
+            }
+        case 'MOVE_TYPE':
+            {
+                const { typeToMove, effectiveness, multiplier } = action.payload;
+                const newState = { ...state };
+                removeTypeFromObject(newState, typeToMove);
+
+                // Add to new location
+                const base = newState[effectiveness][multiplier];
+                const unSorted = [...base, typeToMove];
+                const sorted = [...unSorted].sort((a, b) => {
+                    const indexA = masterOrder.indexOf(a);
+                    const indexB = masterOrder.indexOf(b);
+                    return indexA - indexB;
+                });
+
+                newState[effectiveness][multiplier] = sorted;
+                return newState;
+            }
         case 'RESET':
             return defaultAnswerObject;
         case 'SWITCH_MULTIPLIER':
