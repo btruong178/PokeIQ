@@ -1,10 +1,16 @@
+/**
+ * @file
+ * Header component
+ * @module Header
+ * @component
+ */
+
 import '../css/Header.css';
-import { useState } from "react";
-import { FaBars, FaBook, FaCog } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-// Bootstrap imports
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
+/**
+ * @returns {JSX.Element} Header component
+ */
 
 export function Header() {
     return (

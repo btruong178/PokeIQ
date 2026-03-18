@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>damage_relations_quiz/components/quiz.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-About.html">About</a><ul class='methods'><li data-type='method'><a href="module-About.html#~About">About</a></li></ul></li><li><a href="module-DamageRelations_Form.html">DamageRelations_Form</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Form.html#~DamageRelationsForm">DamageRelationsForm</a></li></ul></li><li><a href="module-DamageRelations_Quiz.html">DamageRelations_Quiz</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Quiz.html#~DamageRelationsQuiz">DamageRelationsQuiz</a></li></ul></li><li><a href="module-DamageRelations_Selection.html">DamageRelations_Selection</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Selection.html#~Header">Header</a></li></ul></li><li><a href="module-Header.html">Header</a><ul class='methods'><li data-type='method'><a href="module-Header.html#.Header">Header</a></li></ul></li><li><a href="module-Homepage.html">Homepage</a><ul class='methods'><li data-type='method'><a href="module-Homepage.html#~Homepage">Homepage</a></li></ul></li><li><a href="module-ServiceDown.html">ServiceDown</a><ul class='methods'><li data-type='method'><a href="module-ServiceDown.html#~ServiceDown">ServiceDown</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-DamageRelations_Handlers.html">DamageRelations_Handlers</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getDualTypeDataRandom">getDualTypeDataRandom</a></li><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getRandomPokemonData">getRandomPokemonData</a></li><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getSingleTypeDataRandom">getSingleTypeDataRandom</a></li></ul></li><li><a href="module-DamageRelations_Logic.html">DamageRelations_Logic</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchDualTypeData">fetchDualTypeData</a></li><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchRandomPokemon">fetchRandomPokemon</a></li><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchSingleTypeData">fetchSingleTypeData</a></li></ul></li><li><a href="module-DamageRelations_ReducerFunctions.html">DamageRelations_ReducerFunctions</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_ReducerFunctions.html#~AnswerObjectReducer">AnswerObjectReducer</a></li></ul></li><li><a href="module-Utilities_String.html">Utilities_String</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">damage_relations_quiz/components/quiz.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file 
+ * Main component that renders the Damage Relations Quiz Webpage interface. 
+ * 
+ * It manages the state for selecting Pokémon types, handles form submissions to fetch Pokémon data based on
+ * different type modes, and displays either the DamageRelations_Form or DamageRelations_Selection
+ * JSX components based on the quiz state.
+ * @module DamageRelations_Quiz
+ * @component
+ */
+
+import { useReducer, useState } from "react";
+import DamageRelationsForm from "./form";
+import {
+    logHandleGetSingleType,
+    logHandleGetDualType,
+    getSingleTypeDataRandom,
+    getDualTypeDataRandom,
+    getRandomPokemonData
+} from "../logic_handling/handlers";
+import {
+    defaultPokemon,
+    defaultAnswerObject
+} from "../logic_handling/default_values";
+import { AnswerObjectReducer } from "../logic_handling/reducer_functions"
+import { Header } from "./header";
+import { TypeEffectivenessZones } from "../react_dnd/dropzone_components";
+import ErrorModal from '../../utilities/error_modal';
+import { capitalizeFirstLetter } from "../../utilities/string";
+import '../../../css/damage_relations_quiz/components/quiz.css';
+
+
+/**
+ * @returns {JSX.Element} The main component for the Damage Relations Quiz webpage
+ */
+
+function DamageRelationsQuiz() {
+    // State hooks for quiz configuration and data management
+    const [selectedSingleType, setSelectedSingleType] = useState("");
+    const [selectedDualType1, setSelectedDualType1] = useState("");
+    const [selectedDualType2, setSelectedDualType2] = useState("");
+    const [pokemon, setPokemon] = useState(defaultPokemon);
+    const [random, setRandom] = useState(true);
+    const [TypeMode, setTypeMode] = useState("Single");
+    // State for managing modal messages and visibility
+    const [modalMessage, setModalMessage] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [quiz, setQuiz] = useState(false);
+    // Reducer for managing the answer object state
+    const [AnswerObject, dispatchAnswerObject] = useReducer(AnswerObjectReducer, defaultAnswerObject);
+    // Reducer for managing incorrect answers
+    const [incorrectAnswers, dispatchIncorrectAnswers] = useReducer(AnswerObjectReducer, defaultAnswerObject);
+
+
+
+    const handleTypeChange = e => setSelectedSingleType(e.target.value);
+    const handleTypeChange1 = e => setSelectedDualType1(e.target.value);
+    const handleTypeChange2 = e => setSelectedDualType2(e.target.value);
+    const showErrorModal = (msg) => {
+        setModalMessage(msg);
+        setShowModal(true);
+    };
+    const closeModal = () => {
+        setShowModal(false);
+        setModalMessage("");
+    };
+    const formHandleSubmit = async () => {
+        const actions = {
+            Single: random
+                ? async () => {
+                    const data = await getSingleTypeDataRandom();
+                    setSelectedSingleType(capitalizeFirstLetter(data.name));
+                }
+                : async () => {
+                    await logHandleGetSingleType(selectedSingleType);
+                },
+
+            Dual: random
+                ? async () => {
+                    const data = await getDualTypeDataRandom();
+                    setSelectedDualType1(capitalizeFirstLetter(data.type1.name));
+                    setSelectedDualType2(capitalizeFirstLetter(data.type2.name));
+                }
+                : async () => {
+                    await logHandleGetDualType(selectedDualType1, selectedDualType2);
+                },
+
+            Pokemon: async () => {
+                if (!random) throw new Error("Random Pokémon only when ‘Random’ is selected.");
+                const data = await getRandomPokemonData();
+                setPokemon(data);
+            }
+        };
+        try {
+            await actions[TypeMode]();
+            setQuiz(true);
+        } catch (error) {
+            showErrorModal(error.message);
+        }
+    };
+
+    return (
+        &lt;div className="damage-relations-container">
+            {!quiz ? (
+                &lt;DamageRelationsForm
+                    random={random}
+                    TypeMode={TypeMode}
+                    selectedSingleType={selectedSingleType}
+                    selectedDualType1={selectedDualType1}
+                    selectedDualType2={selectedDualType2}
+                    setRandom={setRandom}
+                    setTypeMode={setTypeMode}
+                    handleTypeChange={handleTypeChange}
+                    handleTypeChange1={handleTypeChange1}
+                    handleTypeChange2={handleTypeChange2}
+                    formHandleSubmit={formHandleSubmit}
+                />
+            ) : (
+                &lt;>
+                    &lt;Header
+                        selectedSingleType={selectedSingleType}
+                        selectedDualType1={selectedDualType1}
+                        selectedDualType2={selectedDualType2}
+                        random={random}
+                        TypeMode={TypeMode}
+                        pokemon={pokemon}
+                        setQuiz={setQuiz}
+                        formHandleSubmit={formHandleSubmit}
+                        AnswerObject={AnswerObject}
+                        dispatchAnswerObject={dispatchAnswerObject}
+                    />
+                    &lt;div className="type-effectiveness-zones-container">
+                        &lt;TypeEffectivenessZones
+                            AnswerObject={AnswerObject}
+                            dispatchAnswerObject={dispatchAnswerObject}
+                            pokemon={pokemon}
+                            TypeMode={TypeMode}
+                        />
+                    &lt;/div>
+                &lt;/>
+            )}
+
+            {showModal &amp;&amp; (
+                &lt;ErrorModal message={modalMessage} onClose={closeModal} />
+            )}
+        &lt;/div>
+    );
+}
+
+export default DamageRelationsQuiz;</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 18 2026 17:12:03 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

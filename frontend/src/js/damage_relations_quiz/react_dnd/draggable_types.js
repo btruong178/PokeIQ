@@ -46,12 +46,8 @@ const DraggableType = ({ type, multiplier, dispatchAnswerObject, TypeMode, pokem
             return;
         }
         dispatchAnswerObject({
-            command: 'REMOVE_TYPE',
-            payload: { type }
-        });
-        dispatchAnswerObject({
-            command: 'ADD_TYPE',
-            payload: { type, effectiveness: "unSelected", multiplier: "N/A" }
+            command: 'MOVE_TYPE',
+            payload: { typeToMove: type, effectiveness: "unSelected", multiplier: "N/A" }
         });
     }
     const getbuttonStyle = () => {

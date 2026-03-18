@@ -1,4 +1,4 @@
-import DropZone from "./dropzone_types";
+import DropZone from "./dropzone";
 
 export const UnSelectedButtons = ({
     AnswerObject,

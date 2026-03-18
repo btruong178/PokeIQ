@@ -6,17 +6,17 @@ export const defaultAnswerObject = {
     "unSelected": {
         "N/A": availableTypes
     },
-    "Immune To": {
+    "Immune-To": {
         "x0": [],
     },
-    "Resistant To": {
+    "Resistant-To": {
         "x0.5": [],
         "x0.25": []
     },
-    "Normally Damaged": {
+    "Normally-Damaged": {
         "x1": [],
     },
-    "Weak To": {
+    "Weak-To": {
         "x2": [],
         "x4": []
     }

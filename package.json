@@ -9,6 +9,7 @@
     "start:frontend": "cd frontend && npm start",
     "start:backend": "cd backend && npm start",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "docs": "jsdoc -c jsdoc.json",
     "fetch:env": "node config/fetchEnvFromParameterStore.js",
     "docker:exec:backend": "docker compose -f compose.dev.yaml exec backend sh",
     "docker:dev": "docker compose -f compose.dev.yaml up -d",
@@ -20,6 +21,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^8.0.0"
+    "better-docs": "^2.7.3",
+    "concurrently": "^8.0.0",
+    "docdash": "^2.0.2",
+    "jsdoc": "^4.0.5"
   }
 }

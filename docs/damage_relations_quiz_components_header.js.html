@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>damage_relations_quiz/components/header.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-About.html">About</a><ul class='methods'><li data-type='method'><a href="module-About.html#~About">About</a></li></ul></li><li><a href="module-DamageRelations_Form.html">DamageRelations_Form</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Form.html#~DamageRelationsForm">DamageRelationsForm</a></li></ul></li><li><a href="module-DamageRelations_Quiz.html">DamageRelations_Quiz</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Quiz.html#~DamageRelationsQuiz">DamageRelationsQuiz</a></li></ul></li><li><a href="module-DamageRelations_Selection.html">DamageRelations_Selection</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Selection.html#~Header">Header</a></li></ul></li><li><a href="module-Header.html">Header</a><ul class='methods'><li data-type='method'><a href="module-Header.html#.Header">Header</a></li></ul></li><li><a href="module-Homepage.html">Homepage</a><ul class='methods'><li data-type='method'><a href="module-Homepage.html#~Homepage">Homepage</a></li></ul></li><li><a href="module-ServiceDown.html">ServiceDown</a><ul class='methods'><li data-type='method'><a href="module-ServiceDown.html#~ServiceDown">ServiceDown</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-DamageRelations_Handlers.html">DamageRelations_Handlers</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getDualTypeDataRandom">getDualTypeDataRandom</a></li><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getRandomPokemonData">getRandomPokemonData</a></li><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getSingleTypeDataRandom">getSingleTypeDataRandom</a></li></ul></li><li><a href="module-DamageRelations_Logic.html">DamageRelations_Logic</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchDualTypeData">fetchDualTypeData</a></li><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchRandomPokemon">fetchRandomPokemon</a></li><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchSingleTypeData">fetchSingleTypeData</a></li></ul></li><li><a href="module-DamageRelations_ReducerFunctions.html">DamageRelations_ReducerFunctions</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_ReducerFunctions.html#~AnswerObjectReducer">AnswerObjectReducer</a></li></ul></li><li><a href="module-Utilities_String.html">Utilities_String</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">damage_relations_quiz/components/header.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file
+ * Selection component for the Damage Relations Quiz.
+ * It displays the selected quiz options from the Damage Relations Quiz form.
+ * As well as the unselected type buttons for answering the quiz.
+ * @module DamageRelations_Selection
+ * @component
+ */
+
+import '../../../css/damage_relations_quiz/components/header.css'
+import { UnSelectedButtons } from '../react_dnd/dropzone_components';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { ClickPopover, HoverPopover } from '../custom_components/popover';
+import HowToPlayModal from '../custom_components/howToPlay_modal';
+import { useState } from 'react';
+
+/**
+ *
+ * @param {Object} props - The component's properties
+ * @param {string} props.selectedSingleType - The selected single Pokémon type
+ * @param {string} props.selectedDualType1 - The selected first dual Pokémon type
+ * @param {string} props.selectedDualType2 - The selected second dual Pokémon type
+ * @param {boolean} props.random - Indicates if the quiz is in random mode.
+ * @param {string} props.TypeMode - The current type mode ("Single", "Dual", or "Pokemon")
+ * @param {Object} props.pokemon - The Pokémon object containing its data
+ * @param {Function} props.setQuiz - Function to update the quiz state
+ * @param {Function} props.formHandleSubmit - Callback function to handle form submission
+ * @returns {JSX.Element} The Selection component
+ */
+const Header = ({
+    selectedSingleType,
+    selectedDualType1,
+    selectedDualType2,
+    random,
+    TypeMode,
+    pokemon,
+    setQuiz,
+    formHandleSubmit,
+    AnswerObject,
+    dispatchAnswerObject
+}) => {
+    const [ShowHowToPlayModal, setShowHowToPlayModal] = useState(false);
+
+
+    return (
+        &lt;div className="quiz-header-container">
+            &lt;Container fluid>
+                &lt;Row className="justify-content-center">
+                    &lt;Col xs={12} md={4}>
+                        &lt;Container fluid className="quiz-info">
+                            &lt;div className="d-flex justify-content-center align-items-center">
+                                &lt;h5>Quiz Selection&lt;/h5>
+                            &lt;/div>
+                            &lt;hr />
+                            &lt;p className="label">Random: &lt;span>{random ? "On" : "Off"}&lt;/span>&lt;/p>
+                            &lt;p className="label">Type Mode: &lt;span>{TypeMode}&lt;/span>&lt;/p>
+                            &lt;hr />
+                            {TypeMode === "Single" &amp;&amp; (
+                                &lt;>
+                                    &lt;p className="label">Type: &lt;span>{selectedSingleType}&lt;/span>&lt;/p>
+                                &lt;/>
+                            )}
+                            {TypeMode === "Dual" &amp;&amp; (
+                                &lt;>
+                                    &lt;p className="label">Types: &lt;span>{selectedDualType1}-{selectedDualType2}&lt;/span>&lt;/p>
+                                &lt;/>
+                            )}
+                            {TypeMode === "Pokemon" &amp;&amp; (
+                                &lt;>
+                                    &lt;p className="label">Pokemon: &lt;span>{pokemon.name}&lt;/span>&lt;/p>
+                                    &lt;p className="label">Type(s): &lt;span>{pokemon.type.join("-")}&lt;/span>&lt;/p>
+                                &lt;/>
+                            )}
+                            &lt;div className="quiz-info-buttons">
+                                {random &amp;&amp; (
+                                    &lt;Button
+                                        variant="primary"
+                                        onClick={() => { formHandleSubmit(); dispatchAnswerObject({ command: "RESET" }) }}
+                                    >
+                                        Randomize Again
+                                    &lt;/Button>
+                                )}
+                                &lt;Button
+                                    variant="primary"
+                                    onClick={() => { setQuiz(false); dispatchAnswerObject({ command: 'RESET' }) }}
+                                >
+                                    Re-select
+                                &lt;/Button>
+                                &lt;Button variant="primary" onClick={() => { setShowHowToPlayModal(true); }}>
+                                    How to Play
+                                &lt;/Button>
+                                {ShowHowToPlayModal &amp;&amp; &lt;HowToPlayModal onClose={() => setShowHowToPlayModal(false)} />}
+
+                            &lt;/div>
+                        &lt;/Container>
+                    &lt;/Col>
+                    &lt;Col xs={12} md={8}>
+                        &lt;UnSelectedButtons AnswerObject={AnswerObject} dispatchAnswerObject={dispatchAnswerObject} />
+                    &lt;/Col>
+                &lt;/Row>
+            &lt;/Container>
+        &lt;/div>
+    )
+}
+
+export { Header };</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 18 2026 17:12:03 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

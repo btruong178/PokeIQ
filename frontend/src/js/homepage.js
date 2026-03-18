@@ -1,7 +1,18 @@
-import React from 'react'
+/**
+ * @file
+ * Homepage component for PokeIQ
+ * It Welcomes users and provides instructions to get started!
+ * @module Homepage
+ * @component
+ */
+
 import { Container, Row, Col, Image } from 'react-bootstrap'
 import pokeball from '../css/images/luxuryball.png'
 import '../css/Homepage.css'
+
+/**
+ * @returns {JSX.Element} Homepage component
+ */
 
 function Homepage() {
     return (

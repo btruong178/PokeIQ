@@ -1,8 +1,10 @@
 /**
  * @file 
  * Main component that renders the Damage Relations Quiz Webpage interface. 
+ * 
  * It manages the state for selecting Pokémon types, handles form submissions to fetch Pokémon data based on
- * different type modes, and displays either the form or selection JSX components based on the quiz state.
+ * different type modes, and displays either the DamageRelations_Form or DamageRelations_Selection
+ * JSX components based on the quiz state.
  * @module DamageRelations_Quiz
  * @component
  */
@@ -10,11 +12,11 @@
 import { useReducer, useState } from "react";
 import DamageRelationsForm from "./form";
 import {
-    handleGetSingleType,
-    handleGetSingleTypeRandom,
-    handleGetDualType,
-    handleGetDualTypeRandom,
-    handleGetRandomPokemon
+    logHandleGetSingleType,
+    logHandleGetDualType,
+    getSingleTypeDataRandom,
+    getDualTypeDataRandom,
+    getRandomPokemonData
 } from "../logic_handling/handlers";
 import {
     defaultPokemon,
@@ -22,17 +24,17 @@ import {
 } from "../logic_handling/default_values";
 import { AnswerObjectReducer } from "../logic_handling/reducer_functions"
 import { Header } from "./header";
-import { TypeEffectivenessZones } from "../react-dnd/dropzone_components";
+import { TypeEffectivenessZones } from "../react_dnd/dropzone_components";
 import ErrorModal from '../../utilities/error_modal';
 import { capitalizeFirstLetter } from "../../utilities/string";
 import '../../../css/damage_relations_quiz/components/quiz.css';
 
 
 /**
- * @returns {JSX.Element} The main component for the Damage Relations Quiz.
+ * @returns {JSX.Element} The main component for the Damage Relations Quiz webpage
  */
 
-function Damage_Relations_Quiz() {
+function DamageRelationsQuiz() {
     // State hooks for quiz configuration and data management
     const [selectedSingleType, setSelectedSingleType] = useState("");
     const [selectedDualType1, setSelectedDualType1] = useState("");
@@ -51,85 +53,44 @@ function Damage_Relations_Quiz() {
 
 
 
-
-    /**
-     * Handles change for the 'single type' input.
-     *
-     * @param {Event} e - The event object from the input field.
-     */
     const handleTypeChange = e => setSelectedSingleType(e.target.value);
-
-    /**
-     * Handles change for the 'first dual type' input.
-     *
-     * @param {Event} e - The event object from the input field.
-     */
     const handleTypeChange1 = e => setSelectedDualType1(e.target.value);
-
-    /**
-     * Handles change for the 'second dual type' input.
-     *
-     * @param {Event} e - The event object from the input field.
-     */
     const handleTypeChange2 = e => setSelectedDualType2(e.target.value);
-
-    /**
-     * Displays the error modal with a specified message.
-     *
-     * @param {string} msg - The error message to be displayed.
-     */
     const showErrorModal = (msg) => {
         setModalMessage(msg);
         setShowModal(true);
     };
-
-    /**
-     * Closes the error modal.
-     */
     const closeModal = () => {
         setShowModal(false);
         setModalMessage("");
     };
-
-
-    /**
-     * Handles form submission by fetching Pokémon data based on selected mode.
-     *
-     * Depending on the TypeMode and the random flag, this function triggers different
-     * handlers to fetch either a single Pokémon type, dual types, or Pokémon data.
-     *
-     * @async
-     * @returns {Promise<void>}
-     * @throws {Error} Throws an error if a non-random choice is made in "Pokemon" mode.
-     */
-    const handleSubmit = async () => {
+    const formHandleSubmit = async () => {
         const actions = {
             Single: random
                 ? async () => {
-                    const data = await handleGetSingleTypeRandom();
+                    const data = await getSingleTypeDataRandom();
                     setSelectedSingleType(capitalizeFirstLetter(data.name));
                 }
                 : async () => {
-                    await handleGetSingleType(selectedSingleType);
+                    await logHandleGetSingleType(selectedSingleType);
                 },
 
             Dual: random
                 ? async () => {
-                    const data = await handleGetDualTypeRandom();
-                    setSelectedDualType1(capitalizeFirstLetter(data.type1.item.name));
-                    setSelectedDualType2(capitalizeFirstLetter(data.type2.item.name));
+                    const data = await getDualTypeDataRandom();
+                    setSelectedDualType1(capitalizeFirstLetter(data.type1.name));
+                    setSelectedDualType2(capitalizeFirstLetter(data.type2.name));
                 }
                 : async () => {
-                    await handleGetDualType(selectedDualType1, selectedDualType2);
+                    await logHandleGetDualType(selectedDualType1, selectedDualType2);
                 },
 
             Pokemon: async () => {
                 if (!random) throw new Error("Random Pokémon only when ‘Random’ is selected.");
-                const data = await handleGetRandomPokemon();
+                const data = await getRandomPokemonData();
                 setPokemon(data);
             }
         };
-
         try {
             await actions[TypeMode]();
             setQuiz(true);
@@ -152,7 +113,7 @@ function Damage_Relations_Quiz() {
                     handleTypeChange={handleTypeChange}
                     handleTypeChange1={handleTypeChange1}
                     handleTypeChange2={handleTypeChange2}
-                    onSubmit={handleSubmit}
+                    formHandleSubmit={formHandleSubmit}
                 />
             ) : (
                 <>
@@ -164,7 +125,7 @@ function Damage_Relations_Quiz() {
                         TypeMode={TypeMode}
                         pokemon={pokemon}
                         setQuiz={setQuiz}
-                        onSubmit={handleSubmit}
+                        formHandleSubmit={formHandleSubmit}
                         AnswerObject={AnswerObject}
                         dispatchAnswerObject={dispatchAnswerObject}
                     />
@@ -176,7 +137,6 @@ function Damage_Relations_Quiz() {
                             TypeMode={TypeMode}
                         />
                     </div>
-
                 </>
             )}
 
@@ -187,4 +147,4 @@ function Damage_Relations_Quiz() {
     );
 }
 
-export default Damage_Relations_Quiz;
+export default DamageRelationsQuiz;

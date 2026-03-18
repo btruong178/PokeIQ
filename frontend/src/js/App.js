@@ -5,10 +5,10 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 // Component imports
 import Homepage from './homepage';
 import About from './about';
-import Damage_Relations_Quiz from './damage_relations_quiz/components/quiz.js';
+import DamageRelationsQuiz from './damage_relations_quiz/components/quiz.js';
 import { Header } from './header';
 import CheckBackend from './utilities/check_backend';
-import CustomDragLayer from './damage_relations_quiz/react-dnd/CustomDragLayer.js';
+import CustomDragLayer from './damage_relations_quiz/react_dnd/CustomDragLayer.js';
 // CSS imports
 import '../css/App.css';
 // Bootswatch imports
@@ -24,7 +24,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="/About" element={<About />} />
-              <Route path="/Damage_Relations_Quiz" element={<Damage_Relations_Quiz />} />
+              <Route path="/Damage_Relations_Quiz" element={<DamageRelationsQuiz />} />
             </Routes>
             <CustomDragLayer />
           </main>

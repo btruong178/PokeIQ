@@ -1,5 +1,15 @@
-import React from 'react';
+/**
+ * @file
+ * ServiceDown component for PokeIQ
+ * @module ServiceDown
+ * @component
+ */
+
 import '../../css/utilities/service_down.css';
+
+/**
+ * @returns {JSX.element} - The ServiceDown Component
+ */
 
 const ServiceDown = () => (
     <div className="service-down-container">

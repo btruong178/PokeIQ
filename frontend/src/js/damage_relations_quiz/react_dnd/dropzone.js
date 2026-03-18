@@ -1,6 +1,6 @@
 import { useDrop } from 'react-dnd';
 import DraggableType from './draggable_types';
-import '../../../css/damage_relations_quiz/react-dnd/dropzone_types.css';
+import '../../../css/damage_relations_quiz/react-dnd/dropzone.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import React from 'react';
 

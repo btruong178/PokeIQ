@@ -1,31 +1,31 @@
 /**
  * @file
  * Selection component for the Damage Relations Quiz.
- * It displays the UI that the user sees after the form is submitted.
- * Users can select their answer and submit it.
+ * It displays the selected quiz options from the Damage Relations Quiz form.
+ * As well as the unselected type buttons for answering the quiz.
  * @module DamageRelations_Selection
  * @component
  */
 
 import '../../../css/damage_relations_quiz/components/header.css'
-import { UnSelectedButtons } from '../react-dnd/dropzone_components';
+import { UnSelectedButtons } from '../react_dnd/dropzone_components';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { ClickPopover, HoverPopover } from '../custom_components/popover';
 import HowToPlayModal from '../custom_components/howToPlay_modal';
 import { useState } from 'react';
 
 /**
-  *
- * @param {Object} props - The component properties.
- * @param {string} props.selectedSingleType - The selected single Pokémon type.
- * @param {string} props.selectedDualType1 - The selected first dual Pokémon type.
- * @param {string} props.selectedDualType2 - The selected second dual Pokémon type.
+ *
+ * @param {Object} props - The component's properties
+ * @param {string} props.selectedSingleType - The selected single Pokémon type
+ * @param {string} props.selectedDualType1 - The selected first dual Pokémon type
+ * @param {string} props.selectedDualType2 - The selected second dual Pokémon type
  * @param {boolean} props.random - Indicates if the quiz is in random mode.
- * @param {string} props.TypeMode - The current type mode ("Single", "Dual", or "Pokemon").
- * @param {Object} props.pokemon - The Pokémon object containing its data.
- * @param {Function} props.setQuiz - Function to update the quiz state.
- * @param {Function} props.onSubmit - Callback function to handle form submission.
- * @returns {JSX.Element} The Selection component.
+ * @param {string} props.TypeMode - The current type mode ("Single", "Dual", or "Pokemon")
+ * @param {Object} props.pokemon - The Pokémon object containing its data
+ * @param {Function} props.setQuiz - Function to update the quiz state
+ * @param {Function} props.formHandleSubmit - Callback function to handle form submission
+ * @returns {JSX.Element} The Selection component
  */
 const Header = ({
     selectedSingleType,
@@ -35,7 +35,7 @@ const Header = ({
     TypeMode,
     pokemon,
     setQuiz,
-    onSubmit,
+    formHandleSubmit,
     AnswerObject,
     dispatchAnswerObject
 }) => {
@@ -75,7 +75,7 @@ const Header = ({
                                 {random && (
                                     <Button
                                         variant="primary"
-                                        onClick={() => { onSubmit(); dispatchAnswerObject({ command: "RESET" }) }}
+                                        onClick={() => { formHandleSubmit(); dispatchAnswerObject({ command: "RESET" }) }}
                                     >
                                         Randomize Again
                                     </Button>

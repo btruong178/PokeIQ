@@ -1,23 +1,28 @@
 /**
  * @file 
- * Provides handler functions for fetching Pokémon type data and random Pokémon data.
- * These handlers serve as an interface between UI events and the underlying logic functions. 
- * They manage error propagation and logging for debugging purposes.
+ * Logic Handling for Damage Relations Quiz that acts as an intermediary between UI components and backend logic
+ * 
+ * Responsibilities:
+ * - Handle requests for specific and random Pokémon types (single/dual)
+ * - Handle requests for random Pokémon data
+ * 
  * @module DamageRelations_Handlers
  */
 
-import { fetchSingleType, fetchSingleTypeRandom, fetchDualTypeRandom, fetchDualType, fetchRandomPokemon } from "./logic";
+import { fetchSingleTypeData, fetchDualTypeData, fetchRandomPokemon } from "./logic";
 
 /**
- * Handles fetching data for a specific Pokémon type.
+ * Logs data for a specific Pokémon type
  *
- * @param {string} selectedType - The selected Pokémon type.
- * @returns {Promise<void>} A promise that resolves when the data is fetched and logged.
- * @throws {Error} If fetching the data fails.
+ * @private
+ * @function logHandleGetSingleType
+ * @param {string} selectedType - The selected Pokémon type
+ * @returns {Promise<void>} A promise that resolves when the data is fetched and logged
+ * @throws {Error} If fetching the data fails
  */
-export const handleGetSingleType = async (selectedType) => {
+export const logHandleGetSingleType = async (selectedType) => {
     try {
-        const data = await fetchSingleType(selectedType);
+        const data = await fetchSingleTypeData({ random: false }, selectedType);
         console.log("Single Type Data: ", data);
     } catch (error) {
         throw new Error(error.message);
@@ -25,16 +30,18 @@ export const handleGetSingleType = async (selectedType) => {
 };
 
 /**
- * Handles fetching data for two specific Pokémon types.
+ * Logs data for two specific Pokémon types
  *
- * @param {string} selectedType1 - The first selected Pokémon type.
- * @param {string} selectedType2 - The second selected Pokémon type.
- * @returns {Promise<void>} A promise that resolves when the data is fetched and logged.
- * @throws {Error} If fetching the data fails.
+ * @private
+ * @function logHandleGetDualType
+ * @param {string} selectedType1 - The first selected Pokémon type
+ * @param {string} selectedType2 - The second selected Pokémon type
+ * @returns {Promise<void>} A promise that resolves when the data is fetched and logged
+ * @throws {Error} If fetching the data fails
  */
-export const handleGetDualType = async (selectedType1, selectedType2) => {
+export const logHandleGetDualType = async (selectedType1, selectedType2) => {
     try {
-        const data = await fetchDualType(selectedType1, selectedType2);
+        const data = await fetchDualTypeData({ random: false }, selectedType1, selectedType2);
         console.log("Dual-Type 1 Data: ", data.type1);
         console.log("Dual-Type 2 Data: ", data.type2);
     } catch (error) {
@@ -43,35 +50,47 @@ export const handleGetDualType = async (selectedType1, selectedType2) => {
 };
 
 /**
- * Handles fetching data for a random single Pokémon type.
+ * Handles fetching data for a random single Pokémon type
  *
- * @returns {Promise<Object>} A promise that resolves to the Pokémon type damage relation data object.
+ * @function getSingleTypeDataRandom
+ * @returns {Promise<module:DamageRelations_Logic~TypeItem>} A promise that resolves to the Pokémon type damage relation data object
+ * @throws {Error} If fetching the data fails
  */
-export const handleGetSingleTypeRandom = async () => {
-    const data = await fetchSingleTypeRandom();
-    console.log("Single Type Data: ", data.item);
-    return data.item;
+export const getSingleTypeDataRandom = async () => {
+    try {
+        const data = await fetchSingleTypeData({ random: true });
+        console.log("Data from 'getSingleTypeDataRandom':", data);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
 };
 
 /**
- * Handles fetching data for two random Pokémon types.
+ * Handles fetching data for two random Pokémon types
  *
- * @returns {Promise<{type1: Object, type2: Object}>} A promise that resolves to an object containing both type data.
+ * @function getDualTypeDataRandom
+ * @returns {Promise<{type1: module:DamageRelations_Logic~TypeItem, type2: module:DamageRelations_Logic~TypeItem}>} A promise that resolves to an object containing both type data
+ * @throws {Error} If fetching the data fails
  */
-export const handleGetDualTypeRandom = async () => {
-    const data = await fetchDualTypeRandom();
-    console.log("Type 1 Data: ", data.type1.item);
-    console.log("Type 2 Data: ", data.type2.item);
-    return data;
+export const getDualTypeDataRandom = async () => {
+    try {
+        const data = await fetchDualTypeData({ random: true });
+        console.log("Data from 'getDualTypeDataRandom':", data);
+        return data;
+    } catch (error) {
+        throw new Error(error.message);
+    }
 };
 
 /**
- * Handles fetching random Pokémon data including its damage relations.
+ * Handles fetching random Pokémon data including its damage relations
  *
- * @returns {Promise<{id: number, name: string, type: string[], damage_relations: Object}>} A promise that resolves to the Pokémon data.
- * @throws {Error} If fetching the data fails.
+ * @function getRandomPokemonData
+ * @returns {Promise<module:DamageRelations_Logic~Pokemon>} A promise that resolves to the Pokémon data
+ * @throws {Error} If fetching the data fails
  */
-export const handleGetRandomPokemon = async () => {
+export const getRandomPokemonData = async () => {
     try {
         const data = await fetchRandomPokemon();
         console.log("Random Pokémon Data: ", data);
