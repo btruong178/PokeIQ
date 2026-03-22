@@ -137,7 +137,7 @@ export const fetchSingleTypeData = async (options, type = "") => {
         const selectedType = options.random ? getRandomSingleType() : type;
         validateSingleType(selectedType);
         const response = await axios.get(`${Damage_Relations_API_URL}/${selectedType}`);
-        console.log("Return from fetchSingleTypeData:", response.data.item);
+        console.log("Return from 'fetchSingleTypeData':", response.data.item);
         return response.data.item;
     } catch (error) {
         throw new Error(error.message);
@@ -162,6 +162,7 @@ export const fetchDualTypeData = async (options, type1 = "", type2 = "") => {
         validateDualType(selectedType1, selectedType2);
         const type1Data = await fetchSingleTypeData({ random: false }, selectedType1);
         const type2Data = await fetchSingleTypeData({ random: false }, selectedType2);
+        console.log("Return from 'fetchDualTypeData':", { type1: type1Data, type2: type2Data });
         return { type1: type1Data, type2: type2Data };
     } catch (error) {
         throw new Error(error.message);
@@ -181,14 +182,16 @@ export const fetchRandomPokemon = async () => {
     try {
         const result = await axios.get(`${Random_Pokemon_API_URL}`);
         const { id, name, type } = result.data.item;
+        let types;
+        let damage_relations;
         if (type.includes("/")) {
-            const types = type.split("/").map(t => t.trim());
-            let damage_relations = await fetchDualTypeData({ random: false }, types[0], types[1]);
-            return { id, name, type: types, dmg_data: damage_relations };
+            types = type.split("/").map(t => t.trim());
+            damage_relations = await fetchDualTypeData({ random: false }, types[0], types[1]);
         } else {
-            let damage_relations = await fetchSingleTypeData({ random: false }, type);
-            return { id, name, type: [type], dmg_data: damage_relations };
+            types = [type];
+            damage_relations = await fetchSingleTypeData({ random: false }, type);
         }
+        return { id, name, type: types, dmg_data: damage_relations };
     } catch (error) {
         throw new Error(error.message);
     }

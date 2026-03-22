@@ -6,7 +6,7 @@
  * different type modes, and displays either the DamageRelations_Form or DamageRelations_Selection
  * JSX components based on the quiz state.
  * @module DamageRelations_Quiz
- * @component
+ * 
  */
 
 import { useReducer, useState } from "react";
@@ -31,6 +31,7 @@ import '../../../css/damage_relations_quiz/components/quiz.css';
 
 
 /**
+ * @component
  * @returns {JSX.Element} The main component for the Damage Relations Quiz webpage
  */
 

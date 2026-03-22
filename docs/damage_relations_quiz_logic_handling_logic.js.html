@@ -29,7 +29,7 @@
 <nav >
     
     
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-About.html">About</a><ul class='methods'><li data-type='method'><a href="module-About.html#~About">About</a></li></ul></li><li><a href="module-DamageRelations_Form.html">DamageRelations_Form</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Form.html#~DamageRelationsForm">DamageRelationsForm</a></li></ul></li><li><a href="module-DamageRelations_Quiz.html">DamageRelations_Quiz</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Quiz.html#~DamageRelationsQuiz">DamageRelationsQuiz</a></li></ul></li><li><a href="module-DamageRelations_Selection.html">DamageRelations_Selection</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Selection.html#~Header">Header</a></li></ul></li><li><a href="module-Header.html">Header</a><ul class='methods'><li data-type='method'><a href="module-Header.html#.Header">Header</a></li></ul></li><li><a href="module-Homepage.html">Homepage</a><ul class='methods'><li data-type='method'><a href="module-Homepage.html#~Homepage">Homepage</a></li></ul></li><li><a href="module-ServiceDown.html">ServiceDown</a><ul class='methods'><li data-type='method'><a href="module-ServiceDown.html#~ServiceDown">ServiceDown</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-DamageRelations_Handlers.html">DamageRelations_Handlers</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getDualTypeDataRandom">getDualTypeDataRandom</a></li><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getRandomPokemonData">getRandomPokemonData</a></li><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getSingleTypeDataRandom">getSingleTypeDataRandom</a></li></ul></li><li><a href="module-DamageRelations_Logic.html">DamageRelations_Logic</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchDualTypeData">fetchDualTypeData</a></li><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchRandomPokemon">fetchRandomPokemon</a></li><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchSingleTypeData">fetchSingleTypeData</a></li></ul></li><li><a href="module-DamageRelations_ReducerFunctions.html">DamageRelations_ReducerFunctions</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_ReducerFunctions.html#~AnswerObjectReducer">AnswerObjectReducer</a></li></ul></li><li><a href="module-Utilities_String.html">Utilities_String</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-About.html">About</a><ul class='methods'><li data-type='method'><a href="module-About.html#~About">About</a></li></ul></li><li><a href="module-DamageRelations_Form.html">DamageRelations_Form</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Form.html#~DamageRelationsForm">DamageRelationsForm</a></li></ul></li><li><a href="module-DamageRelations_Quiz-DamageRelationsQuiz.html">DamageRelationsQuiz</a></li><li><a href="module-DamageRelations_Selection.html">DamageRelations_Selection</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Selection.html#~Header">Header</a></li></ul></li><li><a href="module-Header.html">Header</a><ul class='methods'><li data-type='method'><a href="module-Header.html#.Header">Header</a></li></ul></li><li><a href="module-Homepage.html">Homepage</a><ul class='methods'><li data-type='method'><a href="module-Homepage.html#~Homepage">Homepage</a></li></ul></li><li><a href="module-ServiceDown.html">ServiceDown</a><ul class='methods'><li data-type='method'><a href="module-ServiceDown.html#~ServiceDown">ServiceDown</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-DamageRelations_DefaultValues.html">DamageRelations_DefaultValues</a></li><li><a href="module-DamageRelations_DropZoneComponents.html">DamageRelations_DropZoneComponents</a></li><li><a href="module-DamageRelations_Handlers.html">DamageRelations_Handlers</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getDualTypeDataRandom">getDualTypeDataRandom</a></li><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getRandomPokemonData">getRandomPokemonData</a></li><li data-type='method'><a href="module-DamageRelations_Handlers.html#~getSingleTypeDataRandom">getSingleTypeDataRandom</a></li></ul></li><li><a href="module-DamageRelations_Logic.html">DamageRelations_Logic</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchDualTypeData">fetchDualTypeData</a></li><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchRandomPokemon">fetchRandomPokemon</a></li><li data-type='method'><a href="module-DamageRelations_Logic.html#~fetchSingleTypeData">fetchSingleTypeData</a></li></ul></li><li><a href="module-DamageRelations_Quiz.html">DamageRelations_Quiz</a></li><li><a href="module-DamageRelations_ReducerFunctions.html">DamageRelations_ReducerFunctions</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations_ReducerFunctions.html#~AnswerObjectReducer">AnswerObjectReducer</a></li></ul></li><li><a href="module-Utilities_String.html">Utilities_String</a><ul class='methods'><li data-type='method'><a href="module-Utilities_String.html#~capitalizeFirstLetter">capitalizeFirstLetter</a></li></ul></li></ul>
     
 </nav>
 
@@ -184,7 +184,7 @@ export const fetchSingleTypeData = async (options, type = "") => {
         const selectedType = options.random ? getRandomSingleType() : type;
         validateSingleType(selectedType);
         const response = await axios.get(`${Damage_Relations_API_URL}/${selectedType}`);
-        console.log("Return from fetchSingleTypeData:", response.data.item);
+        console.log("Return from 'fetchSingleTypeData':", response.data.item);
         return response.data.item;
     } catch (error) {
         throw new Error(error.message);
@@ -209,6 +209,7 @@ export const fetchDualTypeData = async (options, type1 = "", type2 = "") => {
         validateDualType(selectedType1, selectedType2);
         const type1Data = await fetchSingleTypeData({ random: false }, selectedType1);
         const type2Data = await fetchSingleTypeData({ random: false }, selectedType2);
+        console.log("Return from 'fetchDualTypeData':", { type1: type1Data, type2: type2Data });
         return { type1: type1Data, type2: type2Data };
     } catch (error) {
         throw new Error(error.message);
@@ -228,14 +229,16 @@ export const fetchRandomPokemon = async () => {
     try {
         const result = await axios.get(`${Random_Pokemon_API_URL}`);
         const { id, name, type } = result.data.item;
+        let types;
+        let damage_relations;
         if (type.includes("/")) {
-            const types = type.split("/").map(t => t.trim());
-            let damage_relations = await fetchDualTypeData({ random: false }, types[0], types[1]);
-            return { id, name, type: types, dmg_data: damage_relations };
+            types = type.split("/").map(t => t.trim());
+            damage_relations = await fetchDualTypeData({ random: false }, types[0], types[1]);
         } else {
-            let damage_relations = await fetchSingleTypeData({ random: false }, type);
-            return { id, name, type: [type], dmg_data: damage_relations };
+            types = [type];
+            damage_relations = await fetchSingleTypeData({ random: false }, type);
         }
+        return { id, name, type: types, dmg_data: damage_relations };
     } catch (error) {
         throw new Error(error.message);
     }
@@ -256,7 +259,7 @@ export const fetchRandomPokemon = async () => {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Mar 18 2026 17:12:03 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun Mar 22 2026 11:54:17 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

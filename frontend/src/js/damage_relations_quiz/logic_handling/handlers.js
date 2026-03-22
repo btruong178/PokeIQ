@@ -59,7 +59,7 @@ export const logHandleGetDualType = async (selectedType1, selectedType2) => {
 export const getSingleTypeDataRandom = async () => {
     try {
         const data = await fetchSingleTypeData({ random: true });
-        console.log("Data from 'getSingleTypeDataRandom':", data);
+        console.log("Return from 'getSingleTypeDataRandom':", data);
         return data;
     } catch (error) {
         throw new Error(error.message);
@@ -76,7 +76,7 @@ export const getSingleTypeDataRandom = async () => {
 export const getDualTypeDataRandom = async () => {
     try {
         const data = await fetchDualTypeData({ random: true });
-        console.log("Data from 'getDualTypeDataRandom':", data);
+        console.log("Return from 'getDualTypeDataRandom':", data);
         return data;
     } catch (error) {
         throw new Error(error.message);
@@ -93,7 +93,7 @@ export const getDualTypeDataRandom = async () => {
 export const getRandomPokemonData = async () => {
     try {
         const data = await fetchRandomPokemon();
-        console.log("Random Pokémon Data: ", data);
+        console.log("Return from 'getRandomPokemonData':", data);
         return data;
     } catch (error) {
         throw new Error(error.message);
