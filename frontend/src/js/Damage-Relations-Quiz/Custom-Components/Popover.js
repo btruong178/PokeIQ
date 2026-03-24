@@ -1,7 +1,7 @@
 import { OverlayTrigger, Popover } from 'react-bootstrap'
 import { FaInfoCircle } from 'react-icons/fa'
 import { Button } from 'react-bootstrap';
-import '../../../css/damage_relations_quiz/custom_components/popover.css'
+import '../../../css/Damage-Relations-Quiz/Custom-Components/Popover.css'
 
 export function HoverPopover({
     header,

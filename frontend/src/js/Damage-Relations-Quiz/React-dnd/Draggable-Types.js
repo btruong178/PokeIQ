@@ -1,7 +1,17 @@
+/**
+ * @file
+ * This file defines the DraggableType component for the Damage Relations Quiz.
+ * 
+ * Responsibilities:
+ * - Create draggable buttons for each Pokémon type that can be placed into the dropzones
+ * - Manage the state and interactions for the draggable Pokémon types using react-dnd
+ * 
+ * @module DamageRelations-DraggableType
+ */
 import React, { useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import '../../../css/damage_relations_quiz/react-dnd/draggable_types.css';
+import '../../../css/Damage-Relations-Quiz/React-dnd/Draggable-Types.css';
 import { Button } from 'react-bootstrap';
 
 export const styleLookup = {

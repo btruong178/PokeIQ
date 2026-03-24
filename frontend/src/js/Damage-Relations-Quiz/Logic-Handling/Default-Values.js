@@ -4,10 +4,10 @@
  * 
  * Responsibilities:
  * - Provide default values for the quiz's answer object and Pokémon data
- *
- * @module DamageRelations_DefaultValues
+ * 
+ * @module DamageRelations-DefaultValues
  */
-import { availableTypes } from "./logic";
+import { availableTypes } from "./Logic";
 
 /**
  * Object representing the default state of the answer object used in the quiz, categorizing Pokémon types based on their damage relations (e.g., immune, resistant, weak) with default values set to empty arrays or the list of available types for unselected categories.

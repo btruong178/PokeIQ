@@ -5,10 +5,10 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 // Component imports
 import Homepage from './homepage';
 import About from './about';
-import DamageRelationsQuiz from './damage_relations_quiz/components/quiz.js';
+import DamageRelationsQuiz from './Damage-Relations-Quiz/Components/Quiz.js';
 import { Header } from './header';
-import CheckBackend from './utilities/check_backend';
-import CustomDragLayer from './damage_relations_quiz/react_dnd/CustomDragLayer.js';
+import CheckBackend from './Utilities/Check-Backend.js';
+import CustomDragLayer from './Damage-Relations-Quiz/React-dnd/Custom-Drag-Layer.js';
 // CSS imports
 import '../css/App.css';
 // Bootswatch imports

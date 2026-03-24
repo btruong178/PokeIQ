@@ -7,7 +7,7 @@
  * - Fetch Pokémon data from the backend API
  * - Validate type selections
  *
- * @module DamageRelations_Logic
+ * @module DamageRelations-Logic
  */
 
 /**
@@ -45,7 +45,7 @@
  */
 
 import axios from "axios";
-import { capitalizeFirstLetter } from "../../utilities/string.js";
+import { capitalizeFirstLetter } from "../../Utilities/string.js";
 
 const Random_Pokemon_API_URL = `/dynamoDB-api/random-pokemon`;
 const Damage_Relations_API_URL = `/dynamoDB-api/damage-relations`; // '/:typeName' at the end

@@ -4,7 +4,8 @@
  *
  * Responsibilities:
  * - Hold reducer functions for managing object states
- * @module DamageRelations_ReducerFunctions
+ * 
+ * @module DamageRelations-ReducerFunctions
  */
 
 
@@ -24,8 +25,8 @@
  * @property {string[]} Weak-To.x4 - Array of types weak with x4 multiplier
  */
 
-import { availableTypes } from "./logic";
-import { defaultAnswerObject } from "./default_values";
+import { availableTypes } from "./Logic";
+import { defaultAnswerObject } from "./Default-Values.js";
 
 /**
  * @function AnswerObjectReducer
@@ -82,7 +83,7 @@ export const AnswerObjectReducer = (state, action) => {
     switch (action.command) {
         case 'MOVE_TYPE':
             const { typeToMove, effectiveness, multiplier } = action.payload;
-            const newState = { ...state };
+            const newState = JSON.parse(JSON.stringify(state));
             // Remove from current location
             removeTypeFromObject(newState, typeToMove);
             const base = newState[effectiveness][multiplier];
@@ -97,7 +98,8 @@ export const AnswerObjectReducer = (state, action) => {
             newState[effectiveness][multiplier] = sorted;
             return newState;
         case 'RESET':
-            return defaultAnswerObject;
+            console.log("Resetting answer object to default state.");
+            return JSON.parse(JSON.stringify(defaultAnswerObject));
         case 'SWITCH_MULTIPLIER':
             const { type: typeToSwitch, multiplier: currentMultiplier } = action.payload;
             const swapObject = {
@@ -107,7 +109,7 @@ export const AnswerObjectReducer = (state, action) => {
                 "x4": "x2"
             };
             if (Object.keys(swapObject).includes(currentMultiplier)) {
-                const newState = { ...state };
+                const newState = JSON.parse(JSON.stringify(state));;
                 const newMultiplier = swapObject[currentMultiplier];
                 removeTypeFromObject(newState, typeToSwitch);
                 if (currentMultiplier === "x0.5" || currentMultiplier === "x0.25") {

@@ -1,6 +1,16 @@
+/**
+ * @file
+ * This file defines the DropZone component for the Damage Relations Quiz.
+ * 
+ * Responsibilities:
+ * - Provide a drop zone for dragging and dropping Pokémon types based on their damage relations (immune, resistant, weak, etc.)
+ * - Manage the state and interactions for the drop zone using react-dnd
+ * 
+ * @module DamageRelations-DropZone
+ */
 import { useDrop } from 'react-dnd';
-import DraggableType from './draggable_types';
-import '../../../css/damage_relations_quiz/react-dnd/dropzone.css';
+import DraggableType from './Draggable-Types';
+import '../../../css/Damage-Relations-Quiz/React-dnd/Dropzone.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import React from 'react';
 

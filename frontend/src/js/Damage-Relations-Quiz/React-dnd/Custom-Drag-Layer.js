@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDragLayer } from 'react-dnd';
-import '../../../css/damage_relations_quiz/react-dnd/CustomDragLayer.css';
-import { styleLookup } from './draggable_types';
+import '../../../css/Damage-Relations-Quiz/React-dnd/Custom-Drag-Layer.css';
+import { styleLookup } from './Draggable-Types.js';
 
 const layerStyles = {
     position: 'fixed',

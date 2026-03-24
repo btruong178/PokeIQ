@@ -1,21 +1,24 @@
 /**
  * @file
  * Selection component for the Damage Relations Quiz.
- * It displays the selected quiz options from the Damage Relations Quiz form.
- * As well as the unselected type buttons for answering the quiz.
- * @module DamageRelations_Selection
- * @component
+ * 
+ * Responsibilities:
+ * - Display the selected quiz configuration (random mode, type mode, selected types, pokemon, etc.)
+ * - Provide buttons for randomizing the quiz, re-selecting quiz options, etc.
+ * - Render the UnSelectedButtons component for dragging and dropping types into the appropriate zones
+ * 
+ * @module DamageRelations-Selection
  */
 
-import '../../../css/damage_relations_quiz/components/header.css'
-import { UnSelectedButtons } from '../react_dnd/dropzone_components';
+import '../../../css/Damage-Relations-Quiz/Components/Header.css'
+import { UnSelectedButtons } from '../React-dnd/Dropzone-Components.js';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { ClickPopover, HoverPopover } from '../custom_components/popover';
-import HowToPlayModal from '../custom_components/howToPlay_modal';
+import { ClickPopover, HoverPopover } from '../Custom-Components/Popover.js';
+import HowToPlayModal from '../Custom-Components/HowToPlay-Modal.js';
 import { useState } from 'react';
 
 /**
- *
+ * @component
  * @param {Object} props - The component's properties
  * @param {string} props.selectedSingleType - The selected single Pokémon type
  * @param {string} props.selectedDualType1 - The selected first dual Pokémon type
@@ -75,14 +78,14 @@ const Header = ({
                                 {random && (
                                     <Button
                                         variant="primary"
-                                        onClick={() => { formHandleSubmit(); dispatchAnswerObject({ command: "RESET" }) }}
+                                        onClick={() => { dispatchAnswerObject({ command: "RESET" }); formHandleSubmit(); }}
                                     >
                                         Randomize Again
                                     </Button>
                                 )}
                                 <Button
                                     variant="primary"
-                                    onClick={() => { setQuiz(false); dispatchAnswerObject({ command: 'RESET' }) }}
+                                    onClick={() => { dispatchAnswerObject({ command: "RESET" }); setQuiz(false); }}
                                 >
                                     Re-select
                                 </Button>

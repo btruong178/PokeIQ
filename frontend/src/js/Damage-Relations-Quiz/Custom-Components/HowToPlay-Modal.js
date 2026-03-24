@@ -1,5 +1,5 @@
-import '../../../css/damage_relations_quiz/custom_components/howToPlay_modal.css';
-import { HoverPopover } from './popover';
+import '../../../css/Damage-Relations-Quiz/Custom-Components/HowToPlay-Modal.css';
+import { HoverPopover } from './Popover';
 
 const HowToPlayModal = ({ onClose }) => (
     <div className="htp-modal-overlay">

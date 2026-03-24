@@ -2,32 +2,33 @@
  * @file 
  * Main component that renders the Damage Relations Quiz Webpage interface. 
  * 
- * It manages the state for selecting Pokémon types, handles form submissions to fetch Pokémon data based on
- * different type modes, and displays either the DamageRelations_Form or DamageRelations_Selection
- * JSX components based on the quiz state.
- * @module DamageRelations_Quiz
+ * Responsibilities:
+ * - Manage the states for the quiz configuration
+ * - Holds all components together and manages the flow of the quiz
+ * - Renders the appropriate components based on the quiz state (Form vs Quiz)
  * 
+ * @module DamageRelations-Quiz
  */
 
 import { useReducer, useState } from "react";
-import DamageRelationsForm from "./form";
+import DamageRelationsForm from "./Form.js";
 import {
     logHandleGetSingleType,
     logHandleGetDualType,
     getSingleTypeDataRandom,
     getDualTypeDataRandom,
     getRandomPokemonData
-} from "../logic_handling/handlers";
+} from "../Logic-Handling/Handlers.js";
 import {
     defaultPokemon,
     defaultAnswerObject
-} from "../logic_handling/default_values";
-import { AnswerObjectReducer } from "../logic_handling/reducer_functions"
-import { Header } from "./header";
-import { TypeEffectivenessZones } from "../react_dnd/dropzone_components";
-import ErrorModal from '../../utilities/error_modal';
-import { capitalizeFirstLetter } from "../../utilities/string";
-import '../../../css/damage_relations_quiz/components/quiz.css';
+} from "../Logic-Handling/Default-Values.js";
+import { AnswerObjectReducer } from "../Logic-Handling/Reducer-Functions.js";
+import { Header } from "./Header.js";
+import { TypeEffectivenessZones } from "../React-dnd/Dropzone-Components.js";
+import ErrorModal from '../../Utilities/Error-Modal.js';
+import { capitalizeFirstLetter } from "../../Utilities/string.js";
+import '../../../css/Damage-Relations-Quiz/Components/Quiz.css';
 
 
 /**

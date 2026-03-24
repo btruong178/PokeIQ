@@ -1,16 +1,22 @@
 /**
  * @file
  * Form component for the Damage Relations Quiz
- * @module DamageRelations_Form
- * @component
+ * 
+ * Responsibilities:
+ * - Render the form for selecting quiz options (random mode, type mode, selected types, etc)
+ * - Manage the state for the form inputs and handle changes to the form
+ * - Handle form submission and pass the selected options back to the parent component (quiz.js) for processing
+ * 
+ * @module DamageRelations-Form
  */
 
 import { useEffect } from "react";
-import { availableTypes } from "../logic_handling/logic";
-import "../../../css/damage_relations_quiz/components/form.css";
+import { availableTypes } from "../Logic-Handling/Logic";
+import "../../../css/Damage-Relations-Quiz/Components/Form.css";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 
 /**
+ * @component
  * @param {Object} props - The component properties.
  * @param {boolean} props.random - Indicates if the quiz is in random mode.
  * @param {string} props.TypeMode - The current type mode ("Single", "Dual", or "Pokemon").

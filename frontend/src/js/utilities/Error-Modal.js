@@ -1,4 +1,4 @@
-import '../../css/utilities/error_modal.css';
+import '../../css/utilities/error-modal.css';
 
 const ErrorModal = ({ message, onClose }) => {
     return (

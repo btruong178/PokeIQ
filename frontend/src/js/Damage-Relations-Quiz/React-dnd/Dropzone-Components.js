@@ -1,15 +1,23 @@
 /**
- * @file dropzone_components.js
+ * @file
  * This file compiles all react-dnd components for use in the Damage Relations Quiz components
- * It includes the DropZones and Draggable type buttons for each section of the quiz
+ * 
  * Responsibilities:
  * - Provide reusable components for the quiz's drag-and-drop interface
  * - Manage the state and interactions for dragging and dropping Pokémon types into the appropriate zones based on their damage relations
  *
- * @module DamageRelations_DropZoneComponents
+ * @module DamageRelations-DropZoneComponents
  */
-import DropZone from "./dropzone";
-
+import DropZone from "./Dropzone";
+/**
+ * @component
+ * @param {Object} props - The component's properties
+ * @param {Object} props.AnswerObject - The current state of the user's answers
+ * @param {Function} props.dispatchAnswerObject - The dispatch function to update the AnswerObject state
+ * @param {Object} props.pokemon - The Pokémon object containing its data
+ * @param {string} props.TypeMode - The current type mode
+ * @returns {JSX.Element} The UnSelectedButtons component, which is a DropZone for unselected types
+ */
 export const UnSelectedButtons = ({
     AnswerObject,
     dispatchAnswerObject,
@@ -25,7 +33,15 @@ export const UnSelectedButtons = ({
         TypeMode={TypeMode}
     />
 );
-
+/**
+ * @component
+ * @param {Object} props - The component's properties
+ * @param {Object} props.AnswerObject - The current state of the user's answers
+ * @param {Function} props.dispatchAnswerObject - The dispatch function to update the AnswerObject state
+ * @param {Object} props.pokemon - The Pokémon object containing its data
+ * @param {string} props.TypeMode - The current type mode
+ * @returns {JSX.Element} A collection of DropZone components for each type effectiveness zone
+ */
 export const TypeEffectivenessZones = ({
     AnswerObject,
     dispatchAnswerObject,

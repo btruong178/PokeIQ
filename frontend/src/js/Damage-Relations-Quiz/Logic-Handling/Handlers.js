@@ -6,10 +6,10 @@
  * - Handle requests for specific and random Pokémon types (single/dual)
  * - Handle requests for random Pokémon data
  * 
- * @module DamageRelations_Handlers
+ * @module DamageRelations-Handlers
  */
 
-import { fetchSingleTypeData, fetchDualTypeData, fetchRandomPokemon } from "./logic";
+import { fetchSingleTypeData, fetchDualTypeData, fetchRandomPokemon } from "./Logic";
 
 /**
  * Logs data for a specific Pokémon type

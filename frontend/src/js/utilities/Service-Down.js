@@ -5,7 +5,7 @@
  * @component
  */
 
-import '../../css/utilities/service_down.css';
+import '../../css/utilities/service-down.css';
 
 /**
  * @returns {JSX.element} - The ServiceDown Component
