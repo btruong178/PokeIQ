@@ -1,13 +1,21 @@
 /**
  * @file
  * ServiceDown component for PokeIQ
- * @module ServiceDown
- * @component
+ * 
+ * Responsibilities:
+ * - Display a message indicating that the service is currently down
+ * - Provide a user-friendly interface during downtime
+ * 
+ * @module Utilities-ServiceDown
  */
 
 import '../../css/utilities/service-down.css';
 
 /**
+ * @component
+ * @description
+ * A simple React component that displays a message indicating that the service is currently down.
+ * This component is to be rendered when the application detects that the backend service is unavailable.
  * @returns {JSX.element} - The ServiceDown Component
  */
 

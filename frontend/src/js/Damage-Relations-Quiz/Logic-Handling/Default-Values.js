@@ -39,7 +39,7 @@ export const defaultAnswerObject = {
 };
 /**
  * Object representing the default state of a Pokémon used in the quiz, with properties for id, name, type, and damage relations initialized to null, an empty string, an empty array, and an empty object respectively.
- * @type { module:DamageRelations_Logic~Pokemon }
+ * @type { module:DamageRelations-Logic~Pokemon }
  * @property {number|null} id - The default ID of the Pokémon, set to null.
  * @property {string} name - The default name of the Pokémon, set to an empty string.
  * @property {string[]} type - The default type(s) of the Pokémon, set to an empty array.

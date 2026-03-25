@@ -10,8 +10,8 @@
  * @module DamageRelations-Selection
  */
 
-import '../../../css/Damage-Relations-Quiz/Components/Header.css'
-import { UnSelectedButtons } from '../React-dnd/Dropzone-Components.js';
+import 'css/Damage-Relations-Quiz/Components/Header.css'
+import UnSelectedButtons from '../React-dnd/UnSelected-Zone.js';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { ClickPopover, HoverPopover } from '../Custom-Components/Popover.js';
 import HowToPlayModal from '../Custom-Components/HowToPlay-Modal.js';

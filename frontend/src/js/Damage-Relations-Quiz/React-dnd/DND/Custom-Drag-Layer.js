@@ -1,7 +1,18 @@
+/**
+ * @file
+ * This file defines the CustomDragLayer component for the Damage Relations Quiz.
+ * 
+ * Responsibilities:
+ * - Create a custom drag layer to provide a visual representation of the dragged Pokémon type
+ * - Use react-dnd's useDragLayer hook to track the dragging state and position of the dragged item
+ * - Style the drag preview to match the appearance of the draggable type buttons
+ * 
+ * @module DamageRelations-CustomDragLayer
+ */
 import React from 'react';
 import { useDragLayer } from 'react-dnd';
-import '../../../css/Damage-Relations-Quiz/React-dnd/Custom-Drag-Layer.css';
-import { styleLookup } from './Draggable-Types.js';
+import 'css/Damage-Relations-Quiz/React-dnd/DND/Custom-Drag-Layer.css';
+import { styleLookup } from 'js/Damage-Relations-Quiz/React-dnd/DND/Type-Utilities.js';
 
 const layerStyles = {
     position: 'fixed',

@@ -32,7 +32,7 @@ import { defaultAnswerObject } from "./Default-Values.js";
  * @function AnswerObjectReducer
  * @param {Object} state - Current state of the answer object
  * @param {Object} action - Action object containing command and payload
- * @returns { module:DamageRelations_ReducerFunctions~AnswerObject} New state of the answer object
+ * @returns { module:DamageRelations-ReducerFunctions~AnswerObject} New state of the answer object
  * @description
  * Reducer function to manage the state of the answer object in the Damage Relations Quiz
  * 

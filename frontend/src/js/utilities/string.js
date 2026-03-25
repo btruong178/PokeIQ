@@ -1,11 +1,11 @@
 /**
  * @file
  * Utility functions for string manipulation
- * @module Utilities_String
+ * 
+ * @module Utilities-String
  */
 
 /**
- * Capitalizes the first letter of the given string.
  * @function capitalizeFirstLetter
  * @param {string} string - The string to capitalize.
  * @returns {string} The string with the first letter capitalized.

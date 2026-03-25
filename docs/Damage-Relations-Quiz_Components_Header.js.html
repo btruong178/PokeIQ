@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Damage-Relations-Quiz/Components/Header.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TypeEffectivenessZones.html">TypeEffectivenessZones</a></li><li><a href="UnSelectedButtons.html">UnSelectedButtons</a></li><li><a href="module-About.html">About</a><ul class='methods'><li data-type='method'><a href="module-About.html#~About">About</a></li></ul></li><li><a href="module-DamageRelations-DraggableType-DraggableType.html">DraggableType</a></li><li><a href="module-DamageRelations-Form-DamageRelationsForm.html">DamageRelationsForm</a></li><li><a href="module-DamageRelations-Quiz-DamageRelationsQuiz.html">DamageRelationsQuiz</a></li><li><a href="module-DamageRelations-Selection-Header.html">Header</a></li><li><a href="module-Header.html">Header</a><ul class='methods'><li data-type='method'><a href="module-Header.html#.Header">Header</a></li></ul></li><li><a href="module-Homepage.html">Homepage</a><ul class='methods'><li data-type='method'><a href="module-Homepage.html#~Homepage">Homepage</a></li></ul></li><li><a href="module-Utilities-CheckBackend-CheckBackend.html">CheckBackend</a></li><li><a href="module-Utilities-ErrorModal-ErrorModal.html">ErrorModal</a></li><li><a href="module-Utilities-ServiceDown-ServiceDown.html">ServiceDown</a></li></ul><h3>Modules</h3><ul><li><a href="module-DamageRelations-CustomDragLayer.html">DamageRelations-CustomDragLayer</a></li><li><a href="module-DamageRelations-DefaultValues.html">DamageRelations-DefaultValues</a></li><li><a href="module-DamageRelations-DraggableType.html">DamageRelations-DraggableType</a></li><li><a href="module-DamageRelations-DropZone.html">DamageRelations-DropZone</a></li><li><a href="module-DamageRelations-Form.html">DamageRelations-Form</a></li><li><a href="module-DamageRelations-Handlers.html">DamageRelations-Handlers</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-Handlers.html#~getDualTypeDataRandom">getDualTypeDataRandom</a></li><li data-type='method'><a href="module-DamageRelations-Handlers.html#~getRandomPokemonData">getRandomPokemonData</a></li><li data-type='method'><a href="module-DamageRelations-Handlers.html#~getSingleTypeDataRandom">getSingleTypeDataRandom</a></li></ul></li><li><a href="module-DamageRelations-Logic.html">DamageRelations-Logic</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-Logic.html#~fetchDualTypeData">fetchDualTypeData</a></li><li data-type='method'><a href="module-DamageRelations-Logic.html#~fetchRandomPokemon">fetchRandomPokemon</a></li><li data-type='method'><a href="module-DamageRelations-Logic.html#~fetchSingleTypeData">fetchSingleTypeData</a></li></ul></li><li><a href="module-DamageRelations-Quiz.html">DamageRelations-Quiz</a></li><li><a href="module-DamageRelations-ReducerFunctions.html">DamageRelations-ReducerFunctions</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-ReducerFunctions.html#~AnswerObjectReducer">AnswerObjectReducer</a></li></ul></li><li><a href="module-DamageRelations-Selection.html">DamageRelations-Selection</a></li><li><a href="module-Utilities-CheckBackend.html">Utilities-CheckBackend</a></li><li><a href="module-Utilities-ErrorModal.html">Utilities-ErrorModal</a></li><li><a href="module-Utilities-ServiceDown.html">Utilities-ServiceDown</a></li><li><a href="module-Utilities-String.html">Utilities-String</a><ul class='methods'><li data-type='method'><a href="module-Utilities-String.html#~capitalizeFirstLetter">capitalizeFirstLetter</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Damage-Relations-Quiz/Components/Header.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file
+ * Selection component for the Damage Relations Quiz.
+ * 
+ * Responsibilities:
+ * - Display the selected quiz configuration (random mode, type mode, selected types, pokemon, etc.)
+ * - Provide buttons for randomizing the quiz, re-selecting quiz options, etc.
+ * - Render the UnSelectedButtons component for dragging and dropping types into the appropriate zones
+ * 
+ * @module DamageRelations-Selection
+ */
+
+import 'css/Damage-Relations-Quiz/Components/Header.css'
+import UnSelectedButtons from '../React-dnd/UnSelected-Zone.js';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { ClickPopover, HoverPopover } from '../Custom-Components/Popover.js';
+import HowToPlayModal from '../Custom-Components/HowToPlay-Modal.js';
+import { useState } from 'react';
+
+/**
+ * @component
+ * @param {Object} props - The component's properties
+ * @param {string} props.selectedSingleType - The selected single Pokémon type
+ * @param {string} props.selectedDualType1 - The selected first dual Pokémon type
+ * @param {string} props.selectedDualType2 - The selected second dual Pokémon type
+ * @param {boolean} props.random - Indicates if the quiz is in random mode.
+ * @param {string} props.TypeMode - The current type mode ("Single", "Dual", or "Pokemon")
+ * @param {Object} props.pokemon - The Pokémon object containing its data
+ * @param {Function} props.setQuiz - Function to update the quiz state
+ * @param {Function} props.formHandleSubmit - Callback function to handle form submission
+ * @returns {JSX.Element} The Selection component
+ */
+const Header = ({
+    selectedSingleType,
+    selectedDualType1,
+    selectedDualType2,
+    random,
+    TypeMode,
+    pokemon,
+    setQuiz,
+    formHandleSubmit,
+    AnswerObject,
+    dispatchAnswerObject
+}) => {
+    const [ShowHowToPlayModal, setShowHowToPlayModal] = useState(false);
+
+
+    return (
+        &lt;div className="quiz-header-container">
+            &lt;Container fluid>
+                &lt;Row className="justify-content-center">
+                    &lt;Col xs={12} md={4}>
+                        &lt;Container fluid className="quiz-info">
+                            &lt;div className="d-flex justify-content-center align-items-center">
+                                &lt;h5>Quiz Selection&lt;/h5>
+                            &lt;/div>
+                            &lt;hr />
+                            &lt;p className="label">Random: &lt;span>{random ? "On" : "Off"}&lt;/span>&lt;/p>
+                            &lt;p className="label">Type Mode: &lt;span>{TypeMode}&lt;/span>&lt;/p>
+                            &lt;hr />
+                            {TypeMode === "Single" &amp;&amp; (
+                                &lt;>
+                                    &lt;p className="label">Type: &lt;span>{selectedSingleType}&lt;/span>&lt;/p>
+                                &lt;/>
+                            )}
+                            {TypeMode === "Dual" &amp;&amp; (
+                                &lt;>
+                                    &lt;p className="label">Types: &lt;span>{selectedDualType1}-{selectedDualType2}&lt;/span>&lt;/p>
+                                &lt;/>
+                            )}
+                            {TypeMode === "Pokemon" &amp;&amp; (
+                                &lt;>
+                                    &lt;p className="label">Pokemon: &lt;span>{pokemon.name}&lt;/span>&lt;/p>
+                                    &lt;p className="label">Type(s): &lt;span>{pokemon.type.join("-")}&lt;/span>&lt;/p>
+                                &lt;/>
+                            )}
+                            &lt;div className="quiz-info-buttons">
+                                {random &amp;&amp; (
+                                    &lt;Button
+                                        variant="primary"
+                                        onClick={() => { dispatchAnswerObject({ command: "RESET" }); formHandleSubmit(); }}
+                                    >
+                                        Randomize Again
+                                    &lt;/Button>
+                                )}
+                                &lt;Button
+                                    variant="primary"
+                                    onClick={() => { dispatchAnswerObject({ command: "RESET" }); setQuiz(false); }}
+                                >
+                                    Re-select
+                                &lt;/Button>
+                                &lt;Button variant="primary" onClick={() => { setShowHowToPlayModal(true); }}>
+                                    How to Play
+                                &lt;/Button>
+                                {ShowHowToPlayModal &amp;&amp; &lt;HowToPlayModal onClose={() => setShowHowToPlayModal(false)} />}
+
+                            &lt;/div>
+                        &lt;/Container>
+                    &lt;/Col>
+                    &lt;Col xs={12} md={8}>
+                        &lt;UnSelectedButtons AnswerObject={AnswerObject} dispatchAnswerObject={dispatchAnswerObject} />
+                    &lt;/Col>
+                &lt;/Row>
+            &lt;/Container>
+        &lt;/div>
+    )
+}
+
+export { Header };</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Tue Mar 24 2026 22:47:49 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

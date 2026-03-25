@@ -8,7 +8,7 @@ import About from './about';
 import DamageRelationsQuiz from './Damage-Relations-Quiz/Components/Quiz.js';
 import { Header } from './header';
 import CheckBackend from './Utilities/Check-Backend.js';
-import CustomDragLayer from './Damage-Relations-Quiz/React-dnd/Custom-Drag-Layer.js';
+import CustomDragLayer from './Damage-Relations-Quiz/React-dnd/DND/Custom-Drag-Layer.js';
 // CSS imports
 import '../css/App.css';
 // Bootswatch imports

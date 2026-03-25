@@ -53,7 +53,7 @@ export const logHandleGetDualType = async (selectedType1, selectedType2) => {
  * Handles fetching data for a random single Pokémon type
  *
  * @function getSingleTypeDataRandom
- * @returns {Promise<module:DamageRelations_Logic~TypeItem>} A promise that resolves to the Pokémon type damage relation data object
+ * @returns {Promise<module:DamageRelations-Logic~TypeItem>} A promise that resolves to the Pokémon type damage relation data object
  * @throws {Error} If fetching the data fails
  */
 export const getSingleTypeDataRandom = async () => {
@@ -70,7 +70,7 @@ export const getSingleTypeDataRandom = async () => {
  * Handles fetching data for two random Pokémon types
  *
  * @function getDualTypeDataRandom
- * @returns {Promise<{type1: module:DamageRelations_Logic~TypeItem, type2: module:DamageRelations_Logic~TypeItem}>} A promise that resolves to an object containing both type data
+ * @returns {Promise<{type1: module:DamageRelations-Logic~TypeItem, type2: module:DamageRelations-Logic~TypeItem}>} A promise that resolves to an object containing both type data
  * @throws {Error} If fetching the data fails
  */
 export const getDualTypeDataRandom = async () => {

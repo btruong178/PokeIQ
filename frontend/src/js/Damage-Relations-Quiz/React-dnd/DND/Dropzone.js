@@ -10,7 +10,7 @@
  */
 import { useDrop } from 'react-dnd';
 import DraggableType from './Draggable-Types';
-import '../../../css/Damage-Relations-Quiz/React-dnd/Dropzone.css';
+import 'css/Damage-Relations-Quiz/React-dnd/DND/Dropzone.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import React from 'react';
 
