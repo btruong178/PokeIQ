@@ -8,7 +8,7 @@
  * 
  * @module Utilities-ErrorModal
  */
-import '../../css/utilities/error-modal.css';
+import '../../css/Utilities/error-modal.css';
 
 /**
  * @component

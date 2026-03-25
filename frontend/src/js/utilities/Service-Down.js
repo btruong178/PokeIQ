@@ -9,7 +9,7 @@
  * @module Utilities-ServiceDown
  */
 
-import '../../css/utilities/service-down.css';
+import '../../css/Utilities/service-down.css';
 
 /**
  * @component
