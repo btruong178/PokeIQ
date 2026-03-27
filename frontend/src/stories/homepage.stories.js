@@ -1,4 +1,4 @@
-import Homepage from '../js/homepage.js';
+import Homepage from '../js/Homepage.js';
 
 export default {
     title: 'Pages/Homepage',

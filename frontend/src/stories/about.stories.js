@@ -1,4 +1,4 @@
-import About from '../js/about.js';
+import About from '../js/About.js';
 
 export default {
     title: 'Pages/About',

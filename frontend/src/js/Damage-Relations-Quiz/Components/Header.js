@@ -1,13 +1,6 @@
 /**
  * @file
- * Selection component for the Damage Relations Quiz.
- * 
- * Responsibilities:
- * - Display the selected quiz configuration (random mode, type mode, selected types, pokemon, etc.)
- * - Provide buttons for randomizing the quiz, re-selecting quiz options, etc.
- * - Render the UnSelectedButtons component for dragging and dropping types into the appropriate zones
- * 
- * @module DamageRelations-Selection
+ * This file defines the DamageRelationsHeader component for the Damage Relations Quiz.
  */
 
 import 'css/Damage-Relations-Quiz/Components/Header.css'
@@ -18,7 +11,11 @@ import HowToPlayModal from '../Custom-Components/HowToPlay-Modal.js';
 import { useState } from 'react';
 
 /**
- * @component
+ * @memberof module:DamageRelations-Quiz
+ * @description
+ * Header is a React component that renders the header section of the Damage Relations Quiz interface. <br>
+ * Displays the current quiz configuration and provides buttons for randomizing, re-selecting, etc. <br>
+ * Also renders the UnSelectedButtons component
  * @param {Object} props - The component's properties
  * @param {string} props.selectedSingleType - The selected single Pokémon type
  * @param {string} props.selectedDualType1 - The selected first dual Pokémon type
@@ -28,9 +25,9 @@ import { useState } from 'react';
  * @param {Object} props.pokemon - The Pokémon object containing its data
  * @param {Function} props.setQuiz - Function to update the quiz state
  * @param {Function} props.formHandleSubmit - Callback function to handle form submission
- * @returns {JSX.Element} The Selection component
+ * @returns {JSX.Element} The DamageRelationsHeader component
  */
-const Header = ({
+const DamageRelationsHeader = ({
     selectedSingleType,
     selectedDualType1,
     selectedDualType2,
@@ -106,4 +103,4 @@ const Header = ({
     )
 }
 
-export { Header };
+export default DamageRelationsHeader;

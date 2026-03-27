@@ -1,12 +1,7 @@
 /**
  * @file 
- * Main component that renders the Damage Relations Quiz Webpage interface. 
- * 
- * Responsibilities:
- * - Manage the states for the quiz configuration
- * - Holds all components together and manages the flow of the quiz
- * - Renders the appropriate components based on the quiz state (Form vs Quiz)
- * 
+ * Module for the Damage Relations Quiz component, which serves as the main entry point for the quiz interface. <br>
+ * Quiz manages the overall state and flow of the quiz as it compiles all other components together.
  * @module DamageRelations-Quiz
  */
 
@@ -21,18 +16,18 @@ import {
 } from "../Logic-Handling/Handlers.js";
 import {
     defaultPokemon,
-    defaultAnswerObject
+    defaultResponseState
 } from "../Logic-Handling/Default-Values.js";
-import { AnswerObjectReducer } from "../Logic-Handling/Reducer-Functions.js";
-import { Header } from "./Header.js";
-import { TypeEffectivenessZones } from "js/Damage-Relations-Quiz/React-dnd/Type-Effectiveness-Zones.js";
-import ErrorModal from 'js/Utilities/Error-Modal.js';
-import { capitalizeFirstLetter } from "js/Utilities/String.js";
+import { userResponseReducer } from "../Logic-Handling/Reducers.js";
+import DamageRelationsHeader from "./Header.js";
+import TypeEffectivenessZones from "js/Damage-Relations-Quiz/React-dnd/Type-Effectiveness-Zones.js";
+import ErrorModal from 'js/utilities/Error-Modal.js';
+import { capitalizeFirstLetter } from "js/utilities/Utilities-Strings.js";
 import 'css/Damage-Relations-Quiz/Components/Quiz.css';
 
 
 /**
- * @component
+ * @memberof module:DamageRelations-Quiz
  * @description
  * Main component and entry point for the Damage Relations Quiz webpage. Manages the overall state and flow of the quiz.
  * Renders the form for quiz configuration and the quiz interface based on the current state.
@@ -52,9 +47,9 @@ function DamageRelationsQuiz() {
     const [showModal, setShowModal] = useState(false);
     const [quiz, setQuiz] = useState(false);
     // Reducer for managing the answer object state
-    const [AnswerObject, dispatchAnswerObject] = useReducer(AnswerObjectReducer, defaultAnswerObject);
+    const [AnswerObject, dispatchAnswerObject] = useReducer(userResponseReducer, defaultResponseState);
     // Reducer for managing incorrect answers
-    const [incorrectAnswers, dispatchIncorrectAnswers] = useReducer(AnswerObjectReducer, defaultAnswerObject);
+    const [incorrectAnswers, dispatchIncorrectAnswers] = useReducer(userResponseReducer, defaultResponseState);
 
 
 
@@ -74,7 +69,7 @@ function DamageRelationsQuiz() {
             Single: random
                 ? async () => {
                     const data = await getSingleTypeDataRandom();
-                    setSelectedSingleType(capitalizeFirstLetter(data.name));
+                    setSelectedSingleType(capitalizeFirstLetter(data.type1.name));
                 }
                 : async () => {
                     await logHandleGetSingleType(selectedSingleType);
@@ -122,7 +117,7 @@ function DamageRelationsQuiz() {
                 />
             ) : (
                 <>
-                    <Header
+                    <DamageRelationsHeader
                         selectedSingleType={selectedSingleType}
                         selectedDualType1={selectedDualType1}
                         selectedDualType2={selectedDualType2}

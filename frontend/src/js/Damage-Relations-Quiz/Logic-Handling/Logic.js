@@ -1,12 +1,8 @@
 /**
- * @file
- * Damage Relations Quiz data-fetching logic
- *
- * Responsibilities:
- * - Pick random Pokémon types (single/dual)
- * - Fetch Pokémon data from the backend API
- * - Validate type selections
- *
+ * @file 
+ * Module for logic related to the Damage Relations Quiz <br>
+ * All logic-handling functions related to fetching data, validating selections, and processing quiz answers are defined in this module. <br>
+ * It also handles API interactions for fetching Pokémon type data.
  * @module DamageRelations-Logic
  */
 
@@ -15,6 +11,10 @@
  * @property { module:DamageRelations-Logic~DamageRelations } damage_relations - The damage relations data
  * @property { string } name - The name of the type
  * @property { number } id - The ID of the type
+ */
+/**
+ * @typedef { Object } SingleTypeItem - The item for single types
+ * @property { module:DamageRelations-Logic~TypeItem } type1 - The type's data
  */
 /**
  * @typedef { Object } DualTypeItem - The item for dual types
@@ -45,13 +45,13 @@
  */
 
 import axios from "axios";
-import { capitalizeFirstLetter } from "../../Utilities/String.js";
+import { capitalizeFirstLetter } from "js/utilities/Utilities-Strings.js";
 
 const Random_Pokemon_API_URL = `/dynamoDB-api/random-pokemon`;
 const Damage_Relations_API_URL = `/dynamoDB-api/damage-relations`; // '/:typeName' at the end
 
 /**
- * An array of available Pokémon types
+ * An array of Pokémon types
  *
  * @type {string[]}
  */
@@ -129,7 +129,7 @@ const validateDualType = (type1, type2) => {
  * @param {Object} options - Options for fetching data
  * @param {boolean} options.random - Whether to fetch a random type or not
  * @param {string} [type = ""] - The Pokémon type to fetch data for if not random
- * @returns {Promise<module:DamageRelations-Logic~TypeItem>} Damage relations response
+ * @returns {Promise<module:DamageRelations-Logic~SingleTypeItem>} Damage relations response
  * @throws {Error} If validation fails or the network request fails
  */
 export const fetchSingleTypeData = async (options, type = "") => {
@@ -137,8 +137,8 @@ export const fetchSingleTypeData = async (options, type = "") => {
         const selectedType = options.random ? getRandomSingleType() : type;
         validateSingleType(selectedType);
         const response = await axios.get(`${Damage_Relations_API_URL}/${selectedType}`);
-        console.log("Return from 'fetchSingleTypeData':", response.data.item);
-        return response.data.item;
+        console.log("Return from 'fetchSingleTypeData':", { type1: response.data.item });
+        return { type1: response.data.item };
     } catch (error) {
         throw new Error(error.message);
     }
@@ -162,8 +162,8 @@ export const fetchDualTypeData = async (options, type1 = "", type2 = "") => {
         validateDualType(selectedType1, selectedType2);
         const type1Data = await fetchSingleTypeData({ random: false }, selectedType1);
         const type2Data = await fetchSingleTypeData({ random: false }, selectedType2);
-        console.log("Return from 'fetchDualTypeData':", { type1: type1Data, type2: type2Data });
-        return { type1: type1Data, type2: type2Data };
+        console.log("Return from 'fetchDualTypeData':", { type1: type1Data.type1, type2: type2Data.type1 });
+        return { type1: type1Data.type1, type2: type2Data.type1 };
     } catch (error) {
         throw new Error(error.message);
     }

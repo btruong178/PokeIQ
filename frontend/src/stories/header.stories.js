@@ -1,4 +1,4 @@
-import { Header } from '../js/header.js';
+import { Header } from '../js/Header.js';
 
 export default {
     title: 'Components/Header',

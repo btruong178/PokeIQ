@@ -1,12 +1,6 @@
 /**
  * @file
  * This file defines the DraggableType component for the Damage Relations Quiz.
- * 
- * Responsibilities:
- * - Create draggable buttons for each Pokémon type that can be placed into the dropzones
- * - Manage the state and interactions for the draggable Pokémon types using react-dnd
- * 
- * @module DamageRelations-DraggableType
  */
 import React, { useEffect } from 'react';
 import { useDrag } from 'react-dnd';
@@ -16,16 +10,19 @@ import { Button } from 'react-bootstrap';
 import { styleLookup } from './Type-Utilities.js';
 
 /**
- * @component
+ * @memberof module:DamageRelations-ReactDND
+ * @description
+ * DraggableType is a React component that represents a draggable Pokémon type button within the DropZone components in the Damage Relations Quiz. <br>
  * @param {Object} props - The component's properties
  * @param {string} props.type - The Pokémon type represented by this draggable button
  * @param {string} props.multiplier - The current damage multiplier for this type (e.g., "x2", "x0.5", "N/A")
  * @param {Function} props.dispatchAnswerObject - The dispatch function to update the AnswerObject state
  * @param {string} props.TypeMode - The current type mode
  * @param {module:DamageRelations-Logic~Pokemon} props.pokemon - The Pokémon object containing its data
-
+ * @returns {JSX.Element} The DraggableType component, which is a draggable button representing a Pokémon type
  */
 const DraggableType = ({ type, multiplier, dispatchAnswerObject, TypeMode, pokemon }) => {
+    // Set up the drag source using react-dnd's useDrag hook
     const [collectObject, drag, preview] = useDrag({
         type: 'TYPE',
         item: { type },
@@ -38,6 +35,7 @@ const DraggableType = ({ type, multiplier, dispatchAnswerObject, TypeMode, pokem
     useEffect(() => {
         preview(getEmptyImage(), { captureDraggingState: true });
     }, [preview]);
+
     // Handle click event to send the type back to the unSelected zone
     const sendBacktoUnSelectedOnClick = () => {
         console.log("Clicked on type:", type);

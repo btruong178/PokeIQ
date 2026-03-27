@@ -1,13 +1,7 @@
 /**
  * @file
- * This file defines the CustomDragLayer component for the Damage Relations Quiz.
- * 
- * Responsibilities:
- * - Create a custom drag layer to provide a visual representation of the dragged Pokémon type
- * - Use react-dnd's useDragLayer hook to track the dragging state and position of the dragged item
- * - Style the drag preview to match the appearance of the draggable type buttons
- * 
- * @module DamageRelations-CustomDragLayer
+ * This file defines the CustomDragLayer component for the Damage Relations Quiz. <br>
+ * Which provides a custom drag preview for the draggable Pokémon type buttons.
  */
 import React from 'react';
 import { useDragLayer } from 'react-dnd';
@@ -21,8 +15,8 @@ const layerStyles = {
     left: 0,
     top: 0,
 };
-
-function getItemStyles(offset) {
+// Function to calculate the position of the drag preview based on the current mouse offset
+function getPreviewPositionStyle(offset) {
     if (!offset) return { display: 'none' };
     const { x, y } = offset;
     const transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
@@ -31,8 +25,15 @@ function getItemStyles(offset) {
         WebkitTransform: transform,
     };
 }
-
+/**
+ * @memberof module:DamageRelations-ReactDND
+ * @description
+ * CustomDragLayer is a React component that creates a custom drag layer. <br>
+ * Only renders when an item is being dragged.
+ * @returns {JSX.Element} CustomDragLayer component
+ */
 const CustomDragLayer = () => {
+    // Use the useDragLayer hook to access the current drag state and item information from monitor
     const { item, isDragging, currentOffset } = useDragLayer((monitor) => ({
         item: monitor.getItem(),
         isDragging: monitor.isDragging(),
@@ -43,7 +44,7 @@ const CustomDragLayer = () => {
 
     return (
         <div style={layerStyles}>
-            <div style={getItemStyles(currentOffset)}>
+            <div style={getPreviewPositionStyle(currentOffset)}>
                 <div className={["drag-preview", styleLookup[item.type]].join(' ')}>
                     {item.type}
                 </div>

@@ -9,14 +9,14 @@
  * @module Utilities-ServiceDown
  */
 
-import '../../css/Utilities/service-down.css';
+import 'css/utilities/service-down.css';
 
 /**
  * @component
  * @description
  * A simple React component that displays a message indicating that the service is currently down.
  * This component is to be rendered when the application detects that the backend service is unavailable.
- * @returns {JSX.element} - The ServiceDown Component
+ * @returns {JSX.Element} - The ServiceDown Component
  */
 
 const ServiceDown = () => (

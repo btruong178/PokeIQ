@@ -1,24 +1,28 @@
 /**
  * @file
- * Constants for default values used in the Damage Relations Quiz
- * 
- * Responsibilities:
- * - Provide default values for the quiz's answer object and Pokémon data
- * 
- * @module DamageRelations-DefaultValues
+ * Default values used in the Damage Relations Quiz
  */
 import { availableTypes } from "./Logic";
 
 /**
- * Object representing the default state of the answer object used in the quiz, categorizing Pokémon types based on their damage relations (e.g., immune, resistant, weak) with default values set to empty arrays or the list of available types for unselected categories.
- * @type {Object}
- * @property {Object} unSelected - Contains a key "N/A" with an array of all available types, representing types that have not been selected by the user.
- * @property {Object} Immune-To - Contains a key "x0" with an empty array, representing types that deal no damage to the selected type(s).
- * @property {Object} Resistant-To - Contains keys "x0.5" and "x0.25" with empty arrays, representing types that deal half or quarter damage to the selected type(s).
- * @property {Object} Normally-Damaged - Contains a key "x1" with an empty array, representing types that deal normal damage to the selected type(s).
- * @property {Object} Weak-To - Contains keys "x2" and "x4" with empty arrays, representing types that deal double or quadruple damage to the selected type(s).
+ * @memberof module:DamageRelations-Quiz
+ * @description
+ * Object representing the default state of the responseState Object used in the Damage Relations Quiz.
+ * @type {module:DamageRelations-Reducers~responseState}
+ * @property {Object} unSelected - Holds the unselected multipliers
+ * @property {string[]} unSelected.N/A - Array of unselected types
+ * @property {Object} Immune-To - Holds the immune multipliers
+ * @property {string[]} Immune-To.x0 - Array of immune types
+ * @property {Object} Resistant-To - Holds the resistant multipliers
+ * @property {string[]} Resistant-To.x0.5 - Array of types resistant with x0.5 multiplier
+ * @property {string[]} Resistant-To.x0.25 - Array of types resistant with x0.25 multiplier
+ * @property {Object} Normally-Damaged - Holds the normally damaged multipliers
+ * @property {string[]} Normally-Damaged.x1 - Array of normally damaged types
+ * @property {Object} Weak-To - Holds the weak multipliers
+ * @property {string[]} Weak-To.x2 - Array of types weak with x2 multiplier
+ * @property {string[]} Weak-To.x4 - Array of types weak with x4 multiplier
  */
-export const defaultAnswerObject = {
+const defaultResponseState = {
     "unSelected": {
         "N/A": availableTypes
     },
@@ -38,16 +42,20 @@ export const defaultAnswerObject = {
     }
 };
 /**
- * Object representing the default state of a Pokémon used in the quiz, with properties for id, name, type, and damage relations initialized to null, an empty string, an empty array, and an empty object respectively.
- * @type { module:DamageRelations-Logic~Pokemon }
- * @property {number|null} id - The default ID of the Pokémon, set to null.
+ * @memberof module:DamageRelations-Quiz
+ * @description
+ * Object representing the default state of a Pokémon used in the quiz.
+ * @type {module:DamageRelations-Logic~Pokemon}
+ * @property {null} id - The default ID of the Pokémon, set to null.
  * @property {string} name - The default name of the Pokémon, set to an empty string.
  * @property {string[]} type - The default type(s) of the Pokémon, set to an empty array.
  * @property {Object} dmg_data - The default damage data of the Pokémon, set to an empty object.
  */
-export const defaultPokemon = {
+const defaultPokemon = {
     id: null,
     name: "",
     type: [],
     dmg_data: {}
 };
+
+export { defaultResponseState, defaultPokemon };

@@ -1,12 +1,8 @@
 /**
  * @file 
- * Logic Handling for Damage Relations Quiz that acts as an intermediary between UI components and backend logic
- * 
- * Responsibilities:
- * - Handle requests for specific and random Pokémon types (single/dual)
- * - Handle requests for random Pokémon data
- * 
- * @module DamageRelations-Handlers
+ * Module that defines handler functions for the Damage Relations Quiz. <br>
+ * Acts as an intermediary between the quiz components and the logic functions defined in Logic.js.
+ * @module DamageRelations-Logic-Handlers
  */
 
 import { fetchSingleTypeData, fetchDualTypeData, fetchRandomPokemon } from "./Logic";
@@ -51,9 +47,9 @@ export const logHandleGetDualType = async (selectedType1, selectedType2) => {
 
 /**
  * Handles fetching data for a random single Pokémon type
- *
+ * 
  * @function getSingleTypeDataRandom
- * @returns {Promise<module:DamageRelations-Logic~TypeItem>} A promise that resolves to the Pokémon type damage relation data object
+ * @returns {Promise<module:DamageRelations-Logic~SingleTypeItem>} A promise that resolves to the Pokémon type damage relation data object
  * @throws {Error} If fetching the data fails
  */
 export const getSingleTypeDataRandom = async () => {
@@ -70,7 +66,7 @@ export const getSingleTypeDataRandom = async () => {
  * Handles fetching data for two random Pokémon types
  *
  * @function getDualTypeDataRandom
- * @returns {Promise<{type1: module:DamageRelations-Logic~TypeItem, type2: module:DamageRelations-Logic~TypeItem}>} A promise that resolves to an object containing both type data
+ * @returns {Promise<module:DamageRelations-Logic~DualTypeItem>} A promise that resolves to an object containing both type data
  * @throws {Error} If fetching the data fails
  */
 export const getDualTypeDataRandom = async () => {
@@ -87,7 +83,7 @@ export const getDualTypeDataRandom = async () => {
  * Handles fetching random Pokémon data including its damage relations
  *
  * @function getRandomPokemonData
- * @returns {Promise<module:DamageRelations_Logic~Pokemon>} A promise that resolves to the Pokémon data
+ * @returns {Promise<module:DamageRelations-Logic~Pokemon>} A promise that resolves to the Pokémon data
  * @throws {Error} If fetching the data fails
  */
 export const getRandomPokemonData = async () => {

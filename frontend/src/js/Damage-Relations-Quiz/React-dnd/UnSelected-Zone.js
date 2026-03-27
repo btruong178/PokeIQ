@@ -1,7 +1,13 @@
 
+/**
+ * @file
+ * This file defines the UnSelectedButtons component for the Damage Relations Quiz.
+ */
 import DropZone from "js/Damage-Relations-Quiz/React-dnd/DND/Dropzone";
 /**
- * @component
+ * @memberof module:DamageRelations-ReactDND
+ * @description
+ * UnSelectedButtons is a React component that renders the dropzone for types not placed into a damage category yet.
  * @param {Object} props - The component's properties
  * @param {Object} props.AnswerObject - The current state of the user's answers
  * @param {Function} props.dispatchAnswerObject - The dispatch function to update the AnswerObject state

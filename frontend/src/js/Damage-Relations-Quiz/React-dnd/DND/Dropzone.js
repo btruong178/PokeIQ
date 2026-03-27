@@ -1,20 +1,26 @@
 /**
  * @file
  * This file defines the DropZone component for the Damage Relations Quiz.
- * 
- * Responsibilities:
- * - Provide a drop zone for dragging and dropping Pokémon types based on their damage relations (immune, resistant, weak, etc.)
- * - Manage the state and interactions for the drop zone using react-dnd
- * 
- * @module DamageRelations-DropZone
  */
 import { useDrop } from 'react-dnd';
 import DraggableType from './Draggable-Types';
 import 'css/Damage-Relations-Quiz/React-dnd/DND/Dropzone.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import React from 'react';
-
-
+/**
+ * @memberof module:DamageRelations-ReactDND
+ * @description
+ * DropZone is a React component that represents a drop target for draggable Pokémon types in the Damage Relations Quiz. <br>
+ * Populates itself with DraggableType components based on the current state of the AnswerObject.
+ * @param {Object} props - The component's properties
+ * @param {string} props.type_effectiveness - The effectiveness category of the type
+ * @param {string} props.type_multiplier - The multiplier for the type effectiveness
+ * @param {Object} props.AnswerObject - The current state of the answer object
+ * @param {Function} props.dispatchAnswerObject - Function to dispatch actions to update the answer object
+ * @param {module:DamageRelations-Logic~Pokemon} props.pokemon - The Pokémon object containing its data
+ * @param {string} props.TypeMode - The current type mode ("Single", "Dual", or "Pokemon")
+ * @returns {JSX.Element} The DropZone component
+ */
 const DropZone = ({
     type_effectiveness,
     type_multiplier,
@@ -23,6 +29,7 @@ const DropZone = ({
     pokemon,
     TypeMode
 }) => {
+    // Set up the drop target using react-dnd's useDrop hook
     const [{ isOver, canDrop }, drop] = useDrop(() => ({
         accept: 'TYPE',
         drop: ({ type }) => {
@@ -51,6 +58,7 @@ const DropZone = ({
         type_effectiveness === "unSelected"
             ? "unSelected-buttons"
             : `dropzone-content ${isOver ? "hover" : ""} ${canDrop ? "can-drop" : ""}`;
+    // Generates the draggable components for the types in the current effectiveness category based on the AnswerObject state
     const getDroppables = () => {
         const target = AnswerObject[type_effectiveness];
         return Object.entries(target).map(([mult, arr]) =>
@@ -81,6 +89,7 @@ const DropZone = ({
             ))
         );
     }
+    // Gets text and multiplier to display in the header of the dropzone based on the current type mode and effectiveness
     const getHeaderCol = () => {
         const displayMult = (TypeMode === "Dual" && paired[type_multiplier] ||
             TypeMode === "Pokemon" && pokemon.type.length > 1 && paired[type_multiplier])
@@ -100,10 +109,6 @@ const DropZone = ({
     };
     const droppables = getDroppables();
     const headerCol = getHeaderCol();
-
-
-
-
     return (
         <Container fluid ref={drop} className={zoneClass}>
             <Container fluid>

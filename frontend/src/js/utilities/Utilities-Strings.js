@@ -2,7 +2,7 @@
  * @file
  * Utility functions for string manipulation
  * 
- * @module Utilities-String
+ * @module Utilities-Strings
  */
 
 /**

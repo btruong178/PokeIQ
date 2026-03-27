@@ -2,13 +2,13 @@
  * @file
  * Header component
  * @module Header
- * @component
  */
 
 import '../css/Header.css';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 /**
+ * @component
  * @returns {JSX.Element} Header component
  */
 

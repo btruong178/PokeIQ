@@ -2,13 +2,13 @@
  * @file
  * About component for PokeIQ
  * @module About
- * @component
  */
 
 import '../css/About.css'
 import { Container, Row, Col } from 'react-bootstrap';
 
 /**
+ * @component
  * @returns {JSX.Element} About component
  */
 

@@ -1,16 +1,12 @@
 /**
  * @file
- * Reducer functions for the Damage Relations Quiz
- *
- * Responsibilities:
- * - Hold reducer functions for managing object states
- * 
- * @module DamageRelations-ReducerFunctions
+ * Module that define the reducer functions for the Damage Relations Quiz. <br>
+ * @module DamageRelations-Reducers
  */
 
 
 /**
- * @typedef {Object} AnswerObject
+ * @typedef {Object} responseState
  * @property {Object} unSelected - Holds the unselected multipliers
  * @property {string[]} unSelected.N/A - Array of unselected types
  * @property {Object} Immune-To - Holds the immune multipliers
@@ -26,13 +22,13 @@
  */
 
 import { availableTypes } from "./Logic";
-import { defaultAnswerObject } from "./Default-Values.js";
+import { defaultResponseState } from "./Default-Values.js";
 
 /**
- * @function AnswerObjectReducer
+ * @function userResponseReducer
  * @param {Object} state - Current state of the answer object
  * @param {Object} action - Action object containing command and payload
- * @returns { module:DamageRelations-ReducerFunctions~AnswerObject} New state of the answer object
+ * @returns { module:DamageRelations-ReducerFunctions~responseState} New state of the answer object
  * @description
  * Reducer function to manage the state of the answer object in the Damage Relations Quiz
  * 
@@ -64,7 +60,7 @@ import { defaultAnswerObject } from "./Default-Values.js";
  *   }
  * });
  */
-export const AnswerObjectReducer = (state, action) => {
+export const userResponseReducer = (state, action) => {
 
     const masterOrder = availableTypes;
 
@@ -99,7 +95,7 @@ export const AnswerObjectReducer = (state, action) => {
             return newState;
         case 'RESET':
             console.log("Resetting answer object to default state.");
-            return JSON.parse(JSON.stringify(defaultAnswerObject));
+            return JSON.parse(JSON.stringify(defaultResponseState));
         case 'SWITCH_MULTIPLIER':
             const { type: typeToSwitch, multiplier: currentMultiplier } = action.payload;
             const swapObject = {
