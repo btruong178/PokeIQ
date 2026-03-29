@@ -1,6 +1,6 @@
 /**
  * @file
- * This file defines the DamageRelationsForm component for the Damage Relations Quiz.
+ * DamageRelationsForm component for the Damage Relations Quiz.
  */
 
 import { useEffect } from "react";

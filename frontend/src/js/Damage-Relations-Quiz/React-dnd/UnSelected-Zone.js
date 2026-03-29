@@ -1,7 +1,7 @@
 
 /**
  * @file
- * This file defines the UnSelectedButtons component for the Damage Relations Quiz.
+ * UnSelectedButtons component for the Damage Relations Quiz.
  */
 import DropZone from "js/Damage-Relations-Quiz/React-dnd/DND/Dropzone";
 /**

@@ -1,6 +1,6 @@
 /**
  * @file
- * This file defines the DamageRelationsHeader component for the Damage Relations Quiz.
+ * DamageRelationsHeader component for the Damage Relations Quiz.
  */
 
 import 'css/Damage-Relations-Quiz/Components/Header.css'

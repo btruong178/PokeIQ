@@ -1,18 +1,19 @@
 /**
  * @file
- * Header component
- * @module Header
+ * Header component for PokeIQ.
  */
 
 import '../css/Header.css';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 /**
- * @component
+ * @memberof module:Pages
+ * @description
+ * Component that serves as the header for PokeIQ. <br>
  * @returns {JSX.Element} Header component
  */
 
-export function Header() {
+function Header() {
     return (
         <Navbar bg="dark" variant="dark" expand="sm" className="header">
             <Container fluid>
@@ -35,3 +36,5 @@ export function Header() {
         </Navbar>
     )
 }
+
+export default Header;

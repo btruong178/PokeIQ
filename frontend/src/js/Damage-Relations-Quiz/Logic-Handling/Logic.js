@@ -45,11 +45,18 @@
  */
 
 import axios from "axios";
-import { capitalizeFirstLetter } from "js/utilities/Utilities-Strings.js";
 
 const Random_Pokemon_API_URL = `/dynamoDB-api/random-pokemon`;
 const Damage_Relations_API_URL = `/dynamoDB-api/damage-relations`; // '/:typeName' at the end
-
+/**
+ * @private
+ * @function capitalizeFirstLetter
+ * @param {string} string - The string to capitalize.
+ * @returns {string} The string with the first letter capitalized.
+ */
+export const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 /**
  * An array of Pokémon types
  *
