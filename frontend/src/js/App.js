@@ -4,20 +4,20 @@
  * @module App
  */
 
-// Library imports
+// Library
 import { Routes, Route } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-// Component imports
-import Homepage from './Homepage.js';
-import About from './About.js';
+// Component
+import Homepage from './homepage.js';
+import About from './about.js';
 import DamageRelationsQuiz from './Damage-Relations-Quiz/Components/Quiz.js';
-import { Header } from './Header.js';
+import Header from './header.js';
 import CheckBackend from './utilities/Check-Backend.js';
 import CustomDragLayer from './Damage-Relations-Quiz/React-dnd/DND/Custom-Drag-Layer.js';
-// CSS imports
+// CSS
 import '../css/App.css';
-// Bootswatch imports
+// Bootswatch
 import 'bootswatch/dist/darkly/bootstrap.min.css';
 
 /**
