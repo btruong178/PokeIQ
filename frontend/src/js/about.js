@@ -1,14 +1,15 @@
 /**
  * @file
- * About component for PokeIQ
- * @module About
+ * About component for PokeIQ.
  */
 
 import '../css/About.css'
 import { Container, Row, Col } from 'react-bootstrap';
 
 /**
- * @component
+ * @memberof module:Pages
+ * @description
+ * Component that serves as the about page for PokeIQ. <br>
  * @returns {JSX.Element} About component
  */
 

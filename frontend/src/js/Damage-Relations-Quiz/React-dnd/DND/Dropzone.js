@@ -1,6 +1,6 @@
 /**
  * @file
- * This file defines the DropZone component for the Damage Relations Quiz.
+ * DropZone component for the Damage Relations Quiz.
  */
 import { useDrop } from 'react-dnd';
 import DraggableType from './Draggable-Types';

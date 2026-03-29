@@ -1,6 +1,6 @@
 /**
  * @file
- * This file defines the DraggableType component for the Damage Relations Quiz.
+ * DraggableType component for the Damage Relations Quiz.
  */
 import React, { useEffect } from 'react';
 import { useDrag } from 'react-dnd';

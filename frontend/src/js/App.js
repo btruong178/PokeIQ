@@ -1,12 +1,6 @@
 /**
  * @file
- * Root application component that composes global providers and top-level routes.
- *
- * Responsibilities:
- * - Gate rendering behind backend health checks
- * - Provide drag-and-drop context for quiz interactions
- * - Define top-level routes for core application pages
- *
+ * Root Component for PokeIQ.
  * @module App
  */
 
@@ -27,7 +21,9 @@ import '../css/App.css';
 import 'bootswatch/dist/darkly/bootstrap.min.css';
 
 /**
- * @component
+ * @memberof module:App
+ * @description
+ * Root component that composes global providers and top-level routes. <br>
  * @returns {JSX.Element} The root app layout with global providers and route configuration.
  */
 function App() {

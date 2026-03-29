@@ -1,20 +1,13 @@
 /**
  * @file
  * ErrorModal component for PokeIQ
- * 
- * Responsibilities:
- * - Display an error message in a modal overlay
- * - Provide a user-friendly interface for error notifications
- * 
- * @module Utilities-ErrorModal
  */
 import 'css/utilities/error-modal.css';
 
 /**
- * @component
+ * @memberof module:Backend-Utils
  * @description
- * A simple React component that displays an error message in a modal overlay.
- * This component is designed to provide a user-friendly interface for error notifications within the application.
+ * Component to display an error message in a user friendly interface. <br>
  * @param {string} message - The error message to display in the modal
  * @param {function} onClose - A callback function to close the modal when the user clicks the "Close" button
  * @returns {JSX.Element} The ErrorModal component

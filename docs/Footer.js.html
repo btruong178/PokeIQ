@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Damage-Relations-Quiz/Logic-Handling/Default-Values.js - Documentation</title>
+    <title>Footer.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -35,7 +35,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Damage-Relations-Quiz/Logic-Handling/Default-Values.js</h1>
+    <h1 class="page-title">Footer.js</h1>
     
 
     
@@ -47,65 +47,24 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**
  * @file
- * Default values used in the Damage Relations Quiz
+ * Footer component for PokeIQ.
  */
-import { availableTypes } from "./Logic";
-
+import '../css/Footer.css';
 /**
- * @memberof module:DamageRelations-Quiz
+ * @memberof module:Pages
  * @description
- * Object representing the default state of the responseState Object used in the Damage Relations Quiz.
- * @type {module:DamageRelations-Reducers~responseState}
- * @property {Object} unSelected - Holds the unselected multipliers
- * @property {string[]} unSelected.N/A - Array of unselected types
- * @property {Object} Immune-To - Holds the immune multipliers
- * @property {string[]} Immune-To.x0 - Array of immune types
- * @property {Object} Resistant-To - Holds the resistant multipliers
- * @property {string[]} Resistant-To.x0.5 - Array of types resistant with x0.5 multiplier
- * @property {string[]} Resistant-To.x0.25 - Array of types resistant with x0.25 multiplier
- * @property {Object} Normally-Damaged - Holds the normally damaged multipliers
- * @property {string[]} Normally-Damaged.x1 - Array of normally damaged types
- * @property {Object} Weak-To - Holds the weak multipliers
- * @property {string[]} Weak-To.x2 - Array of types weak with x2 multiplier
- * @property {string[]} Weak-To.x4 - Array of types weak with x4 multiplier
+ * Component that serves as the footer for PokeIQ. &lt;br>
+ * @returns {JSX.Element} Footer component
  */
-const defaultResponseState = {
-    "unSelected": {
-        "N/A": availableTypes
-    },
-    "Immune-To": {
-        "x0": [],
-    },
-    "Resistant-To": {
-        "x0.5": [],
-        "x0.25": []
-    },
-    "Normally-Damaged": {
-        "x1": [],
-    },
-    "Weak-To": {
-        "x2": [],
-        "x4": []
-    }
-};
-/**
- * @memberof module:DamageRelations-Quiz
- * @description
- * Object representing the default state of a Pokémon used in the quiz.
- * @type {module:DamageRelations-Logic~Pokemon}
- * @property {null} id - The default ID of the Pokémon, set to null.
- * @property {string} name - The default name of the Pokémon, set to an empty string.
- * @property {string[]} type - The default type(s) of the Pokémon, set to an empty array.
- * @property {Object} dmg_data - The default damage data of the Pokémon, set to an empty object.
- */
-const defaultPokemon = {
-    id: null,
-    name: "",
-    type: [],
-    dmg_data: {}
-};
+function Footer() {
+    return (
+        &lt;footer>
+            &lt;p>&amp;copy; 2026 PokeIQ. All rights reserved.&lt;/p>
+        &lt;/footer>
+    )
+}
 
-export { defaultResponseState, defaultPokemon };</code></pre>
+export default Footer;</code></pre>
         </article>
     </section>
 

@@ -1,8 +1,7 @@
 /**
  * @file
- * Homepage component for PokeIQ
- * It Welcomes users and provides instructions to get started!
- * @module Homepage
+ * Module for non-quiz specific components and logic.
+ * @module Pages
  */
 
 import { Container, Row, Col, Image } from 'react-bootstrap'
@@ -10,7 +9,9 @@ import pokeball from '../css/images/luxuryball.png'
 import '../css/Homepage.css'
 
 /**
- * @component
+ * @memberof module:Pages
+ * @description
+ * Component that serves as the homepage for PokeIQ. <br>
  * @returns {JSX.Element} Homepage component
  */
 

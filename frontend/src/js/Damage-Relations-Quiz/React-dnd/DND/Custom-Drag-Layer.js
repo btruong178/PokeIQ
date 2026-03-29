@@ -1,6 +1,6 @@
 /**
  * @file
- * This file defines the CustomDragLayer component for the Damage Relations Quiz. <br>
+ * CustomDragLayer component for the Damage Relations Quiz. <br>
  * Which provides a custom drag preview for the draggable Pokémon type buttons.
  */
 import React from 'react';

@@ -6,23 +6,23 @@
  */
 
 import { useReducer, useState } from "react";
-import DamageRelationsForm from "./Form.js";
+// Logic and handlers
+import { capitalizeFirstLetter } from "js/Damage-Relations-Quiz/Logic-Handling/Logic.js";
 import {
     logHandleGetSingleType,
     logHandleGetDualType,
     getSingleTypeDataRandom,
     getDualTypeDataRandom,
     getRandomPokemonData
-} from "../Logic-Handling/Handlers.js";
-import {
-    defaultPokemon,
-    defaultResponseState
-} from "../Logic-Handling/Default-Values.js";
-import { userResponseReducer } from "../Logic-Handling/Reducers.js";
-import DamageRelationsHeader from "./Header.js";
+} from "js/Damage-Relations-Quiz/Logic-Handling/Handlers.js";
+import { defaultPokemon, defaultResponseState } from "js/Damage-Relations-Quiz/Logic-Handling/Default-Values.js";
+import { userResponseReducer } from "js/Damage-Relations-Quiz/Logic-Handling/Reducers.js";
+// Components
+import DamageRelationsForm from "./Form.js";
+import DamageRelationsHeader from "js/Damage-Relations-Quiz/Components/Header.js";
 import TypeEffectivenessZones from "js/Damage-Relations-Quiz/React-dnd/Type-Effectiveness-Zones.js";
 import ErrorModal from 'js/utilities/Error-Modal.js';
-import { capitalizeFirstLetter } from "js/utilities/Utilities-Strings.js";
+// CSS
 import 'css/Damage-Relations-Quiz/Components/Quiz.css';
 
 
