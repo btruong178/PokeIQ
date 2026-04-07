@@ -2,7 +2,7 @@
  * @file
  * ErrorModal component for PokeIQ
  */
-import 'css/utilities/error-modal.css';
+import 'css/utilities/Error-Modal.css';
 
 /**
  * @memberof module:Backend-Utils

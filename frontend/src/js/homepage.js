@@ -5,8 +5,8 @@
  */
 
 import { Container, Row, Col, Image } from 'react-bootstrap'
-import pokeball from '../css/images/luxuryball.png'
-import '../css/Homepage.css'
+import pokeball from 'css/images/luxuryball.png'
+import 'css/homepage.css'
 
 /**
  * @memberof module:Pages

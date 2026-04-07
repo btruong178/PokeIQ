@@ -5,7 +5,7 @@
  */
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import 'css/utilities/check-backend.css';
+import 'css/utilities/Check-Backend.css';
 import axios from 'axios';
 import ServiceDown from 'js/utilities/Service-Down.js';
 

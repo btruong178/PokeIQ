@@ -3,7 +3,7 @@
  * ServiceDown component for PokeIQ.
  */
 
-import 'css/utilities/service-down.css';
+import 'css/utilities/Service-Down.css';
 
 /**
  * @memberof module:Backend-Utils

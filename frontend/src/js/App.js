@@ -16,7 +16,7 @@ import Header from './header.js';
 import CheckBackend from './utilities/Check-Backend.js';
 import CustomDragLayer from './Damage-Relations-Quiz/React-dnd/DND/Custom-Drag-Layer.js';
 // CSS
-import '../css/App.css';
+import 'css/App.css';
 // Bootswatch
 import 'bootswatch/dist/darkly/bootstrap.min.css';
 

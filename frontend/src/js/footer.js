@@ -2,7 +2,7 @@
  * @file
  * Footer component for PokeIQ.
  */
-import '../css/Footer.css';
+import 'css/footer.css';
 /**
  * @memberof module:Pages
  * @description

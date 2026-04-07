@@ -3,7 +3,7 @@
  * About component for PokeIQ.
  */
 
-import '../css/About.css'
+import 'css/about.css'
 import { Container, Row, Col } from 'react-bootstrap';
 
 /**
