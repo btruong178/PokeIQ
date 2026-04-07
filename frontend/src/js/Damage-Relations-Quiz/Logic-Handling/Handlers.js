@@ -1,7 +1,7 @@
 /**
  * @file 
  * Module that defines handler functions for the Damage Relations Quiz. <br>
- * Acts as an intermediary between the quiz components and the logic functions defined in Logic.js.
+ * Acts as an intermediary between the quiz components and the logic functions defined module:DamageRelations-Logic. <br>
  * @module DamageRelations-Logic-Handlers
  */
 

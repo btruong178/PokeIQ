@@ -1,4 +1,4 @@
-import '../../../css/Damage-Relations-Quiz/Custom-Components/HowToPlay-Modal.css';
+import 'css/Damage-Relations-Quiz/Custom-Components/HowToPlay-Modal.css';
 import { HoverPopover } from './Popover';
 
 const HowToPlayModal = ({ onClose }) => (
