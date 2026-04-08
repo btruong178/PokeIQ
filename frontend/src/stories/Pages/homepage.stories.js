@@ -12,9 +12,9 @@ export default {
         },
     },
 };
-
+const className = 'sb-raw-homepage';
 export const Default = () => (
-    <div className="sb-raw-homepage">
+    <div className={className}>
         <Homepage />
     </div>
 );

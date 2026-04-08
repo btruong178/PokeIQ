@@ -12,7 +12,6 @@ export default {
         },
     },
 };
-
 export const Default = () => (
     <div className="sb-raw-about">
         <About />

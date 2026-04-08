@@ -9,6 +9,15 @@ import 'css/utilities/Check-Backend.css';
 import axios from 'axios';
 import ServiceDown from 'js/utilities/Service-Down.js';
 
+const healthCheckEndpoint = `/dynamoDB-api/health-check`;
+const defaultHealthCheck = async () => {
+    try {
+        const response = await axios.get(healthCheckEndpoint);
+        return response.status === 200;
+    } catch (err) {
+        return false;
+    }
+};
 /**
  * @memberof module:Backend-Utils
  * @description
@@ -20,23 +29,33 @@ import ServiceDown from 'js/utilities/Service-Down.js';
  * @param {React.ReactNode} props.children - The child components to render if the backend is reachable
  * @returns {JSX.Element} The CheckBackend component
  */
-const CheckBackend = ({ children }) => {
+const CheckBackend = ({ children, healthCheck = defaultHealthCheck }) => {
     const location = useLocation();
     const [backendUp, setBackendUp] = useState(null);
 
-    const checkAPIConnection = async () => {
-        try {
-            const response = await axios.get(`/dynamoDB-api/health-check`);
-            setBackendUp(response.status === 200);
-        } catch (err) {
-            setBackendUp(false);
-        }
-    };
+
 
     useEffect(() => {
-        setBackendUp(null);
+        let isMounted = true;
+        const checkAPIConnection = async () => {
+            setBackendUp(null);
+            try {
+                const isBackendUp = await healthCheck();
+                if (isMounted) {
+                    setBackendUp(isBackendUp);
+                }
+            } catch (err) {
+                if (isMounted) {
+                    setBackendUp(false);
+                }
+            }
+        };
+
         checkAPIConnection();
-    }, [location]);
+        return () => {
+            isMounted = false;
+        };
+    }, [location, healthCheck]);
 
     if (backendUp === null)
         return (

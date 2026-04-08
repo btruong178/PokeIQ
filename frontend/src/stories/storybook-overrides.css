@@ -5,3 +5,9 @@
 .sb-raw-about .about-page {
     min-height: 100vh;
 }
+
+.sb-bottom-footer footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

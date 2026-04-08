@@ -1,6 +1,7 @@
 import 'bootswatch/dist/darkly/bootstrap.min.css';
 import 'css/App.css';
 import 'stories/storybook-overrides.css';
+import { MemoryRouter } from 'react-router-dom';
 /** @type { import('@storybook/react-webpack5').Preview } */
 const preview = {
   tags: ['autodocs'],
@@ -16,9 +17,11 @@ const preview = {
 
 export const decorators = [
   (Story) => (
-    <main>
-      <Story />
-    </main>
+    <MemoryRouter>
+      <main>
+        <Story />
+      </main>
+    </MemoryRouter>
   ),
 ];
 
