@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Damage-Relations-Quiz/Components/Form.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-App.html">App</a><ul class='methods'><li data-type='method'><a href="module-App.html#.App">App</a></li></ul></li><li><a href="module-Backend-Utils.html">Backend-Utils</a><ul class='methods'><li data-type='method'><a href="module-Backend-Utils.html#.CheckBackend">CheckBackend</a></li><li data-type='method'><a href="module-Backend-Utils.html#.ErrorModal">ErrorModal</a></li><li data-type='method'><a href="module-Backend-Utils.html#.ServiceDown">ServiceDown</a></li></ul></li><li><a href="module-DamageRelations-Logic.html">DamageRelations-Logic</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-Logic.html#~fetchDualTypeData">fetchDualTypeData</a></li><li data-type='method'><a href="module-DamageRelations-Logic.html#~fetchRandomPokemon">fetchRandomPokemon</a></li><li data-type='method'><a href="module-DamageRelations-Logic.html#~fetchSingleTypeData">fetchSingleTypeData</a></li></ul></li><li><a href="module-DamageRelations-Logic-Handlers.html">DamageRelations-Logic-Handlers</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-Logic-Handlers.html#~getDualTypeDataRandom">getDualTypeDataRandom</a></li><li data-type='method'><a href="module-DamageRelations-Logic-Handlers.html#~getRandomPokemonData">getRandomPokemonData</a></li><li data-type='method'><a href="module-DamageRelations-Logic-Handlers.html#~getSingleTypeDataRandom">getSingleTypeDataRandom</a></li></ul></li><li><a href="module-DamageRelations-Quiz.html">DamageRelations-Quiz</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-Quiz.html#.DamageRelationsForm">DamageRelationsForm</a></li><li data-type='method'><a href="module-DamageRelations-Quiz.html#.DamageRelationsHeader">DamageRelationsHeader</a></li><li data-type='method'><a href="module-DamageRelations-Quiz.html#.DamageRelationsQuiz">DamageRelationsQuiz</a></li></ul></li><li><a href="module-DamageRelations-ReactDND.html">DamageRelations-ReactDND</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-ReactDND.html#.CustomDragLayer">CustomDragLayer</a></li><li data-type='method'><a href="module-DamageRelations-ReactDND.html#.DraggableType">DraggableType</a></li><li data-type='method'><a href="module-DamageRelations-ReactDND.html#.DropZone">DropZone</a></li><li data-type='method'><a href="module-DamageRelations-ReactDND.html#.TypeEffectivenessZones">TypeEffectivenessZones</a></li><li data-type='method'><a href="module-DamageRelations-ReactDND.html#.UnSelectedButtons">UnSelectedButtons</a></li></ul></li><li><a href="module-DamageRelations-Reducers.html">DamageRelations-Reducers</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-Reducers.html#~userResponseReducer">userResponseReducer</a></li></ul></li><li><a href="module-Pages.html">Pages</a><ul class='methods'><li data-type='method'><a href="module-Pages.html#.About">About</a></li><li data-type='method'><a href="module-Pages.html#.Footer">Footer</a></li><li data-type='method'><a href="module-Pages.html#.Header">Header</a></li><li data-type='method'><a href="module-Pages.html#.Homepage">Homepage</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Damage-Relations-Quiz/Components/Form.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file
+ * DamageRelationsForm component for the Damage Relations Quiz.
+ */
+
+import { useEffect } from "react";
+import { availableTypes } from "../Logic-Handling/Logic";
+import "css/Damage-Relations-Quiz/Components/Form.css";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
+
+/**
+ * @memberof module:DamageRelations-Quiz
+ * @description
+ * DamageRelationsForm is the component that renders the form for selecting quiz options in the Damage Relations Quiz interface. &lt;br>
+ * It allows users to select random mode, type mode, and specific types before starting the quiz.
+ * @param {Object} props - The component properties.
+ * @param {boolean} props.random - Indicates if the quiz is in random mode.
+ * @param {string} props.TypeMode - The current type mode ("Single", "Dual", or "Pokemon").
+ * @param {string} props.selectedSingleType - The currently selected single Pokémon type.
+ * @param {string} props.selectedDualType1 - The currently selected first dual Pokémon type.
+ * @param {string} props.selectedDualType2 - The currently selected second dual Pokémon type.
+ * @param {Function} props.setRandom - Function to update the random flag.
+ * @param {Function} props.setTypeMode - Function to update the type mode.
+ * @param {Function} props.handleTypeChange - Handler for single type input changes.
+ * @param {Function} props.handleTypeChange1 - Handler for first dual type input changes.
+ * @param {Function} props.handleTypeChange2 - Handler for second dual type input changes.
+ * @param {Function} props.formHandleSubmit - Callback function to handle form submission.
+ * @returns {JSX.Element} The DamageRelationsForm component.
+ */
+
+const DamageRelationsForm = ({
+    random,
+    TypeMode,
+    selectedSingleType,
+    selectedDualType1,
+    selectedDualType2,
+    setRandom,
+    setTypeMode,
+    handleTypeChange,
+    handleTypeChange1,
+    handleTypeChange2,
+    formHandleSubmit,
+}) => {
+    useEffect(() => {
+        if (random) {
+            handleTypeChange({ target: { value: "" } });
+            handleTypeChange1({ target: { value: "" } });
+            handleTypeChange2({ target: { value: "" } });
+        }
+        if (!random &amp;&amp; TypeMode === "Pokemon") {
+            setTypeMode("Single");
+            handleTypeChange({ target: { value: "" } });
+        }
+    }, [random]);
+    useEffect(() => {
+        if (TypeMode === "Single") {
+            handleTypeChange1({ target: { value: "" } });
+            handleTypeChange2({ target: { value: "" } });
+        } else if (TypeMode === "Dual") {
+            handleTypeChange({ target: { value: "" } });
+        }
+    }, [TypeMode]);
+    return (
+        &lt;Container fluid className="form-container background">
+            &lt;Row className="form-header">
+                &lt;Col>
+                    &lt;h1>Damage Relations&lt;/h1>
+                    &lt;hr />
+                    &lt;p>
+                        Welcome to the Damage Relations page!
+                    &lt;/p>
+                    &lt;p>
+                        Here you can quiz yourself
+                        on damage relations of each type!
+                    &lt;/p>
+                    &lt;p>
+                        Select your mode(s) and type(s) to
+                        get started.
+                    &lt;/p>
+                &lt;/Col>
+                &lt;hr />
+            &lt;/Row>
+
+            &lt;Row className="toggles-options justify-content-center">
+                &lt;Col xs="auto" className="random-toggle">
+                    &lt;Form.Label>Random Mode:&lt;/Form.Label>
+                    &lt;Form.Check
+                        type="checkbox"
+                        id="random"
+                        checked={random}
+                        onChange={() => setRandom(!random)}
+                    />
+                &lt;/Col>
+
+                &lt;Col xs="auto" className="type-mode-toggle">
+                    &lt;Form.Group controlId="type-mode-toggle" className="mb-3">
+                        &lt;Form.Label>Select Type Mode:&lt;/Form.Label>
+                        &lt;Form.Select
+                            value={TypeMode}
+                            onChange={(e) => setTypeMode(e.target.value)}
+                        >
+                            &lt;option value="Single">Single&lt;/option>
+                            &lt;option value="Dual">Dual&lt;/option>
+                            {random &amp;&amp; &lt;option value="Pokemon">Pokemon&lt;/option>}
+                        &lt;/Form.Select>
+                    &lt;/Form.Group>
+                &lt;/Col>
+
+                {!random &amp;&amp; TypeMode === "Single" &amp;&amp; (
+                    &lt;Container className="single-type-select">
+                        &lt;Form.Group controlId="single-type-select" className="mb-3">
+                            &lt;Form.Label>Choose a Type&lt;/Form.Label>
+                            &lt;Form.Select
+                                value={selectedSingleType}
+                                onChange={handleTypeChange}
+                            >
+                                &lt;option value="">--Select a Type--&lt;/option>
+                                {availableTypes.map((type, index) => (
+                                    &lt;option key={index} value={type}>
+                                        {type}
+                                    &lt;/option>
+                                ))}
+                            &lt;/Form.Select>
+                        &lt;/Form.Group>
+                    &lt;/Container>
+                )}
+
+                {!random &amp;&amp; TypeMode === "Dual" &amp;&amp; (
+                    &lt;Container className="dual-type-select">
+                        &lt;Form.Group controlId="dual-type-select-1" className="mb-3">
+                            &lt;Form.Label>Choose Type 1&lt;/Form.Label>
+                            &lt;Form.Select
+                                value={selectedDualType1}
+                                onChange={handleTypeChange1}
+                            >
+                                &lt;option value="">--Select a Type--&lt;/option>
+                                {availableTypes.map((type, idx) => (
+                                    &lt;option key={idx} value={type}>
+                                        {type}
+                                    &lt;/option>
+                                ))}
+                            &lt;/Form.Select>
+                        &lt;/Form.Group>
+
+                        &lt;Form.Group controlId="dual-type-select-2" className="mb-3">
+                            &lt;Form.Label>Choose Type 2&lt;/Form.Label>
+                            &lt;Form.Select
+                                value={selectedDualType2}
+                                onChange={handleTypeChange2}
+                            >
+                                &lt;option value="">--Select a Type--&lt;/option>
+                                {availableTypes.map((type, idx) => (
+                                    &lt;option key={idx} value={type}>
+                                        {type}
+                                    &lt;/option>
+                                ))}
+                            &lt;/Form.Select>
+                        &lt;/Form.Group>
+                    &lt;/Container>
+                )}
+            &lt;/Row>
+            &lt;Button
+                variant="primary"
+                className="submit-button-container"
+                onClick={formHandleSubmit}
+            >
+                Submit
+            &lt;/Button>
+        &lt;/Container>
+    );
+};
+
+export default DamageRelationsForm;</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Thu Apr 09 2026 17:09:51 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

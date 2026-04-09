@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    "plugins/markdown",
+    "node_modules/better-docs/component"
+  ],
+  "tags": {
+    "allowUnknownTags": [
+      "component",
+      "route"
+    ]
+  },
+  "source": {
+    "include": [
+      "backend"
+    ],
+    "includePattern": ".+\\.(js|jsx)$",
+    "excludePattern": "(node_modules|build|dist|coverage)"
+  },
+  "opts": {
+    "destination": "docs/backend",
+    "recurse": true,
+    "encoding": "utf8",
+    "template": "./node_modules/docdash"
+  }
+}

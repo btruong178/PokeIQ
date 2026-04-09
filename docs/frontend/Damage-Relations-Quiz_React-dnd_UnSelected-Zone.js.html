@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Damage-Relations-Quiz/React-dnd/UnSelected-Zone.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-App.html">App</a><ul class='methods'><li data-type='method'><a href="module-App.html#.App">App</a></li></ul></li><li><a href="module-Backend-Utils.html">Backend-Utils</a><ul class='methods'><li data-type='method'><a href="module-Backend-Utils.html#.CheckBackend">CheckBackend</a></li><li data-type='method'><a href="module-Backend-Utils.html#.ErrorModal">ErrorModal</a></li><li data-type='method'><a href="module-Backend-Utils.html#.ServiceDown">ServiceDown</a></li></ul></li><li><a href="module-DamageRelations-Logic.html">DamageRelations-Logic</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-Logic.html#~fetchDualTypeData">fetchDualTypeData</a></li><li data-type='method'><a href="module-DamageRelations-Logic.html#~fetchRandomPokemon">fetchRandomPokemon</a></li><li data-type='method'><a href="module-DamageRelations-Logic.html#~fetchSingleTypeData">fetchSingleTypeData</a></li></ul></li><li><a href="module-DamageRelations-Logic-Handlers.html">DamageRelations-Logic-Handlers</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-Logic-Handlers.html#~getDualTypeDataRandom">getDualTypeDataRandom</a></li><li data-type='method'><a href="module-DamageRelations-Logic-Handlers.html#~getRandomPokemonData">getRandomPokemonData</a></li><li data-type='method'><a href="module-DamageRelations-Logic-Handlers.html#~getSingleTypeDataRandom">getSingleTypeDataRandom</a></li></ul></li><li><a href="module-DamageRelations-Quiz.html">DamageRelations-Quiz</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-Quiz.html#.DamageRelationsForm">DamageRelationsForm</a></li><li data-type='method'><a href="module-DamageRelations-Quiz.html#.DamageRelationsHeader">DamageRelationsHeader</a></li><li data-type='method'><a href="module-DamageRelations-Quiz.html#.DamageRelationsQuiz">DamageRelationsQuiz</a></li></ul></li><li><a href="module-DamageRelations-ReactDND.html">DamageRelations-ReactDND</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-ReactDND.html#.CustomDragLayer">CustomDragLayer</a></li><li data-type='method'><a href="module-DamageRelations-ReactDND.html#.DraggableType">DraggableType</a></li><li data-type='method'><a href="module-DamageRelations-ReactDND.html#.DropZone">DropZone</a></li><li data-type='method'><a href="module-DamageRelations-ReactDND.html#.TypeEffectivenessZones">TypeEffectivenessZones</a></li><li data-type='method'><a href="module-DamageRelations-ReactDND.html#.UnSelectedButtons">UnSelectedButtons</a></li></ul></li><li><a href="module-DamageRelations-Reducers.html">DamageRelations-Reducers</a><ul class='methods'><li data-type='method'><a href="module-DamageRelations-Reducers.html#~userResponseReducer">userResponseReducer</a></li></ul></li><li><a href="module-Pages.html">Pages</a><ul class='methods'><li data-type='method'><a href="module-Pages.html#.About">About</a></li><li data-type='method'><a href="module-Pages.html#.Footer">Footer</a></li><li data-type='method'><a href="module-Pages.html#.Header">Header</a></li><li data-type='method'><a href="module-Pages.html#.Homepage">Homepage</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Damage-Relations-Quiz/React-dnd/UnSelected-Zone.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * @file
+ * UnSelectedButtons component for the Damage Relations Quiz.
+ */
+import DropZone from "js/Damage-Relations-Quiz/React-dnd/DND/Dropzone";
+/**
+ * @memberof module:DamageRelations-ReactDND
+ * @description
+ * UnSelectedButtons is a React component that renders the dropzone for types not placed into a damage category yet.
+ * @param {Object} props - The component's properties
+ * @param {Object} props.AnswerObject - The current state of the user's answers
+ * @param {Function} props.dispatchAnswerObject - The dispatch function to update the AnswerObject state
+ * @param {Object} props.pokemon - The Pokémon object containing its data
+ * @param {string} props.TypeMode - The current type mode
+ * @returns {JSX.Element} The UnSelectedButtons component, which is a DropZone for unselected types
+ */
+const UnSelectedButtons = ({
+    AnswerObject,
+    dispatchAnswerObject,
+    pokemon,
+    TypeMode
+}) => (
+    &lt;DropZone
+        type_effectiveness="unSelected"
+        type_multiplier="N/A"
+        AnswerObject={AnswerObject}
+        dispatchAnswerObject={dispatchAnswerObject}
+        pokemon={pokemon}
+        TypeMode={TypeMode}
+    />
+);
+
+export default UnSelectedButtons;</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Thu Apr 09 2026 17:09:51 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

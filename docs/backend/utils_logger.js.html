@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>utils/Logger.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-DynamoDB.DynamoDBService.html">DynamoDBService</a><ul class='methods'><li data-type='method'><a href="module-DynamoDB.DynamoDBService.html#batchDeleteItems">batchDeleteItems</a></li><li data-type='method'><a href="module-DynamoDB.DynamoDBService.html#batchPutItems">batchPutItems</a></li><li data-type='method'><a href="module-DynamoDB.DynamoDBService.html#deleteItem">deleteItem</a></li><li data-type='method'><a href="module-DynamoDB.DynamoDBService.html#getItem">getItem</a></li><li data-type='method'><a href="module-DynamoDB.DynamoDBService.html#healthCheck">healthCheck</a></li><li data-type='method'><a href="module-DynamoDB.DynamoDBService.html#putItem">putItem</a></li><li data-type='method'><a href="module-DynamoDB.DynamoDBService.html#scanTable">scanTable</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-DynamoDB.html">DynamoDB</a></li><li><a href="module-DynamoDB-API.html">DynamoDB-API</a><ul class='methods'><li data-type='method'><a href="module-DynamoDB-API.html#.handleDamageRelations">handleDamageRelations</a></li><li data-type='method'><a href="module-DynamoDB-API.html#.handleHealthCheck">handleHealthCheck</a></li><li data-type='method'><a href="module-DynamoDB-API.html#.handleRandomPokemon">handleRandomPokemon</a></li></ul></li><li><a href="module-Server.html">Server</a></li></ul><h3>Global</h3><ul><li><a href="global.html#logError">logError</a></li><li><a href="global.html#logSuccess">logSuccess</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">utils/Logger.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const logsDir = path.join(__dirname, '..', 'logs');
+
+// Ensure logs directory exists
+if (!fs.existsSync(logsDir)) {
+    fs.mkdirSync(logsDir, { recursive: true });
+}
+
+const getLogFilePath = (type) => {
+    const timestamp = new Date().toISOString().replace(/:/g, '-').replace(/\..+/, ''); // YYYY-MM-DDTHH-MM-SS
+    return path.join(logsDir, `${type}-${timestamp}.log`);
+};
+
+/**
+ * Logs errors with explicit context information
+ * @param {string} functionName - Name of the function where error occurred
+ * @param {Error} error - The error object
+ * @param {Object} context - Additional context (table names, params, etc.)
+ */
+export const logError = (functionName, error, context = {}) => {
+    const filePath = new Error().stack?.split('\n')[2]?.match(/\((.+?):\d+:\d+\)/)?.[1] || 'unknown';
+    const timestamp = new Date().toISOString();
+
+    const logMessage = [
+        '\n' + '='.repeat(80),
+        '❌ ERROR OCCURRED (Logger)',
+        '─'.repeat(80),
+        `Timestamp: ${timestamp}`,
+        `Function: ${functionName}`,
+        `File: ${filePath}`,
+        `Message: ${error.message}`,
+        Object.keys(context).length > 0 ? '─'.repeat(80) + '\nContext: ' + JSON.stringify(context, null, 2) : '',
+        '─'.repeat(80),
+        'Stack Trace:',
+        error.stack,
+        '='.repeat(80) + '\n'
+    ].filter(Boolean).join('\n');
+
+    console.error(logMessage);
+
+    try {
+        fs.appendFileSync(getLogFilePath('error'), logMessage, 'utf8');
+    } catch (err) {
+        console.error('Failed to write error log to file:', err);
+    }
+};
+
+/**
+ * Logs success messages
+ */
+export const logSuccess = (functionName, message, data = {}) => {
+    const timestamp = new Date().toISOString();
+
+
+
+    const logMessage = [
+        '\n' + '='.repeat(80),
+        '✅ SUCCESS (Logger)',
+        '─'.repeat(80),
+        `Timestamp: ${timestamp}`,
+        `Function: ${functionName}`,
+        `Message: ${message}`,
+        Object.keys(data).length > 0 ? `Data: ${JSON.stringify(data, null, 2)}` : '',
+        '='.repeat(80) + '\n'
+    ].filter(Boolean).join('\n');
+
+    console.log(logMessage);
+
+    try {
+        fs.appendFileSync(getLogFilePath('success'), logMessage, 'utf8');
+    } catch (err) {
+        console.error('Failed to write success log to file:', err);
+    }
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Thu Apr 09 2026 17:09:49 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

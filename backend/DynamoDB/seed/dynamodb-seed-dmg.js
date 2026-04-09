@@ -1,8 +1,8 @@
 import prompts from 'prompts';
 import axios from 'axios';
 import { DynamoDBService } from "../dynamodb-service.js";
-import { logError, logSuccess } from '../../utils/logger.js';
-import { capitalizeFirstLetter } from '../../utils/stringUtils.js';
+import { logError, logSuccess } from '../../utils/Logger.js';
+import { capitalizeFirstLetter } from '../../utils/String-Utils.js';
 
 const typesTableName = process.env.DYNAMODB_TABLE_NAME_TYPES;
 const TYPE_BASE_URL = 'https://pokeapi.co/api/v2/type/';

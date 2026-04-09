@@ -1,8 +1,8 @@
 import prompts from 'prompts';
 import axios from 'axios';
 import { DynamoDBService } from "../dynamodb-service.js";
-import { logError, logSuccess } from '../../utils/logger.js';
-import { capitalizeFirstLetter } from '../../utils/stringUtils.js';
+import { logError, logSuccess } from '../../utils/Logger.js';
+import { capitalizeFirstLetter } from '../../utils/String-Utils.js';
 
 // Initalize Clients
 const dynamoDBService = new DynamoDBService();
