@@ -73,7 +73,7 @@ import { logSuccess, logError } from '../utils/Logger.js';
  */
 export class DynamoDBService {
     constructor() {
-        this.ddbClient = new DynamoDBClient({ region: process.env.AWS_REGION || 'us-east-1' });
+        this.ddbClient = new DynamoDBClient({ region: process.env.AWS_REGION });
         this.ddbDocClient = DynamoDBDocumentClient.from(this.ddbClient);
     }
     /**

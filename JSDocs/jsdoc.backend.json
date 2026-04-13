@@ -14,7 +14,7 @@
       "backend"
     ],
     "includePattern": ".+\\.(js|jsx)$",
-    "excludePattern": "(node_modules|build|dist|coverage)"
+    "excludePattern": "(node_modules|build|dist|coverage|seed)"
   },
   "opts": {
     "destination": "docs/backend",

@@ -1,3 +1,12 @@
+/**
+ * @file
+ * A script to seed the "pokemon" DynamoDB table with Pokémon data from the PokeAPI.
+ * Accepts optional CLI arguments for the seeding range: `node dynamodb-seed-pokemon.js [startID] [endID]`.
+ * This script provides an interactive CLI to perform the following actions:
+ *   1. Seed Pokémon Data to DynamoDB (by ID range)
+ *   2. Batch Delete Pokémon Data from DynamoDB (by ID range)
+ *   3. Get a single Pokémon by ID from DynamoDB
+ */
 import prompts from 'prompts';
 import axios from 'axios';
 import { DynamoDBService } from "../dynamodb-service.js";
@@ -18,7 +27,10 @@ const pokemonTableName = process.env.DYNAMODB_TABLE_NAME_POKEMON;
 // API URLs from PokeAPI
 const POKEMON_BASE_URL = 'https://pokeapi.co/api/v2/pokemon/';
 
-// Interactive seeding with prompts
+/**
+ * Launches an interactive CLI menu for seeding, deleting, or querying Pokémon data.
+ * @returns {Promise<void>}
+ */
 const interactiveSeed = async () => {
     try {
         console.log('=== Pokémon Data Seeder ===\n');
@@ -106,7 +118,11 @@ const interactiveSeed = async () => {
     }
 };
 
-// Query Pokémon data from DynamoDB
+/**
+ * Fetches a single Pokémon item from the DynamoDB pokemon table by ID.
+ * @param {number} startPokeID - The Pokémon ID to fetch.
+ * @returns {Promise<void>}
+ */
 const getPokemonData = async (startPokeID) => {
     try {
         const pokemonData = await dynamoDBService.getItem(pokemonTableName, { id: startPokeID });
@@ -116,7 +132,12 @@ const getPokemonData = async (startPokeID) => {
 };
 
 
-// Batch Delete Pokémon data from DynamoDB
+/**
+ * Batch deletes Pokémon items from DynamoDB for the given ID range.
+ * @param {number} startPokeID - The starting Pokémon ID (inclusive).
+ * @param {number} endPokeID - The ending Pokémon ID (inclusive).
+ * @returns {Promise<void>}
+ */
 const batchDeletePokemonData = async (startPokeID, endPokeID) => {
     try {
         const toDelete = Array.from({ length: endPokeID - startPokeID + 1 }, (_, i) => startPokeID + i)
@@ -127,7 +148,11 @@ const batchDeletePokemonData = async (startPokeID, endPokeID) => {
     }
 }
 
-// Fetch Pokémon data based on ID
+/**
+ * Fetches a Pokémon's name and types from the PokeAPI.
+ * @param {number|string} pokemonID - The PokeAPI Pokémon ID (or name for special cases).
+ * @returns {Promise<{pokemonName: string, pokemonTypes: string}>} The capitalized name and slash-joined types (e.g. "Grass/Poison").
+ */
 const fetchPokemonDetails_PokeAPI = async (pokemonID) => {
     try {
         // Temp fix for Pikachu ID
@@ -144,7 +169,12 @@ const fetchPokemonDetails_PokeAPI = async (pokemonID) => {
     }
 };
 
-// Aggregate Pokémon data from start to end ID fetched from PokeAPI
+/**
+ * Fetches and aggregates Pokémon data for a range of IDs from the PokeAPI.
+ * @param {number} startPokeID - The starting Pokémon ID (inclusive).
+ * @param {number} endPokeID - The ending Pokémon ID (inclusive).
+ * @returns {Promise<Array<{id: number, name: string, type: string}>>} An array of Pokémon objects ready for DynamoDB.
+ */
 const aggregatePokemonData = async (startPokeID, endPokeID) => {
     try {
         const data = await Promise.all(
@@ -162,7 +192,12 @@ const aggregatePokemonData = async (startPokeID, endPokeID) => {
 };
 
 
-// Seed Pokémon data into DynamoDB
+/**
+ * Aggregates Pokémon data from the PokeAPI and batch writes it to DynamoDB.
+ * @param {number} startPokeID - The starting Pokémon ID (inclusive).
+ * @param {number} endPokeID - The ending Pokémon ID (inclusive).
+ * @returns {Promise<void>}
+ */
 const seedPokemonData = async (startPokeID, endPokeID) => {
     try {
         const pokemonData = await aggregatePokemonData(startPokeID, endPokeID);

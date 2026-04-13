@@ -1,15 +1,26 @@
+/**
+ * @file
+ * A script to seed the "types" DynamoDB table with damage relations data from the PokeAPI.
+ * This script provides an interactive CLI to perform the following actions:
+ *   1. Seed Type Damage Relations Data to DynamoDB
+ *   2. Get Type Data from DynamoDB by Type Name
+ *   3. Batch Delete All Types from DynamoDB
+ */
 import prompts from 'prompts';
 import axios from 'axios';
 import { DynamoDBService } from "../dynamodb-service.js";
 import { logError, logSuccess } from '../../utils/Logger.js';
-import { capitalizeFirstLetter } from '../../utils/String-Utils.js';
 
 const typesTableName = process.env.DYNAMODB_TABLE_NAME_TYPES;
 const TYPE_BASE_URL = 'https://pokeapi.co/api/v2/type/';
 
-// Initalize Clients
+// Initialize Clients
 const dynamoDBService = new DynamoDBService();
 
+/**
+ * Launches an interactive CLI menu for seeding, querying, or deleting type damage relations data.
+ * @returns {Promise<void>}
+ */
 const interactiveSeed = async () => {
     console.log('=== Type Damage Relations Seeder ===\n');
     try {
@@ -52,6 +63,12 @@ const interactiveSeed = async () => {
         logError('Type Damage Relations Seeder', error);
     }
 };
+
+/**
+ * Fetches a single type item from the DynamoDB types table by name.
+ * @param {string} typeName - The name of the type to fetch (e.g. "fire").
+ * @returns {Promise<void>}
+ */
 const getTypeData = async (typeName) => {
     try {
         const response = await dynamoDBService.getItem(typesTableName, { name: typeName });
@@ -60,6 +77,10 @@ const getTypeData = async (typeName) => {
     }
 }
 
+/**
+ * Scans the types table and batch deletes all items.
+ * @returns {Promise<void>}
+ */
 const batchDeleteTypes = async () => {
     try {
         const allItems = await dynamoDBService.scanTable(typesTableName);
@@ -71,6 +92,11 @@ const batchDeleteTypes = async () => {
     }
 }
 
+/**
+ * Fetches damage relations data for a single type from the PokeAPI.
+ * @param {number} typeID - The PokeAPI type ID (1–18).
+ * @returns {Promise<Object>} The full type data from PokeAPI, including id, name, and damage_relations.
+ */
 const fetchDamageRelations_PokeAPI = async (typeID) => {
     try {
         const response = await axios.get(`${TYPE_BASE_URL}${typeID}`);
@@ -80,6 +106,10 @@ const fetchDamageRelations_PokeAPI = async (typeID) => {
     }
 }
 
+/**
+ * Fetches and aggregates damage relations for all 18 Pokémon types from the PokeAPI.
+ * @returns {Promise<Array<{id: number, name: string, damage_relations: Object}>>} An array of type objects with id, name, and damage_relations.
+ */
 const aggregateDmgData = async () => {
     try {
         const data = await Promise.all(
@@ -96,7 +126,10 @@ const aggregateDmgData = async () => {
     }
 }
 
-
+/**
+ * Aggregates all type damage relations from the PokeAPI and batch writes them to DynamoDB.
+ * @returns {Promise<void>}
+ */
 const seedDmgData = async () => {
     try {
         const dmgData = await aggregateDmgData();
