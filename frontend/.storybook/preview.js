@@ -6,6 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 const preview = {
   tags: ['autodocs'],
   parameters: {
+    layout: 'fullscreen',
     controls: {
       matchers: {
         color: /(background|color)$/i,

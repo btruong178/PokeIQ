@@ -37,27 +37,34 @@ export default {
     },
 };
 
-
-
-export const BackendDown = {
+export const Default = {
     args: { isUp: false },
     parameters: {
         docs: {
             description: {
-                story: 'ServiceDown component appears when backend is down.',
+                story: 'Depending on if healthCheck returns true or false, either the children components(Homepage used as an example) or the ServiceDown component will be rendered.',
             },
         },
     },
 };
 
-export const BackendUp = {
-    args: { isUp: true },
+export const LoadingState = {
+    argTypes: {
+        isUp: { control: false, table: { disable: true } },
+    },
     parameters: {
         docs: {
             description: {
-                story: 'Children components appear here - Homepage used as an example.',
+                story: 'Loading spinner appears while checking backend health.',
             },
         },
     },
+    render: () => {
+        const healthCheck = () => new Promise(() => { });
+        return (
+            <CheckBackend healthCheck={healthCheck}>
+                <div />
+            </CheckBackend>
+        );
+    },
 };
-
