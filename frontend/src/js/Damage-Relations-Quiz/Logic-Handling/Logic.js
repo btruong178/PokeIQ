@@ -71,11 +71,10 @@ export const availableTypes = [
 /**
  * Returns a random single Pokémon type
  * 
- * @private
  * @function getRandomSingleType
  * @returns {string} A random Pokémon type
  */
-const getRandomSingleType = () => {
+export const getRandomSingleType = () => {
     const randomIndex = Math.floor(Math.random() * availableTypes.length);
     return availableTypes[randomIndex];
 }
@@ -83,17 +82,14 @@ const getRandomSingleType = () => {
 /**
  * Returns two distinct random Pokémon types
  * 
- * @private
  * @function getRandomDualType
  * @returns {string[]} An array containing two distinct Pokémon types
  */
-const getRandomDualType = () => {
+export const getRandomDualType = () => {
     const randomIndex1 = Math.floor(Math.random() * availableTypes.length);
-    let randomIndex2 = randomIndex1;
-    while (randomIndex2 === randomIndex1) {
-        randomIndex2 = Math.floor(Math.random() * availableTypes.length);
-    }
-    return [availableTypes[randomIndex1], availableTypes[randomIndex2]];
+    const newAvailableTypes = availableTypes.filter((_, index) => index !== randomIndex1);
+    let randomIndex2 = Math.floor(Math.random() * newAvailableTypes.length);
+    return [availableTypes[randomIndex1], newAvailableTypes[randomIndex2]];
 }
 
 /**
