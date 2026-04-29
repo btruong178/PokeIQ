@@ -17,9 +17,9 @@ import { capitalizeFirstLetter } from '../../utils/String-Utils.js';
 const dynamoDBService = new DynamoDBService();
 
 
-// Get Arguments from command line for seeding range
-const startPokeID = parseInt(process.argv[2]) || 1; // Default to 1 if not provided
-const endPokeID = parseInt(process.argv[3]) || 1025; // Default to 1025 if not provided
+// Pokémon ID range for seeding and batch delete
+const startPokeID = 1;
+const endPokeID = 1025;
 
 // Tables
 const pokemonTableName = process.env.DYNAMODB_TABLE_NAME_POKEMON;
@@ -41,8 +41,8 @@ const interactiveSeed = async () => {
             message: 'Select action',
             choices: [
                 { title: 'Seed Pokémon Data', value: 1 },
-                { title: 'Batch Delete Pokémon Data', value: 2 },
-                { title: 'Get Pokémon', value: 3 },
+                { title: 'Get Pokémon', value: 2 },
+                { title: 'Batch Delete Pokémon Data', value: 3 },
             ],
             initial: 0,
         });
@@ -54,52 +54,11 @@ const interactiveSeed = async () => {
         // Ask different prompts depending on the selected action
         switch (action) {
             case 1:
-                const { startID, endID } = await prompts([
-                    {
-                        type: 'number',
-                        name: 'startID',
-                        message: 'Enter starting Pokémon ID:',
-                        validate: v => (v > 0 && v <= 1025) ? true : 'Must be greater than 0 and less than or equal to 1025',
-                    },
-                    {
-                        type: 'number',
-                        name: 'endID',
-                        message: 'Enter ending Pokémon ID:',
-                        validate: v => (v > 0 && v <= 1025) ? true : 'Must be > 0 and <= 1025',
-                    },
-                ]);
-
-                if (!startID || !endID) throw new Error('Operation cancelled.');
-                if (endID < startID) throw new Error('Ending ID must be >= Starting ID.');
-
-                console.log(`\nSeeding Pokémon from ID ${startID} to ${endID}...\n`);
-                await seedPokemonData(startID, endID);
+                console.log(`\nSeeding Pokémon from ID ${startPokeID} to ${endPokeID}...\n`);
+                await seedPokemonData(startPokeID, endPokeID);
                 break;
 
             case 2:
-                const { startID: deleteStartID, endID: deleteEndID } = await prompts([
-                    {
-                        type: 'number',
-                        name: 'startID',
-                        message: 'Enter starting Pokémon ID to delete:',
-                        validate: v => (v > 0 && v <= 1025) ? true : 'Must be greater than 0',
-                    },
-                    {
-                        type: 'number',
-                        name: 'endID',
-                        message: 'Enter ending Pokémon ID to delete:',
-                        validate: v => (v > 0 && v <= 1025) ? true : 'Must be > 0 and <= 1025',
-                    },
-                ]);
-
-                if (!deleteStartID || !deleteEndID) throw new Error('Operation cancelled.');
-                if (deleteEndID < deleteStartID) throw new Error('Ending ID must be >= Starting ID.');
-
-                console.log(`\nDeleting Pokémon from ID ${deleteStartID} to ${deleteEndID}...\n`);
-                await batchDeletePokemonData(deleteStartID, deleteEndID);
-                break;
-
-            case 3:
                 const { id } = await prompts({
                     type: 'number',
                     name: 'id',
@@ -111,6 +70,11 @@ const interactiveSeed = async () => {
 
                 console.log(`\nGetting Pokémon with ID ${id}...\n`);
                 await getPokemonData(id);
+                break;
+
+            case 3:
+                console.log(`\nDeleting Pokémon from ID ${startPokeID} to ${endPokeID}...\n`);
+                await batchDeletePokemonData(startPokeID, endPokeID);
                 break;
         }
     } catch (error) {

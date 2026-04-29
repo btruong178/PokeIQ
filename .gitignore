@@ -142,3 +142,6 @@ dist
 # Storybook files
 *storybook.log
 storybook-static
+
+# Config directory
+/config/
