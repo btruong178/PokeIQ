@@ -15,3 +15,12 @@
 .sb-raw-form .form-container {
     min-height: 100vh;
 }
+
+.sb-smaller-type .draggable-type {
+    width: 15rem;
+    height: 4rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
