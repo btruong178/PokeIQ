@@ -8,6 +8,7 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 import 'css/Damage-Relations-Quiz/React-dnd/DND/Draggable-Types.css';
 import { Button } from 'react-bootstrap';
 import { styleLookup } from './Type-Utilities.js';
+import useIsMobile from 'js/utilities/Use-Is-Mobile.js';
 
 /**
  * @memberof module:DamageRelations-ReactDND
@@ -22,6 +23,8 @@ import { styleLookup } from './Type-Utilities.js';
  * @returns {JSX.Element} The DraggableType component, which is a draggable button representing a Pokémon type
  */
 const DraggableType = ({ type, multiplier, dispatchAnswerObject, TypeMode, pokemon }) => {
+    // Determine if the current viewport is mobile using the custom useIsMobile hook
+    const isMobile = useIsMobile();
     // Set up the drag source using react-dnd's useDrag hook
     const [collectObject, drag, preview] = useDrag({
         type: 'TYPE',
@@ -38,7 +41,6 @@ const DraggableType = ({ type, multiplier, dispatchAnswerObject, TypeMode, pokem
 
     // Handle click event to send the type back to the unSelected zone
     const sendBacktoUnSelectedOnClick = () => {
-        console.log("Clicked on type:", type);
         if (multiplier === "N/A") {
             console.log("Type is already in unSelected");
             return;

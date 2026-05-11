@@ -74,19 +74,25 @@ const DamageRelationsHeader = ({
                             <div className="quiz-info-buttons">
                                 {random && (
                                     <Button
-                                        variant="primary"
+                                        variant='none'
+                                        className='randomize-button'
                                         onClick={() => { dispatchAnswerObject({ command: "RESET" }); formHandleSubmit(); }}
                                     >
                                         Randomize Again
                                     </Button>
                                 )}
                                 <Button
-                                    variant="primary"
+                                    variant="none"
+                                    className="reselect-button"
                                     onClick={() => { dispatchAnswerObject({ command: "RESET" }); setQuiz(false); }}
                                 >
                                     Re-select
                                 </Button>
-                                <Button variant="primary" onClick={() => { setShowHowToPlayModal(true); }}>
+                                <Button
+                                    variant="none"
+                                    className="how-to-play-button"
+                                    onClick={() => { setShowHowToPlayModal(true); }}
+                                >
                                     How to Play
                                 </Button>
                                 {ShowHowToPlayModal && <HowToPlayModal onClose={() => setShowHowToPlayModal(false)} />}

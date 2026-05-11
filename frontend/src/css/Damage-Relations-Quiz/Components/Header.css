@@ -32,7 +32,6 @@
     align-items: center;
     height: 100%;
     width: 100%;
-    /* background-color: rgb(46, 75, 46); */
     padding: 10px;
     position: relative;
 }
@@ -63,25 +62,8 @@
     margin: 5px 0px;
 }
 
-@keyframes gradientBackground {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
 .quiz-info button {
-    background: linear-gradient(270deg, #813e3e, #c2c066, #000000);
-    background-size: 600% 600%;
     color: #FFFFFF;
-    border: none;
     border-radius: 30px;
     padding: 0.5rem 1.1rem;
     font-size: 0.8rem;
@@ -89,8 +71,57 @@
     margin: 5px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
     text-shadow: 0px 0px 5px #000000;
-    transition: transform 0.2s ease-in-out;
-    animation: gradientBackground 8s ease infinite;
+}
+
+.btn.randomize-button {
+    background-color: rgb(90, 17, 17);
+    border: 1.5px solid rgb(194, 37, 37);
+}
+
+.btn.randomize-button:hover {
+    background-color: rgb(63, 12, 12);
+    border: 1.5px solid rgb(136, 26, 26);
+}
+
+.btn.randomize-button:active,
+.btn.randomize-button:active:focus,
+.btn.randomize-button:active:focus-visible {
+    background-color: rgb(63, 12, 12);
+    border: 1.5px solid rgb(136, 26, 26);
+}
+
+.btn.reselect-button {
+    background-color: rgb(17, 90, 17);
+    border: 1.5px solid rgb(37, 194, 37);
+}
+
+.btn.reselect-button:hover {
+    background-color: rgb(12, 63, 12);
+    border: 1.5px solid rgb(26, 136, 26);
+}
+
+.btn.reselect-button:active,
+.btn.reselect-button:active:focus,
+.btn.reselect-button:active:focus-visible {
+    background-color: rgb(12, 63, 12);
+    border: 1.5px solid rgb(26, 136, 26);
+}
+
+.btn.how-to-play-button {
+    background-color: rgb(17, 17, 90);
+    border: 1.5px solid rgb(37, 37, 194);
+}
+
+.btn.how-to-play-button:hover {
+    background-color: rgb(12, 12, 63);
+    border: 1.5px solid rgb(26, 26, 136);
+}
+
+.btn.how-to-play-button:active,
+.btn.how-to-play-button:active:focus,
+.btn.how-to-play-button:active:focus-visible {
+    background-color: rgb(12, 12, 63);
+    border: 1.5px solid rgb(26, 26, 136);
 }
 
 .quiz-info-buttons {
@@ -101,9 +132,9 @@
 }
 
 .quiz-info button:hover {
-    transform: scale(1.05);
+    transform: scale(1.10);
 }
 
 .quiz-info button:active {
-    transform: scale(0.98);
+    transform: scale(0.95);
 }

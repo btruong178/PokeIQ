@@ -34,15 +34,15 @@ export function HoverPopover({
 }
 
 export function ClickPopover({
+    header,
     text,
-    button_text = 'Click me',
     placement = 'bottom',
     className,
 }) {
     const renderPopover = (props) => {
         return (
             <Popover id="hover-popover" {...props}>
-                <Popover.Header as="h3">Info</Popover.Header>
+                <Popover.Header as="h3">{header}</Popover.Header>
                 <Popover.Body>
                     {text}
                 </Popover.Body>
@@ -53,7 +53,7 @@ export function ClickPopover({
     return (
         <OverlayTrigger
             placement={placement}
-            trigger="click"
+            trigger={['click', 'focus', 'hover']}
             overlay={renderPopover}
             container={document.body}
         >
@@ -61,7 +61,7 @@ export function ClickPopover({
                 className={className}
                 style={{ cursor: 'pointer', display: 'inline-block' }}
             >
-                <Button>{button_text}</Button>
+                <FaInfoCircle />
             </span>
         </OverlayTrigger>
     )

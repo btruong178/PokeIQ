@@ -7,7 +7,8 @@
 // Library
 import { Routes, Route } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { MultiBackend } from 'react-dnd-multi-backend';
+import { HTML5toTouch } from 'rdndmb-html5-to-touch';
 // Component
 import Homepage from './homepage.js';
 import About from './about.js';
@@ -30,7 +31,7 @@ function App() {
   return (
     <div className="App">
       <CheckBackend>
-        <DndProvider backend={HTML5Backend}>
+        <DndProvider backend={MultiBackend} options={HTML5toTouch}>
           <main>
             <Header />
             <Routes>
