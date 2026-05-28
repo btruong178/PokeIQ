@@ -6,6 +6,7 @@ import { useDrop } from 'react-dnd';
 import DraggableType from './Draggable-Types';
 import 'css/Damage-Relations-Quiz/React-dnd/DND/Dropzone.css';
 import { Container, Row, Col } from 'react-bootstrap';
+import useIsMobile from 'js/utilities/Use-Is-Mobile.js';
 import React from 'react';
 /**
  * @memberof module:DamageRelations-ReactDND
@@ -29,6 +30,7 @@ const DropZone = ({
     pokemon,
     TypeMode
 }) => {
+    const isMobile = useIsMobile();
     // Set up the drop target using react-dnd's useDrop hook
     const [{ isOver, canDrop }, drop] = useDrop(() => ({
         accept: 'TYPE',

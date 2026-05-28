@@ -53,7 +53,7 @@ export function ClickPopover({
     return (
         <OverlayTrigger
             placement={placement}
-            trigger={['click', 'focus', 'hover']}
+            trigger={['click']}
             overlay={renderPopover}
             container={document.body}
         >

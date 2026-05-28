@@ -2,21 +2,19 @@ import 'css/Damage-Relations-Quiz/Custom-Components/HowToPlay-Modal.css';
 import { ClickPopover } from './Popover';
 
 const HowToPlayModal = ({ onClose }) => (
-    <div className="htp-modal-overlay">
+    <div className="htp-modal-overlay" onClick={onClose}>
         <div className="htp-modal-content">
-            <span>
-                <h2>How to Play</h2>
-                <ClickPopover
-                    header="Tips"
-                    text="This is a popover example."
-                />
-            </span>
+            <h2>How to Play</h2>
             <hr className="separator" />
-
             <p>
-                1. Drag and drop types to their correct effectiveness zones
+                Drag and drop types to their correct effectiveness zones
             </p>
-            <h8>Caution!</h8>
+            <p>
+                If on mobile, tap on the dropzone header to select a type for it
+            </p>
+            <hr className="separator" />
+            <h3>Caution!</h3>
+            <hr className="separator" />
             <p>
                 Refreshing/Randomizing/Reselecting will reset your progress!
             </p>

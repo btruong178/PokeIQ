@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>App.js - Documentation</title>
+    <title>Damage-Relations-Quiz/React-dnd/DND/UnSelected-Modal.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -35,7 +35,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">App.js</h1>
+    <h1 class="page-title">Damage-Relations-Quiz/React-dnd/DND/UnSelected-Modal.js</h1>
     
 
     
@@ -47,55 +47,23 @@
         <article>
             <pre class="prettyprint source linenums"><code>/**
  * @file
- * Root Component for PokeIQ.
- * @module App
+ * Modal component for unselected types
+ * Used only for mobile users as the drag and drop functionality is replaced with tap to select for them. &lt;br>
  */
-
-// Library
-import { Routes, Route } from 'react-router-dom';
-import { DndProvider } from 'react-dnd';
-import { MultiBackend } from 'react-dnd-multi-backend';
-import { HTML5toTouch } from 'rdndmb-html5-to-touch';
-// Component
-import Homepage from './homepage.js';
-import About from './about.js';
-import DamageRelationsQuiz from './Damage-Relations-Quiz/Components/Quiz.js';
-import Header from './header.js';
-import CheckBackend from './utilities/Check-Backend.js';
-import CustomDragLayer from './Damage-Relations-Quiz/React-dnd/DND/Custom-Drag-Layer.js';
-// CSS
-import 'css/App.css';
-// Bootswatch
-import 'bootswatch/dist/darkly/bootstrap.min.css';
 
 /**
- * @memberof module:App
+ * @memberof module:DamageRelations-ReactDND
  * @description
- * Root component that composes global providers and top-level routes. &lt;br>
- * @returns {JSX.Element} The root app layout with global providers and route configuration.
+ * UnSelectedModal is a React component that renders a modal for unselected types on mobile devices. &lt;br>
  */
-function App() {
-  return (
-    &lt;div className="App">
-      &lt;CheckBackend>
-        &lt;DndProvider backend={MultiBackend} options={HTML5toTouch}>
-          &lt;main>
-            &lt;Header />
-            &lt;Routes>
-              &lt;Route path="/" element={&lt;Homepage />} />
-              &lt;Route path="/About" element={&lt;About />} />
-              &lt;Route path="/Damage_Relations_Quiz" element={&lt;DamageRelationsQuiz />} />
-            &lt;/Routes>
-            &lt;CustomDragLayer />
-          &lt;/main>
-        &lt;/DndProvider>
-      &lt;/CheckBackend>
+const UnSelectedModal = () => (
+    &lt;div className="unselected-modal">
+        &lt;h2>Unselected Types&lt;/h2>
+        &lt;p>Tap on a dropzone to select a type for it.&lt;/p>
     &lt;/div>
-  );
-}
+);
 
-export default App;
-</code></pre>
+export default UnSelectedModal;</code></pre>
         </article>
     </section>
 

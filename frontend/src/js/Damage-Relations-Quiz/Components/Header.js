@@ -6,8 +6,9 @@
 import 'css/Damage-Relations-Quiz/Components/Header.css'
 import UnSelectedButtons from '../React-dnd/UnSelected-Zone.js';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { ClickPopover, HoverPopover } from '../Custom-Components/Popover.js';
 import HowToPlayModal from '../Custom-Components/HowToPlay-Modal.js';
+import useIsMobile from 'js/utilities/Use-Is-Mobile.js';
+import UnSelectedModal from 'js/Damage-Relations-Quiz/React-dnd/DND/UnSelected-Modal.js';
 import { useState } from 'react';
 
 /**
@@ -40,7 +41,7 @@ const DamageRelationsHeader = ({
     dispatchAnswerObject
 }) => {
     const [ShowHowToPlayModal, setShowHowToPlayModal] = useState(false);
-
+    const isMobile = useIsMobile();
 
     return (
         <div className="quiz-header-container">
@@ -76,7 +77,7 @@ const DamageRelationsHeader = ({
                                     <Button
                                         variant='none'
                                         className='randomize-button'
-                                        onClick={() => { dispatchAnswerObject({ command: "RESET" }); formHandleSubmit(); }}
+                                        onClick={() => { dispatchAnswerObject({ command: "RESET" }); formHandleSubmit(); console.log("isMobile: ", isMobile); }}
                                     >
                                         Randomize Again
                                     </Button>
@@ -100,9 +101,11 @@ const DamageRelationsHeader = ({
                             </div>
                         </Container>
                     </Col>
-                    <Col xs={12} md={8}>
-                        <UnSelectedButtons AnswerObject={AnswerObject} dispatchAnswerObject={dispatchAnswerObject} />
-                    </Col>
+                    {!isMobile && (
+                        <Col xs={12} md={8}>
+                            <UnSelectedButtons AnswerObject={AnswerObject} dispatchAnswerObject={dispatchAnswerObject} />
+                        </Col>
+                    )}
                 </Row>
             </Container>
         </div>

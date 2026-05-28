@@ -41,6 +41,7 @@ const DraggableType = ({ type, multiplier, dispatchAnswerObject, TypeMode, pokem
 
     // Handle click event to send the type back to the unSelected zone
     const sendBacktoUnSelectedOnClick = () => {
+        console.log("Is Mobile:", isMobile);
         if (multiplier === "N/A") {
             console.log("Type is already in unSelected");
             return;
