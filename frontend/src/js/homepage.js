@@ -6,7 +6,7 @@
 
 import { Container, Row, Col, Image } from 'react-bootstrap'
 import pokeball from 'css/images/luxuryball.png'
-import 'css/homepage.css'
+import 'css/Homepage.css'
 
 /**
  * @memberof module:Pages

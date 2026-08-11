@@ -3,7 +3,7 @@
  * Header component for PokeIQ.
  */
 
-import 'css/header.css';
+import 'css/Header.css';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 /**
