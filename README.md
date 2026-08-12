@@ -55,12 +55,12 @@ Data is sourced from [PokeAPI](https://pokeapi.co/)
 - [Docker](https://www.docker.com/)
 - An AWS account with:
   - Two DynamoDB tables created (see [Database Schema](#database-schema))
-  - An IAM user with `AmazonDynamoDBFullAccess` (or scoped read/write permissions) and access keys
+  - An IAM user with `AmazonDynamoDBFullAccess` permission (or scoped read/write permissions) and access keys
 
 ---
 
 ## Setup and Installation
-
+Make sure to complete the [Prerequisites](#prerequisites-for-local-development) before doing this section
 ### 1. Clone the repository
 
 ```bash
@@ -87,22 +87,49 @@ AWS_REGION=your-aws-region
 
 > See `.env.example` for reference.
 
-### 3. Run with Docker (Recommended)
+### 3. Run with Docker
+
+---
 
 **First run** — build images and start containers:
 ```bash
 npm run docker:dev:build
 ```
 
+---
+
+**Seed DynamoDB Tables** — Add Data to Database
+
+Once containers are up and running:
+
+```bash
+npm run docker:exec:backend
+```
+
+Then choose the seeding option for these commands:
+
+```bash
+npm run dynamodb:seed:pokemon
+```
+```bash
+npm run dynamodb:seed:dmg
+```
+
+---
+
 **Subsequent runs** — start without rebuilding:
 ```bash
 npm run docker:dev
 ```
 
-**Stop containers:**
+---
+
+**Stop containers**
 ```bash
 npm run docker:down
 ```
+
+---
 
 | Service | URL |
 |---|---|
@@ -287,6 +314,6 @@ There are separate docs for both front and back end:
 ```bash
 npm run storybook
 ```
-Browse React Compoenents in Isolation
+Browse React Components in Isolation
 
 Storybook runs on http://localhost:6006.
