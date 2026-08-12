@@ -1,6 +1,6 @@
 # PokeIQ
 
-> A web application that tests Pokémon players' knowledge through interactive quizzes — helping trainers memorize Type Advantages and other key battle mechanics.
+> A web application that tests Pokémon players' knowledge through interactive quizzes, helping trainers memorize Type Advantages and other key battle mechanics.
 
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-Express-339933?logo=node.js&logoColor=white)
